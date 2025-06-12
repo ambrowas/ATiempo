@@ -1,0 +1,11 @@
+# Node modules
+node_modules/
+npm-debug.log*
+.DS_Store # macOS system file
+
+# Python
+__pycache__/
+*.pyc
+.env
+.venv   
+atiempo-9f08a-firebase-adminsdk-fbsvc-e5a274b0b2.json
