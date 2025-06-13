@@ -1,0 +1,16 @@
+{
+  "name": "@Tiempo",
+  "version": "1.0.0",
+  "description": "Final version of ATIEMPO Electron app with Python backend.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "eleela",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^26.2.1"
+  }
+}

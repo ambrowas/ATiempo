@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro de Empleado - ATIEMPO</title>
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; object-src 'self'">
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #f4f4f4;
+    }
+
+    header {
+      background-color: #004080;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    .back-btn {
+      background: white;
+      color: #004080;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      padding: 30px;
+      gap: 40px;
+    }
+
+    .panel {
+      flex: 1;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #004080;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 24px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    #success-message {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      padding: 10px;
+      margin-top: 15px;
+      border-radius: 6px;
+      display: none;
+    }
+  </style>
+</head>
+  <input type="text" id="scannerInput" style="position:absolute; left:-9999px;" autofocus />
+<body>
+  <header>
+    <h1>Registro de Nuevo Empleado</h1>
+    <button class="back-btn" onclick="window.close()">Volver al Menú Principal</button>
+  </header>
+
+  <div class="container">
+    <div class="panel">
+      <h2>Información Personal</h2>
+      <form id="employeeForm">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" required>
+
+        <label for="numEmpleado">Número de Empleado</label>
+        <input type="text" id="numEmpleado" required>
+
+        <label for="fechaNacimiento">Fecha de Nacimiento</label>
+        <input type="date" id="fechaNacimiento">
+
+        <label for="puesto">Puesto</label>
+        <input type="text" id="puesto">
+
+        <label for="departamento">Departamento</label>
+        <input type="text" id="departamento">
+
+        <label for="telefono">Teléfono</label>
+        <input type="text" id="telefono">
+
+        <label for="email">Email</label>
+        <input type="email" id="email">
+
+        <label for="direccion">Dirección</label>
+        <input type="text" id="direccion">
+
+        <label for="sexo">Sexo</label>
+        <select id="sexo">
+          <option value="Masculino">Masculino</option>
+          <option value="Femenino">Femenino</option>
+        </select>
+      </form>
+    </div>
+
+    <div class="panel">
+      <h2>Detalles Adicionales</h2>
+
+      <label for="fechaIncorporacion">Fecha de Incorporación</label>
+      <input type="date" id="fechaIncorporacion">
+
+      <label for="contactoEmergencia">Contacto de Emergencia</label>
+      <input type="text" id="contactoEmergencia">
+
+      <label for="numContactoEmergencia">Tel. Emergencia</label>
+      <input type="text" id="numContactoEmergencia">
+
+      <label for="foto">URL de Foto</label>
+      <input type="text" id="foto">
+
+      <div id="qr"></div>
+
+      <button type="submit" form="employeeForm">Crear y Generar QR</button>
+
+      <div id="success-message">✅ Empleado creado correctamente. Puedes cerrar esta ventana o registrar otro empleado.</div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+  <script src="renderer.js"></script>
+</body>
+</html>
