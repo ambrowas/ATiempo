@@ -7,6 +7,7 @@ import logging
 import firebase_admin
 import smtplib
 from email.message import EmailMessage
+import os
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -67,7 +68,7 @@ Equipo ATIEMPO
 
     try:
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
-            smtp.login("info.elebi@gmail.com", "zftlzvphvwopxnob") # <<< IMPORTANT: Replace with your actual App Password
+            smtp.login(os.environ.get("EMAIL_USER"), os.environ.get("EMAIL_PASS"))
             smtp.send_message(msg)
             logging.info(f"✅ Email sent to {to_email}")
     except Exception as e:
