@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>{% block title %}ATiempo{% endblock %}</title>
+
+  <!-- ✅ CSP: Secure and compatible with Firebase, OpenStreetMap, and your assets -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    base-uri 'self';
+    object-src 'self' blob:;
+    frame-src 'self' blob: data: https://firebasestorage.googleapis.com;
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval'
+      https://www.gstatic.com
+      https://cdn.jsdelivr.net
+      https://cdnjs.cloudflare.com
+      https://maps.googleapis.com
+      https://maps.gstatic.com;
+    script-src-elem 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval'
+      https://www.gstatic.com
+      https://cdn.jsdelivr.net
+      https://cdnjs.cloudflare.com
+      https://maps.googleapis.com
+      https://maps.gstatic.com;
+    connect-src 'self' data: blob:
+      http://127.0.0.1:5000
+      http://localhost:5000
+      https://*.googleapis.com
+      https://www.googleapis.com
+      https://identitytoolkit.googleapis.com
+      https://securetoken.googleapis.com
+      https://*.gstatic.com
+      https://*.firebaseio.com
+      https://nominatim.openstreetmap.org
+      https://tile.openstreetmap.org
+      https://firebasestorage.googleapis.com;
+    img-src 'self' data: blob:
+      https://placehold.co
+      https://tile.openstreetmap.org
+      https://*.googleapis.com
+      https://*.gstatic.com
+      https://maps.gstatic.com
+      https://maps.googleapis.com
+      https://firebasestorage.googleapis.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com;
+    worker-src 'self' blob:;
+    child-src 'self' blob:;
+  ">
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+  <style>
+    /* ====== GLOBAL LAYOUT ====== */
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      border: 2px solid black;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 25px;
+      background-color: #004080;
+      border-bottom: 4px solid #050505;
+      color: white;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .header-left img {
+      height: 80px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-right button {
+      padding: 8px 16px;
+      font-size: 14px;
+      background-color: #fff;
+      color: #004080;
+      border: 2px solid #004080;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.25s ease;
+    }
+
+    .header-right button:hover {
+      background-color: #004080;
+      color: white;
+    }
+
+    /* ====== NETWORK INDICATOR ====== */
+    #networkIndicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #ffffff;
+      color: #004080;
+      font-weight: bold;
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 2px solid #004080;
+      font-size: 13px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.3s ease, background 0.3s ease, color 0.3s ease;
+    }
+
+    #networkIndicator:hover {
+      transform: scale(1.05);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+    }
+
+    @keyframes pulseGreen {
+      0% { box-shadow: 0 0 0 0 rgba(0,200,83,0.6); }
+      70% { box-shadow: 0 0 0 10px rgba(0,200,83,0); }
+      100% { box-shadow: 0 0 0 0 rgba(0,200,83,0); }
+    }
+
+    @keyframes pulseRed {
+      0% { box-shadow: 0 0 0 0 rgba(255,23,68,0.6); }
+      70% { box-shadow: 0 0 0 10px rgba(255,23,68,0); }
+      100% { box-shadow: 0 0 0 0 rgba(255,23,68,0); }
+    }
+
+    /* ====== MAIN CONTENT ====== */
+    .content-wrapper {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+    }
+
+    .sidebar {
+      background-color: #004080;
+      border-right: 4px solid black;
+      width: 240px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      box-sizing: border-box;
+    }
+
+    .sidebar button {
+      padding: 15px;
+      font-size: 15px;
+      border: 2px solid black;
+      border-radius: 6px;
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+      transition: background-color 0.2s ease-in-out;
+      text-align: left;
+    }
+
+    .sidebar button:hover {
+      background-color: #0056b3;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    /* ====== FOOTER ====== */
+    #refran-display {
+      padding: 15px;
+      border-top: 4px solid #050505;
+      background-color: #004080;
+      color: #f5f8f8;
+      font-style: italic;
+      text-align: center;
+      font-size: 1.1em;
+    }
+
+    /* ====== THEME VARS ====== */
+    :root {
+      --bg-color: #f4f4f4;
+      --card-bg: #ffffff;
+      --text-color: #1f2937;
+      --accent-color: #004080;
+      --border-color: #ccc;
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #1e1e2f;
+      --card-bg: #2a2a3b;
+      --text-color: #e5e7eb;
+      --accent-color: #60a5fa;
+      --border-color: #444;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border: 2px solid var(--border-color);
+    }
+
+    select, input, textarea {
+      background-color: var(--card-bg);
+      color: var(--text-color);
+      border: 1px solid var(--border-color);
+    }
+  </style>
+
+  {% block extra_styles %}{% endblock %}
+</head>
+
+<body>
+  <!-- ===== HEADER ===== -->
+  <header>
+    <div class="header-left">
+      <img src="{{ url_for('static', filename='assets/atiempologo.png') }}" alt="Logo ATiempo">
+      <h1>ATIEMPO</h1>
+    </div>
+
+    <div class="header-right">
+      <span id="welcomeMsg" style="font-weight: bold;"></span>
+      <span id="networkIndicator" title="Click para alternar modo">
+        <span id="statusDot" style="
+          width:10px;
+          height:10px;
+          border-radius:50%;
+          background-color:#00c853;
+          animation:pulseGreen 2s infinite;
+        "></span>
+        <span id="statusText">Online</span>
+      </span>
+      <button id="authBtn">🔐 INICIAR SESIÓN</button>
+    </div>
+  </header>
+
+  <!-- ===== MAIN LAYOUT ===== -->
+  <div class="content-wrapper">
+    {% include 'sidebar.html' %}
+    <div class="main-content">
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <div id="refran-display">"Por Una Guinea Mejor"</div>
+
+  <!-- ===== GLOBAL SCRIPTS ===== -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const container = document.getElementById("elebiAnimation");
+      if (container) {
+        lottie.loadAnimation({
+          container,
+          renderer: "svg",
+          loop: true,
+          autoplay: true,
+          path: "/static/assets/Loading sand clock.json"
+        });
+      }
+    });
+    function loadPage(url) { window.location.href = url; }
+  </script>
+
+  {% block extra_scripts %}{% endblock %}
+
+  <!-- ✅ Firebase Core -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+  <!-- ✅ Global Auth -->
+  <script src="{{ url_for('static', filename='js/globalAuth.js') }}"></script>
+
+  <!-- ✅ Renderer -->
+  <script src="{{ url_for('static', filename='renderer.js') }}"></script>
+
+  <!-- ✅ Network Indicator Logic -->
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const indicator = document.getElementById("networkIndicator");
+    const dot = document.getElementById("statusDot");
+    const text = document.getElementById("statusText");
+
+    function updateIndicator() {
+      const offline = localStorage.getItem("offlineMode") === "true";
+      if (offline) {
+        dot.style.backgroundColor = "#ff1744";
+        dot.style.animation = "pulseRed 2s infinite";
+        text.textContent = "Offline";
+        indicator.style.background = "#ffeeee";
+        indicator.style.color = "#b00020";
+        indicator.style.borderColor = "#b00020";
+        indicator.title = "Actualmente en modo sin conexión (click para activar conexión)";
+      } else {
+        dot.style.backgroundColor = "#00c853";
+        dot.style.animation = "pulseGreen 2s infinite";
+        text.textContent = "Online";
+        indicator.style.background = "#ffffff";
+        indicator.style.color = "#004080";
+        indicator.style.borderColor = "#004080";
+        indicator.title = "Actualmente en línea (click para activar modo sin conexión)";
+      }
+    }
+
+    indicator.addEventListener("click", () => {
+      const current = localStorage.getItem("offlineMode") === "true";
+      const newState = !current;
+      localStorage.setItem("offlineMode", newState);
+      updateIndicator();
+
+      const msg = newState ? "📴 Modo sin conexión activado" : "🌐 Conexión restaurada";
+      if (typeof showToast === "function") showToast(msg);
+      else alert(msg);
+
+      if (confirm("¿Recargar la página para aplicar el nuevo modo?")) {
+        location.reload();
+      }
+    });
+
+    updateIndicator();
+
+    window.addEventListener("storage", (e) => {
+      if (e.key === "offlineMode") updateIndicator();
+    });
+  });
+  </script>
+</body>
+</html>

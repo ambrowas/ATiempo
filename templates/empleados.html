@@ -1,0 +1,843 @@
+{% extends "base.html" %}
+{% block title %}Gestión de Empleados - ATiempo{% endblock %}
+{% block extra_styles %}
+<style>
+  :root { --primary-color:#004080; --outer-border:4px solid black; --inner-border:2px solid black; }
+
+  .top-controls { display:flex; flex-direction:column; gap:15px; width:100%; }
+  .action-toolbar {
+    display:flex; align-items:center; gap:12px;
+    background:#ffffff; border:2px solid #ccc; border-radius:8px;
+    padding:8px 14px; margin-bottom:16px; box-shadow:0 2px 6px rgba(0,0,0,0.05);
+  }
+  .tool-btn { display:flex; align-items:center; gap:6px; background:var(--primary-color); color:#fff; font-weight:600; border:none; border-radius:6px; padding:10px 14px; cursor:pointer; transition:background .2s, transform .1s; }
+  .tool-btn:hover { background:#003366; transform:translateY(-1px); }
+  .tool-btn span { font-size:18px; }
+
+  .employee-selector { display:flex; gap:15px; align-items:center; background:#fff; padding:15px; border:var(--inner-border); border-radius:8px; width:100%; }
+  .employee-selector label { font-weight:bold; font-size:16px; }
+  .employee-selector select { flex-grow:1; padding:10px; font-size:16px; border:1px solid #ccc; border-radius:4px; }
+
+  #edit-controls { display:none; gap:10px; }
+  #edit-controls button { padding:10px 15px; font-size:16px; font-weight:bold; border:var(--inner-border); border-radius:6px; cursor:pointer; }
+  .save-btn { background:#28a745; color:#fff; }
+  .cancel-btn { background:#dc3545; color:#fff; }
+
+  #data-container { display:none; width:100%; }
+  #employee-details-card { background:#fff; border:var(--inner-border); border-radius:8px; padding:20px; box-shadow:0 4px 8px rgba(0,0,0,.1); }
+
+  .card-header { display:flex; align-items:center; gap:20px; border-bottom:1px solid #eee; padding-bottom:20px; margin-bottom:20px; }
+  .card-header img { width:120px; height:120px; border-radius:50%; border:3px solid var(--primary-color); object-fit:cover; }
+  .employee-title h2 { color:var(--primary-color); font-size:1.8em; margin:0; }
+  .employee-title p { color:#555; font-size:1.1em; margin:5px 0 0; }
+
+  .tabs { display:flex; border-bottom:2px solid #ddd; margin-bottom:20px; gap:6px; flex-wrap:wrap; }
+  .tab { padding:12px 20px; cursor:pointer; background:#f0f0f0; border:1px solid #ddd; border-bottom:none; border-radius:5px 5px 0 0; font-weight:bold; }
+  .tab.active { background:#fff; border-bottom:2px solid #fff; margin-bottom:-2px; }
+  .tab-content { display:none; }
+  .tab-content.active { display:block; }
+
+  .hr-card { background:#fff; border:var(--inner-border); border-radius:8px; padding:20px; box-shadow:0 4px 8px rgba(0,0,0,.1); margin-bottom:20px; }
+  .hr-card h3 { margin:0 0 10px; border-bottom:1px solid #eee; padding-bottom:10px; color:var(--primary-color); }
+
+  .details-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px 20px; }
+  .detail-item strong { display:block; color:#333; font-size:12px; text-transform:uppercase; margin-bottom:4px; }
+  .detail-item span { font-size:16px; color:#555; }
+  .detail-item input, .detail-item select { width:100%; padding:8px; font-size:15px; border:1px solid #ccc; border-radius:4px; }
+
+  /* Modals */
+  .modal { display:none; position:fixed; z-index:1000; inset:0; background:rgba(0,0,0,.6); align-items:center; justify-content:center; }
+  .modal-content { background:#fff; width:92%; max-width:650px; border:var(--outer-border); padding:22px 26px; border-radius:10px; box-shadow:0 10px 30px rgba(0,0,0,.25); position:relative; }
+  .modal-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+  .modal-header h2 { margin:0; }
+  .close-btn { color:#666; font-size:26px; font-weight:bold; cursor:pointer; }
+  .modal-content label { font-weight:bold; margin:6px 0 4px; display:block; }
+  .modal-content input, .modal-content textarea, .modal-content button, .modal-content select { font-size:16px; }
+  .modal-content input, .modal-content textarea { padding:10px; border:1px solid #ccc; border-radius:4px; width:100%; }
+  .modal-actions { display:flex; gap:10px; margin-top:12px; }
+  .modal-content button[type="submit"] { padding:12px; background:#28a745; color:#fff; border:none; border-radius:4px; cursor:pointer; font-weight:bold; }
+
+   .fadepane { opacity:0; transform: translateY(8px); transition: opacity .22s ease, transform .22s ease; }
+  .fadepane.show { opacity:1; transform: translateY(0); }
+  .modal-content.animate { animation: modalPop .22s ease; }
+
+  @keyframes modalPop {
+    from { transform: scale(.97); opacity:.6; }
+    to { transform: scale(1); opacity:1; }
+  }
+
+  .btn { padding:8px 14px; border:none; border-radius:6px; cursor:pointer; font-weight:600; }
+
+  .btn-primary { background:#007bff; color:#fff; }
+  .btn-danger { background:#dc3545; color:#fff; }
+  .btn-success { background:#28a745; color:#fff; }
+  .btn-secondary { background:#6c757d; color:#fff; }
+
+  .files-box a { display:inline-block; margin-right:10px; text-decoration:none; }
+  .puesto-section h4 { color: var(--primary-color); margin-bottom: 8px; }
+  .puesto-section ul { margin-left: 20px; }
+  .puesto-section li { margin-bottom: 4px; }
+  /* ---- Make page content stretch full width ---- */
+.main-content {
+  align-items: stretch !important;   /* override base.html centering */
+}
+
+/* Cards should fill the row */
+.tabcontent,
+.tabcontent .card {
+  max-width: none !important;
+}
+.card {
+  width: 100% !important;
+}
+
+/* Table containers span full available width */
+.card .overflow-x-auto,
+.table-responsive {
+  display: block;
+  width: 100%;
+}
+
+/* Tables truly occupy the card width */
+table {
+  width: 100% !important;
+  border-collapse: collapse;
+  table-layout: auto;               /* use 'fixed' if you want equal column widths */
+}
+
+/* Optional: tighten left/right padding so the table visually reaches the edges */
+.card {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* Optional: make header row sticky so it feels more “app-like” on long lists */
+thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+</style>
+{% endblock %}
+{% block content %}
+
+  <div class="top-controls">
+    <div class="action-toolbar">
+      <button class="tool-btn" id="nuevoEmpleadoBtn" title="Nuevo Empleado"><span>➕</span> Nuevo Empleado</button>
+      <button class="tool-btn" id="editBtnTop" title="Editar"><span>✏️</span> Editar Empleado</button>
+      <button class="tool-btn" id="bajaEmpleadoBtn" title="Dar de Baja"><span>🗑️</span> Eliminar Empleado</button>
+      <button class="tool-btn" id="pendientesBtn" title="Solicitudes Pendientes"><span>📝</span> Empleados Pendientes</button>
+    </div>
+
+    <div class="employee-selector">
+      <label for="employeeSelect">Seleccionar Empleado:</label>
+      <select id="employeeSelect"></select>
+    </div>
+
+    <div id="edit-controls">
+      <button id="saveBtn" class="save-btn">💾 GUARDAR CAMBIOS</button>
+      <button id="cancelBtn" class="cancel-btn">❌ CANCELAR</button>
+    </div>
+  </div>
+
+  <div id="data-container">
+    <div id="employee-details-card">
+      <div class="card-header">
+        <img id="detail_photo" src="https://placehold.co/120" alt="Foto de Empleado">
+        <div class="employee-title">
+          <h2 id="detail_nombre_completo">---</h2>
+          <p id="detail_puesto">---</p>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <div class="tab active" data-tab="tab-personales">👤 Datos Personales</div>
+        <div class="tab" data-tab="tab-profesionales">💼 Datos Profesionales</div>
+        <div class="tab" data-tab="tab-financieros">💳 Datos Financieros</div>
+        <div class="tab" data-tab="tab-puesto">🧩 Puesto</div>
+      </div>
+
+      <!-- TAB PANES -->
+      <div id="tab-personales" class="tab-content active">
+        <div class="hr-card fadepane" id="pane-personales">
+          <h3>👤 Datos Personales</h3>
+          <div class="details-grid" id="grid-personales">
+            <div class="detail-item"><strong>Nombre completo</strong><span id="p_nombre_completo">---</span></div>
+            <div class="detail-item"><strong>Fecha de Nacimiento</strong><span id="p_fecha_nacimiento">---</span></div>
+            <div class="detail-item"><strong>Teléfono Personal</strong><span id="p_telefono_personal">---</span></div>
+            <div class="detail-item"><strong>Email Personal</strong><span id="p_email_personal">---</span></div>
+            <div class="detail-item"><strong>Dirección</strong><span id="p_direccion">---</span></div>
+            <div class="detail-item"><strong>Ciudad</strong><span id="p_ciudad">---</span></div>
+            <div class="detail-item"><strong>País</strong><span id="p_pais">---</span></div>
+            <div class="detail-item"><strong>Número de Identidad</strong><span id="p_identidad">---</span></div>
+            <div class="detail-item"><strong>Estado Civil</strong><span id="p_estado_civil">---</span></div>
+            <div class="detail-item"><strong>Contacto Emergencia</strong><span id="p_contacto_emergencia">---</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-profesionales" class="tab-content">
+        <div class="hr-card fadepane" id="pane-profesionales">
+          <h3>💼 Datos Profesionales</h3>
+          <div class="details-grid" id="grid-profesionales">
+            <div class="detail-item"><strong>Departamento</strong><span id="pr_departamento">---</span></div>
+            <div class="detail-item"><strong>Categoría</strong><span id="pr_categoria_empleado">---</span></div>
+            <div class="detail-item"><strong>Puesto</strong><span id="pr_puesto">---</span></div>
+            <div class="detail-item"><strong>Número de Empleado</strong><span id="pr_numero_empleado">---</span></div>
+            <div class="detail-item"><strong>Fecha de Incorporación</strong><span id="pr_fecha_incorporacion">---</span></div>
+            <div class="detail-item"><strong>Email Corporativo</strong><span id="pr_email_corporativo">---</span></div>
+            <div class="detail-item"><strong>Teléfono Corporativo</strong><span id="pr_telefono_corporativo">---</span></div>
+            <div class="detail-item"><strong>Supervisor</strong><span id="pr_supervisor">---</span></div>
+            <div class="detail-item"><strong>Ubicación</strong><span id="pr_ubicacion_laboral">---</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-financieros" class="tab-content">
+        <div class="hr-card fadepane" id="pane-financieros">
+          <h3>💳 Datos Financieros</h3>
+          <div class="details-grid" id="grid-financieros">
+            <div class="detail-item"><strong>Banco</strong><span id="f_banco">---</span></div>
+            <div class="detail-item"><strong>Número de Cuenta</strong><span id="f_numero_cuenta">---</span></div>
+            <div class="detail-item"><strong>Tipo de Cuenta</strong><span id="f_tipo_cuenta">---</span></div>
+            <div class="detail-item"><strong>Salario Base</strong><span id="f_salario_base">---</span></div>
+            <div class="detail-item"><strong>Moneda</strong><span id="f_moneda">---</span></div>
+            <div class="detail-item"><strong>Beneficios</strong><span id="f_beneficios">---</span></div>
+            <div class="detail-item"><strong>Deducciones</strong><span id="f_deducciones">---</span></div>
+          </div>
+          <p class="small-note">⚠️ Nunca muestres IBAN completo en UI pública.</p>
+        </div>
+      </div>
+
+      <div id="tab-puesto" class="tab-content">
+        <div class="hr-card fadepane" id="pane-puesto">
+          <h3>🧩 Puesto</h3>
+          <div class="puesto-section">
+            <h4>Descripción del Puesto</h4>
+            <p id="job-description">---</p>
+          </div>
+          <div class="puesto-section">
+            <h4>Responsabilidades</h4>
+            <ul id="responsibilities-list"></ul>
+          </div>
+          <div class="puesto-section">
+            <h4>Jerarquía</h4>
+            <div id="hierarchy-map"></div>
+          </div>
+        </div>
+      </div>
+      <!-- /TAB PANES -->
+    </div>
+  </div>
+
+  <!-- NUEVO EMPLEADO MODAL -->
+  <div id="newHireModal" class="modal">
+    <div class="modal-content animate">
+      <div class="modal-header">
+        <h2>Iniciar Proceso de Ingreso</h2>
+        <span class="close-btn" data-close="newHireModal">&times;</span>
+      </div>
+      <form id="newHireTriggerForm">
+        <label for="newHireName">Nombre Completo:</label>
+        <input type="text" id="newHireName" required placeholder="Ej: Mariana Pérez">
+        <label for="newHireEmail">Email Personal:</label>
+        <input type="email" id="newHireEmail" required placeholder="nombre@dominio.com">
+        <div class="modal-actions">
+          <button type="submit" class="btn btn-success">Enviar Email con Formulario</button>
+          <button type="button" class="btn btn-secondary" data-close="newHireModal">Cancelar</button>
+        </div>
+        <p id="modal-message"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- SOLICITUDES PENDIENTES MODAL -->
+  <div id="pendingModal" class="modal">
+    <div class="modal-content animate">
+      <div class="modal-header">
+        <h2>Solicitudes pendientes</h2>
+        <span class="close-btn" data-close="pendingModal">&times;</span>
+      </div>
+      <div class="modal-actions">
+        <button id="refreshPendingBtn" class="btn btn-primary">🔄 Actualizar</button>
+      </div>
+      <div id="pending-list" class="fadepane" style="margin-top:10px;">Cargando...</div>
+    </div>
+  </div>
+
+  <!-- COMENTARIO MODAL -->
+  <div id="commentModal" class="modal">
+    <div class="modal-content animate">
+      <div class="modal-header">
+        <h2>Agregar Comentario</h2>
+        <span class="close-btn" data-close="commentModal">&times;</span>
+      </div>
+      <form id="commentForm">
+        <input type="hidden" id="commentHireId">
+        <label for="commentText">Comentario:</label>
+        <textarea id="commentText" rows="4" required placeholder="Escribe un comentario útil para el candidato..."></textarea>
+        <div class="modal-actions">
+          <button type="submit" class="btn btn-success">Enviar</button>
+          <button type="button" class="btn btn-secondary" data-close="commentModal">Cancelar</button>
+        </div>
+        <p id="commentMessage"></p>
+      </form>
+    </div>
+  </div>
+
+{% endblock %}
+{% block extra_scripts %}
+<!-- Global Auth Config -->
+<script>
+  /* ======================================================
+     1) GLOBALS + BACKEND CONFIG
+     ====================================================== */
+  let backendBaseUrl = "http://127.0.0.1:5000"; // fallback
+  let isEditMode = false;
+  let currentEmployeeId = null;
+  let currentEmployeeData = {};
+
+  async function loadBackendConfig() {
+    try {
+      const r = await fetch("backend_config.json", { cache: "no-store" });
+      if (!r.ok) throw new Error("backend_config.json not found");
+      const cfg = await r.json();
+      backendBaseUrl = `http://${cfg.host}:${cfg.port}`;
+      console.log("✅ backendBaseUrl:", backendBaseUrl);
+    } catch (e) {
+      console.warn("⚠️ Using fallback backendBaseUrl:", backendBaseUrl, e.message);
+    }
+  }
+
+  /* ======================================================
+     2) ELEMENT REFS
+     ====================================================== */
+  const dataContainer = document.getElementById("data-container");
+  const editControls = document.getElementById("edit-controls");
+  const editBtnTop = document.getElementById("editBtnTop");
+  const saveBtn = document.getElementById("saveBtn");
+  const cancelBtn = document.getElementById("cancelBtn");
+  const nuevoEmpleadoBtn = document.getElementById("nuevoEmpleadoBtn");
+  const bajaEmpleadoBtn = document.getElementById("bajaEmpleadoBtn");
+  const pendientesBtn = document.getElementById("pendientesBtn");
+  const employeeSelect = document.getElementById("employeeSelect");
+
+  const tabs = document.querySelectorAll(".tab");
+  const tabContents = document.querySelectorAll(".tab-content");
+
+  const newHireModal = document.getElementById("newHireModal");
+  const pendingModal = document.getElementById("pendingModal");
+  const commentModal = document.getElementById("commentModal");
+  const newHireForm = document.getElementById("newHireTriggerForm");
+  const modalMessage = document.getElementById("modal-message");
+  const pendingList = document.getElementById("pending-list");
+  const refreshPendingBtn = document.getElementById("refreshPendingBtn");
+  const commentForm = document.getElementById("commentForm");
+  const commentHireIdInput = document.getElementById("commentHireId");
+  const commentTextInput = document.getElementById("commentText");
+  const commentMessage = document.getElementById("commentMessage");
+
+  /* ======================================================
+     3) HELPERS
+     ====================================================== */
+  function setText(id, value, placeholder="---") {
+    const el = document.getElementById(id);
+    if (el) el.textContent = (value ?? "") !== "" ? value : placeholder;
+  }
+
+  function showPaneAnimated(paneId) {
+    const pane = document.getElementById(paneId);
+    if (!pane) return;
+    pane.classList.remove("show");
+    requestAnimationFrame(() => { pane.classList.add("show"); });
+  }
+
+  function toggleButtons(inEdit) {
+    isEditMode = inEdit;
+    editBtnTop.style.display = inEdit ? "none" : "inline-block";
+    saveBtn.style.display = inEdit ? "inline-block" : "none";
+    cancelBtn.style.display = inEdit ? "inline-block" : "none";
+  }
+
+  function makeFieldEditable(spanId, fieldName, type="text") {
+    const span = document.getElementById(spanId);
+    if (!span || !span.parentElement) return;
+    const input = document.createElement("input");
+    input.type = type;
+    input.dataset.fieldName = fieldName;
+    input.value = currentEmployeeData[fieldName] || "";
+    span.parentElement.replaceChild(input, span);
+  }
+
+  function replaceInputsWithSpans(containerEl, mapping) {
+    Object.entries(mapping).forEach(([spanId, { field, placeholder, transform }]) => {
+      const grid = containerEl;
+      const input = grid.querySelector(`input[data-field-name="${field}"], select[data-field-name="${field}"]`);
+      if (input && input.parentElement) {
+        const span = document.createElement("span");
+        span.id = spanId;
+        let val = input.value ?? "";
+        if (transform) val = transform(val);
+        span.textContent = val !== "" ? val : (placeholder || "---");
+        input.parentElement.replaceChild(span, input);
+      }
+    });
+  }
+
+  function gatherInputs(containerEl) {
+    const updated = {};
+    containerEl.querySelectorAll('input[data-field-name], select[data-field-name]').forEach(i => {
+      updated[i.dataset.fieldName] = i.value;
+    });
+    return updated;
+  }
+
+  /* ======================================================
+     4) EMPLOYEES + DETAILS
+     ====================================================== */
+  async function loadEmployees() {
+    try {
+      const r = await fetch(`${backendBaseUrl}/employees`);
+      const data = await r.json();
+      if (data.status !== "success") throw new Error(data.message || "No se pudo obtener empleados.");
+      employeeSelect.innerHTML = '<option value="">-- Por favor, seleccione un empleado --</option>';
+      (data.employees || [])
+        .filter(emp => {
+          const name = (emp.nombre_completo || emp.nombre || "").trim().toLowerCase();
+          return name && name !== "sin nombre";
+        })
+        .forEach(emp => {
+          const opt = document.createElement("option");
+          opt.value = emp.id;
+          opt.textContent = emp.nombre_completo || emp.nombre || `Empleado ${emp.id}`;
+          employeeSelect.appendChild(opt);
+        });
+    } catch (e) {
+      console.error("Error cargando empleados:", e);
+      alert("No se pudo cargar la lista de empleados.");
+    }
+  }
+
+  async function fetchEmployee(id) {
+    const r = await fetch(`${backendBaseUrl}/employee-details/${id}`);
+    const d = await r.json();
+    if (d.status !== "success") throw new Error(d.message || "No se pudo cargar detalles.");
+    return d.data ? d.data : d;
+  }
+
+  function getMockPuestoData(employeeName, position) {
+    return {
+      job_description: `Como ${position || 'empleado'} en ATiempo, tu rol es fundamental para el desarrollo institucional.`,
+      responsibilities: [
+        "Cumplir los objetivos asignados con eficiencia y ética.",
+        "Cooperar con otros departamentos.",
+        "Mantener comunicación constante con superiores y colegas.",
+        "Promover la mejora continua.",
+        "Representar a la institución con profesionalismo."
+      ],
+      hierarchy: {
+        CEO: "Dr. Crisantos Obama Ondo",
+        "Director de Departamento": "Ana García",
+        Supervisor: "Carlos Pérez",
+        Tú: employeeName || "—",
+        direct_reports: ["Laura Martínez", "Pedro Sánchez"]
+      }
+    };
+  }
+
+  function populatePuestoTab(data) {
+    document.getElementById("job-description").textContent = data.job_description;
+    const list = document.getElementById("responsibilities-list");
+    list.innerHTML = "";
+    data.responsibilities.forEach(r => {
+      const li = document.createElement("li");
+      li.textContent = r;
+      list.appendChild(li);
+    });
+    const map = document.getElementById("hierarchy-map");
+    map.innerHTML = `
+      <p><strong>CEO:</strong> ${data.hierarchy.CEO}</p>
+      <p><strong>Director de Departamento:</strong> ${data.hierarchy["Director de Departamento"]}</p>
+      <p><strong>Supervisor:</strong> ${data.hierarchy.Supervisor}</p>
+      <p><strong>Tú:</strong> ${data.hierarchy.Tú}</p>
+      <p><strong>Reporta a:</strong> ${data.hierarchy.direct_reports.join(", ")}</p>`;
+  }
+
+  async function activateTab(tabId) {
+    if (!currentEmployeeId) return;
+    try {
+      const data = await fetchEmployee(currentEmployeeId);
+      currentEmployeeData = data;
+
+      // Header
+      document.getElementById("detail_photo").src = data.url_foto || "https://placehold.co/120";
+      setText("detail_nombre_completo", data.nombre_completo);
+      setText("detail_puesto", data.puesto);
+
+      // Switch tabs
+      tabs.forEach(t => t.classList.remove("active"));
+      tabContents.forEach(c => c.classList.remove("active"));
+      document.querySelector(`.tab[data-tab="${tabId}"]`)?.classList.add("active");
+      document.getElementById(tabId)?.classList.add("active");
+
+      // Fill active tab
+      if (tabId === "tab-personales") {
+        setText("p_nombre_completo", data.nombre_completo);
+        setText("p_fecha_nacimiento", data.fecha_nacimiento, "--------");
+        setText("p_telefono_personal", data.telefono_personal);
+        setText("p_email_personal", data.email_personal);
+        setText("p_direccion", data.direccion);
+        setText("p_ciudad", data.ciudad);
+        setText("p_pais", data.pais);
+        setText("p_identidad", data.numero_identidad || data.identidad);
+        setText("p_estado_civil", data.estado_civil);
+        setText("p_contacto_emergencia", data.contacto_emergencia);
+        showPaneAnimated("pane-personales");
+      } else if (tabId === "tab-profesionales") {
+        setText("pr_departamento", data.departamento);
+        setText("pr_categoria_empleado", data.categoria_empleado);
+        setText("pr_puesto", data.puesto);
+        setText("pr_numero_empleado", data.numero_empleado);
+        setText("pr_fecha_incorporacion", data.fecha_incorporacion, "--------");
+        setText("pr_email_corporativo", data.email_corporativo);
+        setText("pr_telefono_corporativo", data.telefono_corporativo);
+        setText("pr_supervisor", data.supervisor);
+        setText("pr_ubicacion_laboral", data.ubicacion_laboral);
+        showPaneAnimated("pane-profesionales");
+      } else if (tabId === "tab-financieros") {
+        setText("f_banco", data.banco);
+        setText("f_numero_cuenta", data.numero_cuenta ? "****" + String(data.numero_cuenta).slice(-4) : "—");
+        setText("f_tipo_cuenta", data.tipo_cuenta);
+        setText("f_salario_base", data.salario_base);
+        setText("f_moneda", data.moneda || "DOP");
+        setText("f_beneficios", data.beneficios);
+        setText("f_deducciones", data.deducciones);
+        showPaneAnimated("pane-financieros");
+      } else if (tabId === "tab-puesto") {
+        const mock = getMockPuestoData(currentEmployeeData.nombre_completo, currentEmployeeData.puesto);
+        populatePuestoTab(mock);
+        showPaneAnimated("pane-puesto");
+      }
+    } catch (e) {
+      console.error("No se pudieron cargar los detalles:", e);
+      alert("No se pudieron cargar los detalles del empleado.");
+    }
+  }
+
+  employeeSelect.addEventListener("change", async (e) => {
+    const id = e.target.value;
+    currentEmployeeId = id || null;
+    if (!currentEmployeeId) {
+      dataContainer.style.display = "none";
+      editControls.style.display = "none";
+      return;
+    }
+    dataContainer.style.display = "block";
+    editControls.style.display = "flex";
+    await activateTab(document.querySelector(".tab.active")?.dataset.tab || "tab-personales");
+    toggleButtons(false);
+  });
+
+  tabs.forEach(tab => {
+    tab.addEventListener("click", async () => {
+      await activateTab(tab.dataset.tab);
+      toggleButtons(false); // leave edit mode when switching tabs
+    });
+  });
+
+  /* ======================================================
+     5) EDIT MODE
+     ====================================================== */
+  editBtnTop.addEventListener("click", () => {
+    if (!currentEmployeeId) return alert("Seleccione un empleado primero.");
+    const activeTabId = document.querySelector(".tab.active")?.dataset.tab;
+    if (!activeTabId) return;
+
+    if (activeTabId === "tab-personales") {
+      makeFieldEditable("p_nombre_completo", "nombre_completo");
+      makeFieldEditable("p_fecha_nacimiento", "fecha_nacimiento", "date");
+      makeFieldEditable("p_telefono_personal", "telefono_personal");
+      makeFieldEditable("p_email_personal", "email_personal");
+      makeFieldEditable("p_direccion", "direccion");
+      makeFieldEditable("p_ciudad", "ciudad");
+      makeFieldEditable("p_pais", "pais");
+      makeFieldEditable("p_identidad", "numero_identidad");
+      makeFieldEditable("p_estado_civil", "estado_civil");
+      makeFieldEditable("p_contacto_emergencia", "contacto_emergencia");
+    } else if (activeTabId === "tab-profesionales") {
+      makeFieldEditable("pr_departamento", "departamento");
+      makeFieldEditable("pr_categoria_empleado", "categoria_empleado");
+      makeFieldEditable("pr_puesto", "puesto");
+      makeFieldEditable("pr_numero_empleado", "numero_empleado");
+      makeFieldEditable("pr_fecha_incorporacion", "fecha_incorporacion", "date");
+      makeFieldEditable("pr_email_corporativo", "email_corporativo");
+      makeFieldEditable("pr_telefono_corporativo", "telefono_corporativo");
+      makeFieldEditable("pr_supervisor", "supervisor");
+      makeFieldEditable("pr_ubicacion_laboral", "ubicacion_laboral");
+    } else if (activeTabId === "tab-financieros") {
+      makeFieldEditable("f_banco", "banco");
+      makeFieldEditable("f_numero_cuenta", "numero_cuenta");
+      makeFieldEditable("f_tipo_cuenta", "tipo_cuenta");
+      makeFieldEditable("f_salario_base", "salario_base");
+      makeFieldEditable("f_moneda", "moneda");
+      makeFieldEditable("f_beneficios", "beneficios");
+      makeFieldEditable("f_deducciones", "deducciones");
+    }
+    toggleButtons(true);
+  });
+
+  cancelBtn.addEventListener("click", async () => {
+    if (!currentEmployeeId) return;
+    if (!confirm("¿Descartar los cambios no guardados?")) return;
+    await activateTab(document.querySelector(".tab.active")?.dataset.tab || "tab-personales");
+    toggleButtons(false);
+  });
+
+  saveBtn.addEventListener("click", async () => {
+    if (!currentEmployeeId) return;
+    const activeTabId = document.querySelector(".tab.active")?.dataset.tab;
+    let containerEl, mapping = {};
+
+    if (activeTabId === "tab-personales") {
+      containerEl = document.getElementById("grid-personales");
+      mapping = {
+        "p_nombre_completo": { field:"nombre_completo" },
+        "p_fecha_nacimiento": { field:"fecha_nacimiento" },
+        "p_telefono_personal": { field:"telefono_personal" },
+        "p_email_personal": { field:"email_personal" },
+        "p_direccion": { field:"direccion" },
+        "p_ciudad": { field:"ciudad" },
+        "p_pais": { field:"pais" },
+        "p_identidad": { field:"numero_identidad" },
+        "p_estado_civil": { field:"estado_civil" },
+        "p_contacto_emergencia": { field:"contacto_emergencia" }
+      };
+    } else if (activeTabId === "tab-profesionales") {
+      containerEl = document.getElementById("grid-profesionales");
+      mapping = {
+        "pr_departamento": { field:"departamento" },
+        "pr_categoria_empleado": { field:"categoria_empleado" },
+        "pr_puesto": { field:"puesto" },
+        "pr_numero_empleado": { field:"numero_empleado" },
+        "pr_fecha_incorporacion": { field:"fecha_incorporacion" },
+        "pr_email_corporativo": { field:"email_corporativo" },
+        "pr_telefono_corporativo": { field:"telefono_corporativo" },
+        "pr_supervisor": { field:"supervisor" },
+        "pr_ubicacion_laboral": { field:"ubicacion_laboral" }
+      };
+    } else {
+      containerEl = document.getElementById("grid-financieros");
+      mapping = {
+        "f_banco": { field:"banco" },
+        "f_numero_cuenta": { field:"numero_cuenta" },
+        "f_tipo_cuenta": { field:"tipo_cuenta" },
+        "f_salario_base": { field:"salario_base" },
+        "f_moneda": { field:"moneda" },
+        "f_beneficios": { field:"beneficios" },
+        "f_deducciones": { field:"deducciones" }
+      };
+    }
+
+    const updatedData = gatherInputs(containerEl);
+    if (Object.keys(updatedData).length === 0) { toggleButtons(false); return; }
+
+    try {
+      const r = await fetch(`${backendBaseUrl}/employee-details/${currentEmployeeId}`, {
+        method:"PUT",
+        headers:{ "Content-Type":"application/json" },
+        body: JSON.stringify(updatedData)
+      });
+      const result = await r.json();
+      if (result.status !== "success") throw new Error(result.message || "No se pudo guardar.");
+
+      currentEmployeeData = { ...currentEmployeeData, ...updatedData };
+      replaceInputsWithSpans(containerEl, mapping);
+      alert("¡Datos guardados con éxito!");
+      toggleButtons(false);
+      setText("detail_nombre_completo", currentEmployeeData.nombre_completo);
+      setText("detail_puesto", currentEmployeeData.puesto);
+    } catch (e) {
+      alert("Error al guardar: " + e.message);
+    }
+  });
+
+  /* ======================================================
+     6) DAR DE BAJA
+     ====================================================== */
+  bajaEmpleadoBtn.addEventListener("click", async () => {
+    if (!currentEmployeeId) return alert("Seleccione un empleado primero.");
+    if (!confirm("¿Está seguro que desea dar de baja a este empleado?")) return;
+    try {
+      const r = await fetch(`${backendBaseUrl}/employee-details/${currentEmployeeId}/terminate`, { method:"POST", headers:{ "Content-Type":"application/json" } });
+      const rs = await r.json();
+      if (rs.status !== "success") throw new Error(rs.message || "No se pudo realizar la baja.");
+      alert("Empleado dado de baja exitosamente.");
+      await loadEmployees();
+      employeeSelect.value = "";
+      dataContainer.style.display = "none";
+      editControls.style.display = "none";
+    } catch (e) {
+      alert("Error al dar de baja: " + e.message);
+    }
+  });
+
+  /* ======================================================
+     7) NUEVO EMPLEADO (EMAIL)
+     ====================================================== */
+  nuevoEmpleadoBtn.addEventListener("click", () => openModal("newHireModal"));
+  newHireForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const name = document.getElementById("newHireName").value.trim();
+    const email = document.getElementById("newHireEmail").value.trim();
+    modalMessage.style.color = "inherit";
+    modalMessage.textContent = "Enviando email...";
+    try {
+      const r = await fetch(`${backendBaseUrl}/send-registration-email`, {
+        method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify({ nombre:name, email })
+      });
+      const jr = await r.json();
+      if (jr.status !== "success") throw new Error(jr.message || "No se pudo enviar el email.");
+      modalMessage.style.color = "green";
+      modalMessage.textContent = "✅ ¡Email de registro enviado con éxito!";
+      setTimeout(() => { closeModal("newHireModal"); newHireForm.reset(); modalMessage.textContent=""; }, 1500);
+    } catch (e2) {
+      modalMessage.style.color = "red";
+      modalMessage.textContent = `Error: ${e2.message}`;
+    }
+  });
+
+  /* ======================================================
+     8) SOLICITUDES PENDIENTES
+     ====================================================== */
+  pendientesBtn.addEventListener("click", async () => {
+    openModal("pendingModal");
+    await loadPendingApprovals();
+  });
+
+  refreshPendingBtn.addEventListener("click", async () => {
+    await loadPendingApprovals();
+  });
+
+  async function loadPendingApprovals() {
+    const list = document.getElementById("pending-list");
+    list.innerHTML = "Cargando pendientes...";
+    try {
+      let response, data;
+      try {
+        response = await fetch("https://us-central1-atiempo-9f08a.cloudfunctions.net/getPendingHires", { mode: "cors" });
+        const text = await response.text();
+        if (text.trim().startsWith("<")) throw new Error("HTML response");
+        data = JSON.parse(text);
+      } catch (cloudErr) {
+        console.warn("⚠️ Cloud Function falló, usando Flask local:", cloudErr.message);
+        response = await fetch(`${backendBaseUrl}/api/debug/pending-hires`);
+        const text = await response.text();
+        if (text.trim().startsWith("<")) throw new Error("HTML response from Flask");
+        data = JSON.parse(text);
+      }
+
+      if (!data || data.status !== "success") throw new Error(data?.message || "Respuesta inválida");
+
+      const pendingList = data.pending || data.hires || [];
+      if (pendingList.length === 0) {
+        list.innerHTML = `
+          <div style="padding: 20px; text-align: center; color: #666;">
+            <p>No hay solicitudes pendientes</p>
+          </div>`;
+        return;
+      }
+
+      list.innerHTML = "";
+      pendingList.forEach((doc) => {
+        const personales = doc.personales || {};
+        const archivos = personales.archivos || {};
+        const card = document.createElement("div");
+        card.className = "hr-card";
+        card.innerHTML = `
+          <h4>${personales.nombre_completo || "Nombre no disponible"}</h4>
+          <p><strong>Email:</strong> ${personales.email_personal || "---"}</p>
+          <p><strong>Teléfono:</strong> ${personales.telefono_personal || "---"}</p>
+          <p><strong>Estado:</strong> ${doc.status || "pending"}</p>
+          <p><strong>Fecha:</strong> ${doc.submission_date ? new Date(doc.submission_date).toLocaleDateString() : "---"}</p>
+          <div style="margin:10px 0;padding:10px;background:#f8f9fa;border-radius:4px;">
+            <strong>Archivos:</strong>
+            ${archivos.foto_url ? `<a href="${archivos.foto_url}" target="_blank">📷 Foto</a>` : ""}
+            ${archivos.cv_url ? `<a href="${archivos.cv_url}" target="_blank" style="margin-left:10px;">📄 CV</a>` : ""}
+          </div>
+          <div style="display:flex;gap:10px;margin-top:10px;">
+            <button onclick="reviewHire('${doc.id}','approved')" class="btn btn-success">✅ Aprobar</button>
+            <button onclick="reviewHire('${doc.id}','rejected')" class="btn btn-danger">❌ Rechazar</button>
+            <button onclick="openCommentModal('${doc.id}')" class="btn btn-primary">📝 Comentar</button>
+          </div>
+          <div style="margin-top:10px;font-size:12px;color:#666;">
+            ID: ${doc.id}<br>
+            Última actualización: ${new Date().toLocaleTimeString()}
+          </div>
+        `;
+        list.appendChild(card);
+      });
+    } catch (err) {
+      console.error("❌ Error cargando pendientes:", err);
+      list.innerHTML = `
+        <div style="color: #dc3545; padding: 20px; text-align: center;">
+          <p>Error cargando pendientes: ${err.message}</p>
+          <button onclick="loadPendingApprovals()" class="btn btn-primary">🔄 Reintentar</button>
+        </div>`;
+    }
+  }
+
+  async function reviewHire(id, status) {
+    try {
+      if (status === "approved") {
+        const r = await fetch(`${backendBaseUrl}/api/hire/approve`, {
+          method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify({ hire_id:id })
+        });
+        const jr = await r.json();
+        if (jr.status !== "success" && jr.status !== "partial_success") throw new Error(jr.message || "No se pudo aprobar.");
+        alert(`Empleado aprobado${jr.status === "partial_success" ? " (email falló)" : ""}.`);
+        await loadPendingApprovals();
+      } else {
+        const r = await fetch("https://us-central1-atiempo-9f08a.cloudfunctions.net/updateHireStatus", {
+          method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify({ id, status })
+        });
+        const jr = await r.json();
+        if (jr.status !== "success") throw new Error(jr.message || "No se pudo actualizar.");
+        alert("Registro actualizado.");
+        await loadPendingApprovals();
+      }
+    } catch (e) {
+      alert("Error: " + e.message);
+    }
+  }
+
+  function openModal(id) {
+    const m = document.getElementById(id);
+    if (!m) return;
+    m.style.display = "flex";
+    const c = m.querySelector(".modal-content");
+    if (c) { c.classList.remove("animate"); void c.offsetWidth; c.classList.add("animate"); }
+  }
+  function closeModal(id) {
+    const m = document.getElementById(id);
+    if (!m) return;
+    m.style.display = "none";
+  }
+  document.querySelectorAll(".close-btn").forEach(btn => {
+    btn.addEventListener("click", () => closeModal(btn.dataset.close));
+  });
+  window.addEventListener("click", (e) => {
+    [newHireModal, pendingModal, commentModal].forEach(m => {
+      if (e.target === m) m.style.display = "none";
+    });
+  });
+
+  /* ======================================================
+     9) INIT
+     ====================================================== */
+window.addEventListener("load", async () => {
+  await loadBackendConfig();
+  await loadEmployees();
+});
+
+</script>
+{% endblock %}

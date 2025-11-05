@@ -1,16 +1,23 @@
 {
-  "name": "@Tiempo",
+  "name": "atiempo",
   "version": "1.0.0",
   "description": "Final version of ATIEMPO Electron app with Python backend.",
   "main": "main.js",
-  "scripts": {
-    "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+ "scripts": {
+  "backend": "venv/bin/python3 app.py",
+  "start": "concurrently \"npm run backend\" \"electron .\"",
+  "electron": "electron .",
+  "dist": "electron-builder --mac --x64 --config public/assets/icons/builder/electron-builder.yml"
+},
   "keywords": [],
   "author": "eleela",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^26.2.1"
+    "concurrently": "^9.2.0",
+    "electron": "^26.2.1",
+    "electron-builder": "^26.0.12"
+  },
+  "dependencies": {
+    "cors": "^2.8.5"
   }
 }

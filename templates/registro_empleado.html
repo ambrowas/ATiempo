@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Nuevo Ingreso - ATiempo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #004080;
+            --border-outer: 4px solid black;
+            --border-inner: 2px solid black;
+        }
+        body { font-family: 'Roboto', sans-serif; background-color: #f4f4f4; line-height: 1.6; }
+        .container { max-width: 900px; margin: 30px auto; padding: 30px; background: #fff; border-radius: 8px; border: var(--border-outer); }
+        header { text-align: center; margin-bottom: 20px; }
+        header img { height: 80px; }
+        h1, h2, h3 { color: var(--primary-color); }
+        
+        /* --- Tab System Styles --- */
+        .tab-switcher { border-bottom: var(--border-inner); margin-bottom: 20px; }
+        .tab-link { background-color: #f1f1f1; border: var(--border-inner); border-bottom: none; cursor: pointer; padding: 10px 20px; font-size: 16px; font-weight: 700; transition: background-color 0.3s; border-radius: 6px 6px 0 0; }
+        .tab-link.active { background-color: var(--primary-color); color: white; }
+        .tab-content { display: none; animation: fadeIn 0.5s; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        fieldset { border: var(--border-inner); border-radius: 5px; padding: 20px; margin-top: 20px; }
+        legend { font-weight: 700; font-size: 1.2em; color: var(--primary-color); padding: 0 10px; }
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .form-group { display: flex; flex-direction: column; }
+        label { margin-bottom: 5px; font-weight: 700; color: #333; }
+        input, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        
+        /* Dynamic List Styles */
+        .dynamic-list-container { margin-top: 15px; }
+        .dynamic-list-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .dynamic-list { border: 1px solid #ddd; padding: 10px; border-radius: 4px; min-height: 40px; }
+        .list-item { background-color: #f8f9fa; padding: 10px; margin-bottom: 5px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; }
+        .remove-btn { background: #dc3545; color: white; border: none; border-radius: 50%; width: 22px; height: 22px; cursor: pointer; font-weight: bold; }
+        .plus-btn { background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; padding: 5px 10px; }
+
+        .submit-btn { width: 100%; padding: 15px; font-size: 16px; background-color: #035917; color: white; border: 2px solid black; border-radius: 5px; cursor: pointer; transition: background-color 0.3s; margin-top: 20px; }
+        #form-message { text-align: center; font-weight: bold; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+               <img src="assets/atiempologo.png" alt="Logo Atiempo">
+            <h1>Formulario de Registro de Nuevo Empleado</h1>
+        </header>
+
+        <form id="newHireForm">
+            <div class="tab-switcher">
+                <button type="button" class="tab-link active" onclick="openTab(event, 'personales')">1. Datos Personales</button>
+                <button type="button" class="tab-link" onclick="openTab(event, 'profesionales')">2. Datos Profesionales</button>
+                <button type="button" class="tab-link" onclick="openTab(event, 'financieros')">3. Datos Financieros</button>
+            </div>
+
+            <div id="personales" class="tab-content active">
+                <fieldset>
+                    <legend>Identidad</legend>
+                    <div class="form-grid">
+                        <div class="form-group"><label for="nombres">Nombre(s)</label><input type="text" id="nombres" required></div>
+                        <div class="form-group"><label for="apellidos">Apellido(s)</label><input type="text" id="apellidos" required></div>
+                        <div class="form-group"><label for="fecha_nacimiento">Fecha de Nacimiento</label><input type="date" id="fecha_nacimiento" required></div>
+                        <div class="form-group"><label for="sexo">Sexo</label><select id="sexo"><option>Masculino</option><option>Femenino</option></select></div>
+                        <div class="form-group"><label for="estado_civil">Estado Civil</label><select id="estado_civil" required><option value="">Seleccione...</option><option>Soltero/a</option><option>Casado/a</option><option>Separado/a</option><option>Divorciado/a</option><option>Viudo/a</option></select></div>
+                        <div class="form-group"><label for="dependientes">Nº de Dependientes</label><input type="number" id="dependientes" value="0" min="0" required></div>
+                        <div class="form-group"><label for="nacionalidad">Nacionalidad</label><input type="text" id="nacionalidad" value="Ecuatoguineana" required></div>
+                        <div class="form-group"><label for="natural_de">Natural de (Provincia)</label><select id="natural_de" required><option value="">Seleccione...</option><option>Annobón</option><option>Bioko Norte</option><option>Bioko Sur</option><option>Centro Sur</option><option>Kié-Ntem</option><option>Litoral</option><option>Wele-Nzas</option></select></div>
+                        <div class="form-group"><label for="direccion">Dirección Completa</label><input type="text" id="direccion" required></div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Contacto Personal y Emergencia</legend>
+                    <div class="form-grid">
+                        <div class="form-group"><label for="email_personal">Email Personal</label><input type="email" id="email_personal" required></div>
+                        <div class="form-group"><label for="telefono_personal">Teléfono Personal</label><input type="tel" id="telefono_personal" required></div>
+                        <div class="form-group"><label for="contacto_emergencia_nombre">Nombre del Contacto de Emergencia</label><input type="text" id="contacto_emergencia_nombre" required></div>
+                        <div class="form-group"><label for="contacto_emergencia_relacion">Relación</label><input type="text" id="contacto_emergencia_relacion" placeholder="Ej: Esposo/a, Madre..." required></div>
+                        <div class="form-group"><label for="contacto_emergencia_telefono">Teléfono de Emergencia</label><input type="tel" id="contacto_emergencia_telefono" required></div>
+                    </div>
+                </fieldset>
+                 <fieldset>
+                    <legend>Documentos Personales</legend>
+                     <div class="form-grid">
+                         <div class="form-group"><label for="foto">Foto de Perfil (tipo carnet)</label><input type="file" id="foto" accept="image/png, image/jpeg" required></div>
+                         <div class="form-group"><label for="documento_identidad">DIP / Pasaporte</label><input type="file" id="documento_identidad" accept=".pdf,image/*" required></div>
+                     </div>
+                </fieldset>
+            </div>
+
+            <div id="profesionales" class="tab-content">
+                <fieldset>
+                    <legend>Contrato</legend>
+                    <div class="form-grid">
+                        <div class="form-group"><label for="fecha_incorporacion">Fecha de Incorporación</label><input type="date" id="fecha_incorporacion" required></div>
+                        <div class="form-group"><label for="tipo_contrato">Tipo de Contrato</label>
+                            <select id="tipo_contrato" required>
+                                <option>Indefinido</option><option>Temporal</option><option>Prácticas</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="expiracion_group" style="display:none;"><label for="fecha_expiracion">Fecha de Expiración</label><input type="date" id="fecha_expiracion"></div>
+                        <div class="form-group"><label for="contrato_file">Subir Contrato (PDF)</label><input type="file" id="contrato_file" accept=".pdf" required></div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Experiencia y Formación</legend>
+                    <div class="form-group"><label for="cv_file">Subir Curriculum Vitae (PDF)</label><input type="file" id="cv_file" accept=".pdf" required></div>
+                    <div class="dynamic-list-container">
+                        <div class="dynamic-list-header"><h3>Titulaciones Académicas</h3><button type="button" class="plus-btn" id="addTitulacionBtn">+</button></div>
+                        <div id="titulacionesList" class="dynamic-list"></div>
+                    </div>
+                    <div class="dynamic-list-container">
+                        <div class="dynamic-list-header"><h3>Experiencia Laboral Previa</h3><button type="button" class="plus-btn" id="addExperienciaBtn">+</button></div>
+                        <div id="experienciaList" class="dynamic-list"></div>
+                    </div>
+                     <div class="form-group"><label for="reconocimientos_file">Subir Reconocimientos / Certificados (PDF)</label><input type="file" id="reconocimientos_file" accept=".pdf"></div>
+                </fieldset>
+            </div>
+            
+            <div id="financieros" class="tab-content">
+                <fieldset>
+                    <legend>Información Financiera</legend>
+                    <div class="form-grid">
+                        <div class="form-group"><label for="salario_anual">Salario Bruto Anual</label><input type="number" id="salario_anual" min="0" step="100" required></div>
+                        <div class="form-group"><label for="salario_mensual">Salario Neto Mensual (Aprox.)</label><input type="text" id="salario_mensual" readonly style="background:#e9ecef;"></div>
+                        <div class="form-group"><label for="banco">Banco</label><select id="banco" required><option>Bange</option><option>SGBGE</option><option>CCEI Bank</option><option>EcoBank</option><option>BGFI</option></select></div>
+                        <div class="form-group"><label for="numero_cuenta">Número de Cuenta</label><input type="text" id="numero_cuenta" required></div>
+                    </div>
+                </fieldset>
+            </div>
+
+           <button type="button" id="formNavBtn" class="submit-btn">SIGUIENTE</button>
+            <p id="form-message"></p>
+        </form>
+    </div>
+
+<script>
+  let currentTab = 0; 
+  const form = document.getElementById('newHireForm');
+  const navBtn = document.getElementById('formNavBtn');
+  const tabLinks = document.querySelectorAll('.tab-link');
+  const tabContents = document.querySelectorAll('.tab-content');
+  const messageEl = document.getElementById('form-message');
+
+  function validateTab(tabIndex) {
+    const tab = tabContents[tabIndex];
+    const inputs = tab.querySelectorAll('input[required], select[required]');
+    let isTabValid = true;
+    for (const input of inputs) {
+      if (!input.checkValidity()) {
+        input.style.borderColor = 'red';
+        isTabValid = false;
+      } else {
+        input.style.borderColor = '#ccc';
+      }
+    }
+    return isTabValid;
+  }
+
+  function updateButtonState() {
+    form.querySelectorAll('input[required], select[required]')
+      .forEach(el => el.style.borderColor = '#ccc');
+
+    if (currentTab < 2) {
+      navBtn.textContent = 'SIGUIENTE';
+      navBtn.onclick = () => moveToNextTab();
+    } else {
+      if (validateTab(0) && validateTab(1) && validateTab(2)) {
+        navBtn.textContent = 'ENVIAR FORMULARIO PARA APROBACIÓN';
+        navBtn.onclick = () => form.requestSubmit();
+      } else {
+        navBtn.textContent = 'Faltan campos requeridos';
+        navBtn.onclick = () =>
+          alert('Por favor, revise todas las pestañas y complete los campos marcados en rojo.');
+      }
+    }
+  }
+
+  function moveToNextTab() {
+    if (!validateTab(currentTab)) {
+      alert('Por favor, complete todos los campos requeridos antes de continuar.');
+      return;
+    }
+    if (currentTab < 2) {
+      tabLinks[currentTab + 1].click();
+    }
+  }
+
+  function openTab(evt, tabIndex) {
+    currentTab = tabIndex;
+    tabContents.forEach(tab => tab.style.display = "none");
+    tabLinks.forEach(link => link.classList.remove("active"));
+    tabContents[currentTab].style.display = "block";
+    tabLinks[currentTab].classList.add("active");
+    updateButtonState();
+  }
+
+  function addListItem(type) {
+    const containerId = type === 'titulacion' ? 'titulacionesList' : 'experienciaList';
+    const listContainer = document.getElementById(containerId);
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'list-item';
+
+    let content = '';
+    if (type === 'titulacion') {
+      content = `
+        <input type="text" placeholder="Título" class="data-titulo" style="flex:2;" required>
+        <input type="text" placeholder="Institución" class="data-institucion" style="flex:2;" required>
+        <input type="number" placeholder="Año" class="data-ano" style="flex:1;" required min="1950" max="2099">
+      `;
+    } else {
+      content = `
+        <input type="text" placeholder="Puesto" class="data-puesto" style="flex:2;" required>
+        <input type="text" placeholder="Institución" class="data-institucion" style="flex:2;" required>
+        <input type="text" placeholder="Desde-Hasta (Años)" class="data-periodo" style="flex:1;" required>
+      `;
+    }
+    itemDiv.innerHTML = `${content} <button type="button" class="remove-btn" onclick="this.parentElement.remove()">-</button>`;
+    listContainer.appendChild(itemDiv);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    tabLinks.forEach((link, index) => {
+      link.addEventListener('click', (event) => openTab(event, index));
+    });
+    tabLinks[0].click();
+
+    document.getElementById('tipo_contrato').addEventListener('change', function () {
+      document.getElementById('expiracion_group').style.display = (this.value !== 'Indefinido') ? 'block' : 'none';
+    });
+
+    document.getElementById('salario_anual').addEventListener('input', function () {
+      const mensualNeto = (this.value / 12) * 0.80;
+      document.getElementById('salario_mensual').value =
+        mensualNeto > 0 ? `~ ${mensualNeto.toFixed(2)}` : '';
+    });
+
+    document.getElementById('addTitulacionBtn').addEventListener('click', () => addListItem('titulacion'));
+    document.getElementById('addExperienciaBtn').addEventListener('click', () => addListItem('experiencia'));
+
+    form.addEventListener('input', updateButtonState);
+  });
+
+  // 🚀 SUBMISSION LOGIC
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    messageEl.textContent = 'Enviando...';
+    navBtn.disabled = true;
+
+    const titulaciones = Array.from(document.querySelectorAll('#titulacionesList .list-item')).map(item => ({
+      titulo: item.querySelector('.data-titulo').value,
+      institucion: item.querySelector('.data-institucion').value,
+      ano: item.querySelector('.data-ano').value,
+    }));
+    const experiencia = Array.from(document.querySelectorAll('#experienciaList .list-item')).map(item => ({
+      puesto: item.querySelector('.data-puesto').value,
+      institucion: item.querySelector('.data-institucion').value,
+      periodo: item.querySelector('.data-periodo').value,
+    }));
+
+    const formData = new FormData();
+    const nombres = document.getElementById('nombres').value;
+    const apellidos = document.getElementById('apellidos').value;
+
+    formData.append('nombre_completo', `${nombres} ${apellidos}`.trim());
+    formData.append('nombres', nombres);
+    formData.append('apellidos', apellidos);
+    formData.append('fecha_nacimiento', document.getElementById('fecha_nacimiento').value);
+    formData.append('sexo', document.getElementById('sexo').value);
+    formData.append('estado_civil', document.getElementById('estado_civil').value);
+    formData.append('dependientes', document.getElementById('dependientes').value);
+    formData.append('nacionalidad', document.getElementById('nacionalidad').value);
+    formData.append('natural_de', document.getElementById('natural_de').value);
+    formData.append('direccion', document.getElementById('direccion').value);
+    formData.append('email_personal', document.getElementById('email_personal').value);
+    formData.append('telefono_personal', document.getElementById('telefono_personal').value);
+    formData.append('contacto_emergencia_nombre', document.getElementById('contacto_emergencia_nombre').value);
+    formData.append('contacto_emergencia_relacion', document.getElementById('contacto_emergencia_relacion').value);
+    formData.append('contacto_emergencia_telefono', document.getElementById('contacto_emergencia_telefono').value);
+    formData.append('fecha_incorporacion', document.getElementById('fecha_incorporacion').value);
+    formData.append('tipo_contrato', document.getElementById('tipo_contrato').value);
+    formData.append('fecha_expiracion', document.getElementById('fecha_expiracion').value);
+    formData.append('salario_bruto_anual', document.getElementById('salario_anual').value);
+    formData.append('banco', document.getElementById('banco').value);
+    formData.append('numero_cuenta', document.getElementById('numero_cuenta').value);
+    formData.append('titulaciones_json', JSON.stringify(titulaciones));
+    formData.append('experiencia_json', JSON.stringify(experiencia));
+    formData.append('submission_date', new Date().toISOString());
+
+    formData.append('foto_file', document.getElementById('foto').files[0]);
+    formData.append('identidad_file', document.getElementById('documento_identidad').files[0]);
+    formData.append('cv_file', document.getElementById('cv_file').files[0]);
+    formData.append('contrato_file', document.getElementById('contrato_file').files[0]);
+    const reconocimientosFile = document.getElementById('reconocimientos_file').files[0];
+    if (reconocimientosFile) {
+      formData.append('reconocimientos_file', reconocimientosFile);
+    }
+
+    try {
+      const response = await fetch(
+        "https://us-central1-atiempo-9f08a.cloudfunctions.net/submitNewHire",
+        { method: "POST", body: formData }
+      );
+
+      const result = await response.json();
+      if (result.status === 'success') {
+        messageEl.style.color = 'green';
+        messageEl.textContent = '¡Formulario enviado con éxito!';
+        document.getElementById('successSound').play().catch(() => {});
+        form.reset();
+        tabLinks[0].click();
+      } else {
+        throw new Error(result.message);
+      }
+    } catch (error) {
+      messageEl.style.color = 'red';
+      messageEl.textContent = 'Error al enviar el formulario. Verifique su conexión o intente nuevamente.';
+      console.error("Submission error:", error);
+    } finally {
+      navBtn.disabled = false;
+    }
+  });
+</script>
+<audio id="successSound" src="assets/success.mp3" preload="auto"></audio>
+</body>
+</html>

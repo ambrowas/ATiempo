@@ -1,0 +1,9 @@
+Flask
+Flask-Cors
+requests
+python-dotenv
+firebase-admin
+qrcode
+pillow
+weasyprint
+gunicorn

@@ -1,0 +1,1101 @@
+{% extends "base.html" %}
+{% block title %}Gestión de Nóminas - ATiempo{% endblock %}
+{% block extra_styles %}
+<style>
+:root { --primary-color:#004080; --border-inner:2px solid black; }
+body{
+  font-family:'Roboto',sans-serif; margin:0; background:#f4f4f4;
+  height:100vh; display:flex; flex-direction:column;
+}
+.main-content {
+  flex: 1; 
+  display: flex;
+  flex-direction: column; 
+  background: #f4f4f4;
+  padding: 25px 40px; 
+  overflow-y: auto; 
+  overflow-x: hidden;
+  box-sizing: border-box;
+  
+  /* 🔑 CRITICAL FIX: Overrides any centering behavior */
+  align-items: stretch !important; /* Ensures child elements use full width */
+  justify-content: flex-start !important; /* Ensures content starts at the top (eliminates vertical centering/jump) */
+}
+
+/* Tabs */
+.tab{ overflow:hidden; border-bottom:2px solid #ccc; margin-bottom:25px; }
+.tab button{
+  background:inherit; border:none; outline:none; cursor:pointer;
+  padding:14px 20px; transition:.3s; font-size:1.1rem; font-weight:600; color:#555;
+}
+.tab button:hover{ background:#e9e9e9; }
+.tab button.active{ background:#f4f4f4; color:var(--primary-color); border-bottom:3px solid var(--primary-color); }
+.tabcontent{ display:none; animation:fadeEffect .4s ease-in-out; }
+@keyframes fadeEffect{ from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+
+/* Cards */
+.card{
+  background:#fff; border-radius:10px; padding:25px; border:var(--border-inner);
+  box-shadow:0 4px 8px rgba(0,0,0,.1); margin-bottom:25px;
+}
+.card h3{ margin-top:0; color:#000; border-bottom:2px solid #ccc; padding-bottom:8px; }
+
+/* Summary bar */
+#summaryBar{
+  display:none; background:#e9f2ff; border-left:6px solid var(--primary-color);
+  padding:12px 18px; font-weight:600; color:#003366; margin-bottom:20px;
+  border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,.05);
+}
+
+/* Table */
+table{ width:100%; border-collapse:collapse; background:#fff; font-size:13px; border-radius:8px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,.1); }
+th{ background:#004080; color:#fff; padding:10px; }
+td{ border-bottom:1px solid #ddd; padding:8px; text-align:center; }
+tr:nth-child(even){ background:#f9f9f9; }
+thead th{ position:sticky; top:0; z-index:1; }
+
+/* Buttons */
+.btn{
+  background:var(--primary-color); color:#fff; padding:10px 18px; border:2px solid #000;
+  border-radius:6px; font-weight:600; cursor:pointer; transition:all .2s ease;
+}
+.btn:hover{ background:#0055cc; transform:translateY(-2px); }
+.filter-button{
+  background:#28a745; color:#fff; padding:10px 20px; border:2px solid #1e7e34; border-radius:6px;
+  font-weight:bold; cursor:pointer; transition:background .2s, transform .1s;
+}
+.filter-button:hover{ background:#218838; transform:translateY(-1px); }
+
+/* Filter area */
+.filter-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:20px; align-items:end; }
+
+/* Two-column layout for Generate/Progress */
+.nomina-two-col{ display:grid; grid-template-columns:1.05fr 1fr; gap:20px; align-items:start; }
+
+/* Progress panel (non-card look) */
+.progress-panel{
+  background:#fff; border:2px dashed #9aa4b2; border-radius:10px; padding:18px 18px 12px; min-height:240px;
+  display:flex; flex-direction:column;
+}
+.progress-title{ font-weight:700; margin:0 0 10px; color:#0b1e3a; border-bottom:2px solid #e6e8eb; padding-bottom:6px; }
+.progress-container{ width:100%; height:28px; background:#e6e8eb; border-radius:14px; overflow:hidden; margin:10px 0 14px; }
+.progress-bar{
+  height:100%; width:0%; background:#09783b; color:#fff; font-weight:700; display:flex; align-items:center; justify-content:center;
+  transition:width .3s ease;
+}
+
+/* Streaming log */
+#animation-content{
+  flex:1; overflow:auto; padding:8px; background:#f9fbff; border:1px solid #d5e1ff; border-radius:8px;
+}
+.animation-line{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+  font-size:13px; margin:4px 0; padding:4px 6px; border-left:4px solid #cbd5e1; background:#fff; border-radius:6px; animation:fadeIn .25s ease-out;
+}
+.animation-line.info{border-left-color:#2563eb}
+.animation-line.success{border-left-color:#16a34a;background:#f3fff6}
+.animation-line.error{border-left-color:#dc2626;background:#fff5f5}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+
+/* Make results area truly full width */
+.tabcontent .card, .tabcontent, .card .overflow-x-auto, table { width:100% !important; }
+/* Stack the generate form and progress panel */
+.nomina-two-col { display:block; }
+.nomina-two-col > * + * { margin-top:20px; } /* keep the spacing that 'gap' gave you */
+#center-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+#center-loader.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+#center-loader-animation {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 15px;
+}
+
+#center-loader-text {
+  font-weight: 600;
+  color: #004080;
+  font-size: 18px;
+}
+/* ===== PDF Modal Viewer ===== */
+.modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.25s ease;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  width: 85%;
+  max-width: 1000px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-close {
+  background: #c53030;
+  color: white;
+  font-weight: bold;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  background: #9b2c2c;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+.modal .flex button {
+  font-size: 0.9rem;
+}
+.modal .flex button:active {
+  transform: scale(0.97);
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+
+</style>
+{% endblock %}
+{% block content %}
+<div id="auth-message" class="text-center text-red-600 font-semibold mb-4 hidden">
+  <div id="center-loader">
+    <div id="center-loader-animation"></div>
+    <p id="center-loader-text">Autenticando...</p>
+  </div>
+</div>
+
+<div id="payroll-management-content">
+  
+  <div class="tab">
+    <button id="defaultOpen" class="tablinks" onclick="openTab(event, 'VerNominas')">VER NÓMINAS</button>
+    <button class="tablinks" onclick="openTab(event, 'GenerarNominas')">GENERAR NÓMINAS</button>
+  </div>
+
+
+  <div id="VerNominas" class="tabcontent">
+    <div class="card">
+      <h3>Buscar y Filtrar Nóminas</h3>
+      <div class="filter-grid">
+        <div>
+          <label for="employeeSearch">Buscar (Nombre):</label>
+          <input id="employeeSearch" type="text" placeholder="Ej. Juan Pérez" class="w-full p-2 border rounded-md" />
+        </div>
+        <div>
+          <label for="filterEmployee">Empleado:</label>
+          <select id="filterEmployee" class="w-full p-2 border rounded-md">
+            <option value="">Todos los Empleados</option>
+          </select>
+        </div>
+        <div>
+          <label for="filterPeriod">Periodo (YYYY-MM):</label>
+          <input id="filterPeriod" type="month" class="w-full p-2 border rounded-md" />
+        </div>
+        <div>
+          <button onclick="loadCompanyPayroll()" class="filter-button">Aplicar Filtros</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="summaryBar"></div>
+
+    <div class="card">
+      <h3>Resultados</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Empleado</th><th>Puesto</th><th>Periodo</th><th>Salario Base</th>
+            <th>Bono Ventas</th><th>Bruto</th><th>Seg. Social</th><th>IPRF</th>
+            <th>INSESO</th><th>Otros</th><th>Neto</th><th>Ver</th>
+          </tr>
+        </thead>
+        <tbody id="companyPayrollTableBody">
+          <tr><td colspan="12" class="text-center py-4">Cargando nóminas...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="GenerarNominas" class="tabcontent">
+    <div class="nomina-two-col">
+      <div class="card">
+        <h3 style="margin-top:0;border-bottom:2px solid #e6e8eb;padding-bottom:6px;">Generar Nueva Nómina</h3>
+        <label for="generatePeriod" class="block text-sm font-medium text-gray-700">Periodo (YYYY-MM):</label>
+        <input type="month" id="generatePeriod" class="w-full p-2 border rounded-md mb-3">
+        <button onclick="generateNewPayroll()" class="btn w-full">Generar Nómina</button>
+      </div>
+      <div class="progress-panel">
+        <h3 class="progress-title">Progreso de Generación</h3>
+        <div class="progress-container"><div id="progress-bar" class="progress-bar"></div></div>
+        <div id="progress-text" class="font-semibold" style="margin-bottom:6px;"></div>
+        <div id="animation-content"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="pdfModal"
+     class="modal hidden"
+     aria-hidden="true">
+
+  <div class="modal-content">
+    <div class="flex justify-between items-center mb-3">
+      <h3 id="pdfTitle" class="text-lg font-semibold text-blue-800">
+        Vista de Nómina
+      </h3>
+
+      <div class="flex gap-2">
+        <button id="downloadPdfBtn"
+          class="bg-blue-600 text-white font-semibold px-3 py-1 rounded hover:bg-blue-700 transition">
+          ⬇ Descargar PDF
+        </button>
+
+        <button id="pdfCloseBtn"
+          class="modal-close bg-red-600 text-white font-semibold px-3 py-1 rounded hover:bg-red-700 transition">
+          ✕
+        </button>
+      </div>
+    </div>
+
+    <iframe id="pdfFrame"
+            src=""
+            style="width:100%;height:70vh;border:1px solid #ccc;border-radius:6px;background:#fff;">
+    </iframe>
+  </div>
+</div>
+{% endblock %}
+{% block extra_scripts %}
+<!-- Firebase (compat) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+
+
+<script>
+(function () {
+
+  function showLoader(message = "Autenticando...") {
+  const loader = document.getElementById("center-loader");
+  const text = document.getElementById("center-loader-text");
+  if (loader) loader.classList.add("visible");
+  if (text) text.textContent = message;
+
+  const animBox = document.getElementById("center-loader-animation");
+  if (animBox && !animBox.dataset.initialized) {
+    lottie.loadAnimation({
+      container: animBox,
+      renderer: "svg",
+      loop: true,
+      autoplay: true,
+      path: "/static/assets/Loading sand clock.json" // 🔁 use your real path
+    });
+    animBox.dataset.initialized = "true";
+  }
+}
+
+function hideLoader() {
+  const loader = document.getElementById("center-loader");
+  if (!loader) return;
+  loader.style.transition = "opacity 0.8s ease";
+  loader.style.opacity = "0";
+  setTimeout(() => {
+    loader.classList.remove("visible");
+    loader.style.opacity = "1";
+  }, 800);
+}
+
+  /* -------- Tabs (global) -------- */
+  window.openTab = function (evt, tabName) {
+    const tabs = document.getElementsByClassName("tabcontent");
+    const links = document.getElementsByClassName("tablinks");
+    for (let i = 0; i < tabs.length; i++) tabs[i].style.display = "none";
+    for (let i = 0; i < links.length; i++) links[i].className = links[i].className.replace(" active", "");
+    const target = document.getElementById(tabName);
+    if (target) target.style.display = "block";
+    if (evt && evt.currentTarget) evt.currentTarget.className += " active";
+  };
+
+  /* -------- DOM -------- */
+  const authMsgEl   = document.getElementById("auth-message");
+  const pageRootEl  = document.getElementById("payroll-management-content");
+  const filterEmpEl = document.getElementById("filterEmployee");
+  const periodEl    = document.getElementById("filterPeriod");
+  const searchEl    = document.getElementById("employeeSearch");
+  const tableBody   = document.getElementById("companyPayrollTableBody");
+  const genPeriodEl = document.getElementById("generatePeriod");
+  const summaryBar  = document.getElementById("summaryBar");
+  const progressBar = document.getElementById("progress-bar");
+  const progressTxt = document.getElementById("progress-text");
+  const animBox     = document.getElementById("animation-content");
+
+  /* -------- Backend base URL (avoid hard-coding ports) -------- */
+  let backendBaseUrl = window.location.origin;
+  async function resolveBackendBaseUrl() {
+    try {
+      const r = await fetch("/backend_config.json", {cache:"no-store"});
+      if (r.ok) {
+        const j = await r.json();
+        if (j && j.backend) backendBaseUrl = j.backend;
+      }
+    } catch (_) {}
+  }
+
+  /* -------- Firebase -------- */
+  const firebaseConfig = {
+    apiKey: "AIzaSyBTehSBePV6bjKkI_htP6NsU4agckkSOrE",
+    authDomain: "atiempo-9f08a.firebaseapp.com",
+    projectId: "atiempo-9f08a",
+    storageBucket: "atiempo-9f08a.appspot.com",
+    messagingSenderId: "221735208077",
+    appId: "1:221735208077:web:28a3134fa23bd407a20ec4",
+    measurementId: "G-NVPGWJQ9J6"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db   = firebase.firestore();
+
+  let firebaseIdToken = null;
+  let allEmployees = [];
+
+  /* -------- Modal helpers -------- */
+  window.closePdfViewerModal = function () {
+    if (pdfModal) pdfModal.style.display = "none";
+    if (pdfViewer) pdfViewer.src = "";
+  };
+  
+  function showSummary(text, tone = "info") {
+    if (!summaryBar) return;
+    summaryBar.textContent = text || "";
+    summaryBar.style.display = "block";
+    summaryBar.style.borderLeft = tone === "error" ? "6px solid #dc3545" : "6px solid #28a745";
+  }
+
+  /* -------- Filters -------- */
+  async function loadEmployeesForFilter() {
+    const snap = await db.collection("EMPLEADOS").get();
+    allEmployees = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    filterEmpEl.innerHTML = '<option value="">Todos los Empleados</option>';
+    allEmployees.forEach(emp => {
+      const opt = document.createElement("option");
+      opt.value = emp.id;
+      opt.textContent = emp.nombre || emp.nombre_completo || emp.id;
+      filterEmpEl.appendChild(opt);
+    });
+  }
+  if (searchEl) {
+    searchEl.addEventListener("input", () => {
+      const q = searchEl.value.trim().toLowerCase();
+      if (!q) { filterEmpEl.value = ""; return; }
+      for (let i = 0; i < filterEmpEl.options.length; i++) {
+        const t = (filterEmpEl.options[i].textContent || "").toLowerCase();
+        if (t.includes(q)) { filterEmpEl.value = filterEmpEl.options[i].value; return; }
+      }
+      filterEmpEl.value = "";
+    });
+    filterEmpEl.addEventListener("change", () => { searchEl.value = ""; });
+  }
+
+async function previewPayroll(employee_id, period) {
+  console.log("🟡 Previewing payroll for:", employee_id, period);
+
+  const pdfUrl = `${backendBaseUrl}/api/payroll/pdf/${employee_id}/${period}`;
+  console.log("📎 Fetching PDF from:", pdfUrl);
+
+  const pdfModal = document.getElementById("pdfModal");
+  const pdfFrame = document.getElementById("pdfFrame");
+  const pdfTitle = document.getElementById("pdfTitle");
+
+  if (!pdfModal || !pdfFrame) {
+    console.error("❌ PDF modal or frame element not found!");
+    return;
+  }
+
+  try {
+    // Just set iframe src — no fetch needed
+    pdfFrame.src = pdfUrl;
+    pdfTitle.textContent = `Nómina - ${employee_id} (${period})`;
+
+    pdfModal.classList.remove("hidden");
+    pdfModal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+
+    console.log("✅ PDF modal opened successfully");
+  } catch (err) {
+    console.error("❌ Error loading PDF:", err);
+    alert("No se pudo cargar el PDF de la nómina.");
+  }
+}
+
+/* -------- Read payrolls (Flask) -------- */
+async function fetchPayrolls(initial = false) {
+  const params = new URLSearchParams();
+
+  // ⛔ Only include filters if not the initial load
+  if (!initial) {
+    if (filterEmpEl.value) params.set("employee_id", filterEmpEl.value);
+    if (periodEl.value) params.set("period", periodEl.value);
+  }
+
+  const url = `${backendBaseUrl}/api/payroll/all${params.toString() ? "?" + params.toString() : ""}`;
+  const res = await fetch(url, { headers: { Authorization: `Bearer ${firebaseIdToken}` } });
+  const data = await res.json();
+
+  if (!res.ok || data.status !== "success") {
+    throw new Error(data.message || "No se pudieron cargar las nóminas");
+  }
+
+  return data.payroll || [];
+}
+
+window.loadCompanyPayroll = async function (initial = false) {
+  tableBody.innerHTML = '<tr><td colspan="12" class="py-4 text-center">Cargando nóminas...</td></tr>';
+  try {
+    const slips = await fetchPayrolls(initial);
+
+    const who = filterEmpEl.value
+      ? (allEmployees.find(e => e.id === filterEmpEl.value)?.nombre || "empleado")
+      : "todos los empleados";
+    const per = periodEl.value || "todos los periodos";
+    showSummary(`Mostrando ${slips.length} nómina(s) para ${who}, periodo: ${per}.`);
+
+    tableBody.innerHTML = "";
+    if (slips.length === 0) {
+      tableBody.innerHTML = '<tr><td colspan="12" class="py-4 text-center">Sin resultados</td></tr>';
+      return;
+    }
+
+ slips.forEach(slip => {
+  const d = slip.deducciones || {};
+  const tr = document.createElement("tr");
+
+  const nameToDisplay = resolveEmployeeName(slip.employee_id, slip.employee_name);
+  const roleToDisplay = resolveEmployeeRole(slip.employee_id, slip.employee_role);
+
+  tr.innerHTML = `
+    <td>${nameToDisplay}</td>
+    <td>${roleToDisplay}</td>
+    <td>${slip.periodo || "N/D"}</td>
+    <td>${(slip.salario_base || 0).toLocaleString("es-GQ", { style:"currency", currency:"XAF" })}</td>
+    <td>${(slip.bono_ventas || 0).toLocaleString("es-GQ", { style:"currency", currency:"XAF" })}</td>
+    <td>${(slip.salario_bruto || (slip.salario_base||0)+(slip.bono_ventas||0)).toLocaleString("es-GQ", { style:"currency", currency:"XAF" })}</td>
+    <td>${(slip.seg_social || 0).toLocaleString("es-GQ", { style:"currency", currency:"XAF" })}</td>
+    <td>${(slip.irpf || 0).toLocaleString("es-GQ", { style:"currency", currency:"XAF" })}</td>
+    <td>${(slip.inseso || 0).toLocaleString("es-GQ", { style:"currency", currency:"XAF" })}</td>
+    <td>${(slip.otros || 0).toLocaleString("es-GQ", { style:"currency", currency:"XAF" })}</td>
+    <td>${(slip.neto || 0).toLocaleString("es-GQ", { style:"currency", currency:"XAF" })}</td>
+    <td><button class="text-blue-600 hover:underline" onclick='viewPayroll(${JSON.stringify(slip)})'>Ver</button></td>
+  `;
+  tableBody.appendChild(tr);
+});
+
+  } catch (e) {
+    tableBody.innerHTML = '<tr><td colspan="12" class="py-4 text-center text-red-600">Error al cargar nóminas.</td></tr>';
+    showSummary(`Error: ${e.message}`, "error");
+    console.error(e);
+  }
+};
+
+async function generateNewPayroll() {
+  const period = genPeriodEl?.value;
+  if (!period) {
+    alert("Seleccione un periodo (YYYY-MM)");
+    return;
+  }
+
+  let overwrite = false;
+
+  // === 1️⃣ Step 1: Check if payroll already exists for this period ===
+  try {
+    const checkUrl = `${backendBaseUrl}/api/payroll/all?period=${period}`;
+    const res = await fetch(checkUrl);
+    const data = await res.json();
+
+    if (res.ok && data.status === "success" && data.payroll && data.payroll.length > 0) {
+      const modal = document.createElement("div");
+      modal.innerHTML = `
+        <div style="
+          position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+          background: rgba(0,0,0,0.65);
+          display: flex; align-items: center; justify-content: center;
+          z-index: 10000;
+        ">
+          <div style="
+            background: white;
+            border-radius: 12px;
+            padding: 25px 35px;
+            max-width: 480px;
+            text-align: center;
+            border: 3px solid #004080;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            animation: fadeIn 0.3s ease;
+          ">
+            <h2 style="color:#004080;margin-bottom:8px;">⚠️ Nómina existente</h2>
+            <p style="margin:8px 0 18px 0;font-size:15px;">
+              Ya existen <b>${data.payroll.length}</b> nómina(s) para el periodo <b>${period}</b>.<br><br>
+              ¿Desea recrearlas y sobrescribir las existentes?
+            </p>
+            <div style="display:flex;justify-content:center;gap:10px;">
+              <button id="cancelRegenBtn" style="
+                background:#c53030;color:#fff;padding:10px 18px;border:none;
+                border-radius:6px;font-weight:600;cursor:pointer;
+              ">Cancelar</button>
+              <button id="confirmRegenBtn" style="
+                background:#004080;color:#fff;padding:10px 18px;border:none;
+                border-radius:6px;font-weight:600;cursor:pointer;
+              ">Sí, recrear</button>
+            </div>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+
+      overwrite = await new Promise(resolve => {
+        modal.querySelector("#cancelRegenBtn").onclick = () => { modal.remove(); resolve(false); };
+        modal.querySelector("#confirmRegenBtn").onclick = () => { modal.remove(); resolve(true); };
+      });
+
+      if (!overwrite) {
+        addAnimationLine(`⚠️ Generación cancelada. Nómina existente para ${period}.`, "error");
+        return;
+      } else {
+        addAnimationLine(`🗑️ Eliminando nóminas previas antes de regenerar…`, "info");
+      }
+    }
+  } catch (err) {
+    console.warn("⚠️ Error comprobando nóminas existentes:", err);
+  }
+
+  // === 2️⃣ Step 2: Run payroll generation ===
+  showPayrollAnimation();
+  addAnimationLine("🚀 Iniciando generación de nóminas...");
+  updateProgress(10, "Inicializando sistema…");
+  progressBar.style.background = "#09783b";
+
+  await new Promise(r => setTimeout(r, 400));
+  addAnimationLine(`📅 Periodo seleccionado: ${period}`);
+  updateProgress(25, "Configurando periodo…");
+
+  await new Promise(r => setTimeout(r, 350));
+  addAnimationLine("⏳ Conectando con servidor…");
+  updateProgress(35, "Estableciendo conexión…");
+
+  const user = firebase.auth().currentUser;
+  if (!user) {
+    addAnimationLine("❌ No hay sesión activa", "error");
+    updateProgress(100, "Error");
+    progressBar.style.background = "#c0392b";
+    return;
+  }
+
+  const token = await user.getIdToken();
+
+  try {
+    const res = await fetch(`${backendBaseUrl}/api/payroll/generate`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify({ period, force: overwrite })
+    });
+
+    const data = await res.json();
+    if (!res.ok || data.status !== "success") {
+      throw new Error(data.message || "Fallo al generar nóminas");
+    }
+
+    // 🧮 Step-by-step employee progress
+    addAnimationLine("📊 Procesando empleados…");
+    updateProgress(50, "Generando nóminas…");
+    progressBar.style.background = "#0b66ff";
+
+    const results = Array.isArray(data.results) ? data.results : [];
+    const total = results.length || 1;
+    let shown = 0;
+
+   for (const r of results) {
+  await new Promise(s => setTimeout(s, 100));
+  
+  const resolvedName = resolveEmployeeName(r.id) || r.name || `Empleado ${r.id}`;
+  
+  if (r.status === "success") {
+    addAnimationLine(`✅ ${resolvedName}: FCFA ${Number(r.net_salary || 0).toLocaleString("es-GQ")}`, "success");
+  } else {
+    addAnimationLine(`❌ ${resolvedName}: ${r.error || "Error desconocido"}`, "error");
+  }
+  
+  shown++;
+  const pct = 50 + Math.round((shown / total) * 40);
+  updateProgress(pct, `Generando nóminas ${shown}/${total}`);
+  if (pct > 70 && pct < 90) progressBar.style.background = "#0055cc";
+  if (pct >= 90) progressBar.style.background = "#f59e0b";
+}
+
+
+    // ✅ Completion
+    await new Promise(s => setTimeout(s, 500));
+    addAnimationLine("🎉 Proceso completado correctamente.", "success");
+    updateProgress(95, "Finalizando…");
+    await new Promise(s => setTimeout(s, 700));
+    addAnimationLine("🔄 Actualizando listado de nóminas…");
+    await window.loadCompanyPayroll(true);
+    updateProgress(100, "Completado ✅");
+    progressBar.style.background = "#16a34a";
+// ✅ Show confirmation modal with built-in Lottie confetti animation
+const confirmModal = document.createElement("div");
+confirmModal.innerHTML = `
+  <div style="
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.65);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 10000;
+  ">
+    <div style="
+      background: white;
+      border-radius: 12px;
+      padding: 40px 50px;
+      max-width: 500px;
+      text-align: center;
+      border: 3px solid #004080;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      animation: fadeIn 0.3s ease;
+    ">
+      <div id="lottieSuccess" style="width:150px;height:150px;margin:0 auto 10px;"></div>
+      <h2 style="color:#004080;margin-bottom:10px;">🎉 Nóminas Generadas</h2>
+      <p style="font-size:15px;margin-bottom:20px;">
+        Las nóminas para el periodo <b>${period}</b> se han generado correctamente.<br><br>
+        ¿Desea visualizar el reporte PDF ahora?
+      </p>
+      <div style="display:flex;justify-content:center;gap:10px;">
+        <button id="closeReportBtn" style="
+          background:#c53030;color:#fff;padding:10px 18px;border:none;
+          border-radius:6px;font-weight:600;cursor:pointer;
+        ">No, cerrar</button>
+        <button id="openReportBtn" style="
+          background:#004080;color:#fff;padding:10px 18px;border:none;
+          border-radius:6px;font-weight:600;cursor:pointer;
+        ">Ver Reporte</button>
+      </div>
+    </div>
+  </div>
+`;
+document.body.appendChild(confirmModal);
+
+// 🎆 Improved embedded confetti animation
+const lottieConfetti = {
+  v: "5.7.4",
+  fr: 30,
+  ip: 0,
+  op: 60,
+  w: 200,
+  h: 200,
+  nm: "success-confetti",
+  ddd: 0,
+  assets: [],
+  layers: [
+    {
+      ddd: 0,
+      ind: 1,
+      ty: 4,
+      nm: "circle-bg",
+      sr: 1,
+      ks: {
+        o: { a: 0, k: 100 },
+        r: { a: 0, k: 0 },
+        p: { a: 0, k: [100, 100, 0] },
+        a: { a: 0, k: [0, 0, 0] },
+        s: { a: 1, k: [{ t: 0, s: [0, 0, 100] }, { t: 15, s: [100, 100, 100] }] }
+      },
+      shapes: [
+        {
+          ty: "el",
+          p: { a: 0, k: [0, 0] },
+          s: { a: 0, k: [150, 150] },
+          nm: "circle-path"
+        },
+        { ty: "fl", c: { a: 0, k: [0, 0.25, 0.65, 1] }, o: { a: 0, k: 100 } }
+      ]
+    },
+    {
+      ddd: 0,
+      ind: 2,
+      ty: 4,
+      nm: "check",
+      sr: 1,
+      ks: {
+        o: { a: 1, k: [{ t: 10, s: [0] }, { t: 15, s: [100] }] },
+        r: { a: 0, k: 0 },
+        p: { a: 0, k: [100, 100, 0] },
+        a: { a: 0, k: [0, 0, 0] },
+        s: { a: 0, k: [100, 100, 100] }
+      },
+      shapes: [
+        {
+          ty: "sh",
+          ks: {
+            a: 0,
+            k: {
+              i: [],
+              o: [],
+              v: [[-40, 0], [-10, 30], [50, -40]],
+              c: false
+            }
+          },
+          st: { c: [1, 1, 1, 1], w: 12, lc: 2, lj: 2 }
+        }
+      ]
+    },
+    ...Array.from({ length: 12 }).map((_, i) => ({
+      ddd: 0,
+      ind: i + 3,
+      ty: 4,
+      nm: `confetti-${i}`,
+      sr: 1,
+      ks: {
+        o: { a: 1, k: [{ t: 10, s: [100] }, { t: 40, s: [0] }] },
+        r: { a: 1, k: [{ t: 10, s: [0] }, { t: 40, s: [Math.random() * 720] }] },
+        p: {
+          a: 1,
+          k: [
+            { t: 10, s: [100, 100, 0] },
+            { t: 40, s: [100 + Math.cos(i * 30) * 80, 200 + Math.sin(i * 30) * 80, 0] }
+          ]
+        },
+        a: { a: 0, k: [0, 0, 0] },
+        s: { a: 0, k: [100, 100, 100] }
+      },
+      shapes: [
+        {
+          ty: "rc",
+          s: { a: 0, k: [6, 6] },
+          p: { a: 0, k: [0, 0] },
+          r: { a: 0, k: 1 },
+          nm: "square"
+        },
+        { ty: "fl", c: { a: 0, k: [Math.random(), Math.random(), Math.random(), 1] }, o: { a: 0, k: 100 } }
+      ]
+    }))
+  ]
+};
+
+if (window.lottie) {
+  window.lottie.loadAnimation({
+    container: document.getElementById("lottieSuccess"),
+    renderer: "svg",
+    loop: false,
+    autoplay: true,
+    animationData: lottieConfetti
+  });
+}
+
+// 🎯 Modal behavior
+confirmModal.querySelector("#closeReportBtn").onclick = () => {
+  confirmModal.remove();
+  console.log("📄 Reporte omitido por el usuario.");
+};
+
+confirmModal.querySelector("#openReportBtn").onclick = () => {
+  confirmModal.remove();
+  const pdfUrl = `${backendBaseUrl}/api/payroll/report/${period}?t=${Date.now()}`;
+  const pdfModal = document.getElementById("pdfModal");
+  const pdfFrame = document.getElementById("pdfFrame");
+  const pdfTitle = document.getElementById("pdfTitle");
+
+  pdfFrame.src = pdfUrl;
+  pdfTitle.textContent = `📊 Reporte de Nóminas (${period})`;
+  pdfModal.classList.remove("hidden");
+  pdfModal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+};
+
+
+  } catch (err) {
+    console.error(err);
+    addAnimationLine(`❌ Error: ${err.message}`, "error");
+    progressBar.style.background = "#c0392b";
+    updateProgress(100, "Error ❌");
+  }
+}
+
+function resolveEmployeeName(id, fallback) {
+  const e = allEmployees.find(x => x.id === id);
+  return (e?.nombre || e?.nombre_completo || fallback || id);
+}
+
+function resolveEmployeeRole(id, fallback) {
+  const e = allEmployees.find(x => x.id === id);
+  return (e?.puesto || fallback || "Sin especificar");
+}
+
+
+
+
+  /* -------- PDF Preview -------- */
+// Modal elements we reuse
+const pdfModal      = document.getElementById("pdfModal");
+const pdfFrame      = document.getElementById("pdfFrame");
+const pdfTitle      = document.getElementById("pdfTitle");
+const pdfCloseBtn   = document.getElementById("pdfCloseBtn");
+const downloadBtn   = document.getElementById("downloadPdfBtn");
+
+// Open PDF for a given slip
+window.viewPayroll = function (slip) {
+  try {
+    // 1. build the backend URL that actually exists in Flask
+    const empId  = slip.employee_id || slip.id || "";
+    const period = slip.periodo      || "";
+
+    if (!empId || !period) {
+      console.error("❌ Missing employee_id or period in slip:", slip);
+      alert("No se pudo determinar el empleado o el periodo de la nómina.");
+      return;
+    }
+
+    const pdfUrl = `${backendBaseUrl}/api/payroll/pdf/${encodeURIComponent(empId)}/${encodeURIComponent(period)}`;
+    console.log("📄 Opening payroll PDF:", pdfUrl);
+
+    // 2. Set iframe src so it loads the PDF
+    pdfFrame.src = pdfUrl;
+
+    // 3. Update modal title
+   const safeName = resolveEmployeeName(slip.employee_id, slip.employee_name) || "Empleado";
+pdfTitle.textContent = `Nómina - ${safeName} (${period})`;
+
+
+    // 4. Wire download button to same URL
+    downloadBtn.onclick = () => {
+      const a = document.createElement("a");
+      a.href = pdfUrl;
+      // build nice filename
+      const cleanName  = safeName.replace(/\s+/g, "_").replace(/[^a-zA-Z0-9_]/g, "");
+      const cleanPer   = period.replace(/[^0-9A-Za-z_-]/g, "_");
+      a.download = `nomina_${cleanName}_${cleanPer}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    };
+
+    // 5. Show modal
+    pdfModal.classList.remove("hidden");
+    pdfModal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+
+  } catch (err) {
+    console.error("PDF preview error:", err);
+    alert("Error al mostrar la nómina.");
+  }
+};
+
+// Close modal (Esc or close button)
+function closePdfModal() {
+  pdfFrame.src = ""; // release the PDF
+  pdfModal.classList.add("hidden");
+  pdfModal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+}
+
+pdfCloseBtn.addEventListener("click", closePdfModal);
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !pdfModal.classList.contains("hidden")) {
+    closePdfModal();
+  }
+});
+
+  /* -------- Progress helpers -------- */
+  function showPayrollAnimation(){
+    if(!animBox||!progressBar||!progressTxt) return;
+    animBox.innerHTML = "";
+    progressBar.style.width = "0%";
+    progressBar.style.background = "#09783b";
+    progressTxt.textContent = "Preparando...";
+  }
+  
+  function addAnimationLine(text, type='info'){
+    if(!animBox) return;
+    const div = document.createElement("div");
+    div.className = `animation-line ${type}`;
+    div.textContent = text;
+    animBox.appendChild(div);
+    animBox.scrollTop = animBox.scrollHeight;
+  }
+  
+  function updateProgress(pct, label){
+    pct = Math.max(0, Math.min(100, pct|0));
+    progressBar.style.width = pct + "%";
+    progressBar.textContent = pct + "%";
+    if(label) progressTxt.textContent = label;
+  }
+
+
+  /* -------- Expose used fns -------- */
+  window.loadCompanyPayroll = window.loadCompanyPayroll;
+  window.generateNewPayroll = generateNewPayroll;
+  window.showPayrollAnimation = showPayrollAnimation;
+  window.addAnimationLine = addAnimationLine;
+  window.updateProgress = updateProgress;
+
+  /* -------- Auth & Init -------- */
+  auth.onAuthStateChanged(async (user) => {
+    if (user) {
+      if (authMsgEl) { authMsgEl.classList.add("hidden"); authMsgEl.style.display = "none"; authMsgEl.textContent = ""; }
+
+
+      firebaseIdToken = await user.getIdToken();
+      await resolveBackendBaseUrl();
+
+      const today = new Date();
+      const y = today.getFullYear();
+      const m = String(today.getMonth() + 1).padStart(2, "0");
+      if (periodEl)   periodEl.value = `${y}-${m}`;
+      if (genPeriodEl) genPeriodEl.value = `${y}-${m}`;
+
+      await loadEmployeesForFilter();
+      await window.loadCompanyPayroll(true);
+
+
+      // Default to VER NÓMINAS
+      const firstTabBtn = document.getElementById("defaultOpen");
+      if (firstTabBtn) firstTabBtn.click();
+    } else {
+      if (authMsgEl) { authMsgEl.classList.remove("hidden"); authMsgEl.style.display = "block"; authMsgEl.textContent = "Acceso no autorizado. Por favor, inicie sesión."; }
+  
+    }
+  });
+})();
+/* -------- Ensure layout visible while loading -------- */
+/* -------- Final Initialization Logic (Corrected) -------- */
+document.addEventListener("DOMContentLoaded", () => {
+  const main = document.getElementById("payroll-management-content");
+  const tableBody = document.getElementById("companyPayrollTableBody");
+  
+  const defaultTabName = 'VerNominas';
+  const defaultTabButton = document.getElementById("defaultOpen");
+  const defaultTabContent = document.getElementById(defaultTabName);
+
+  if (main) {
+    // 1. Ensure the main structure is visible immediately
+    main.style.display = "block"; 
+    main.style.opacity = "1";
+    main.classList.remove("hidden");
+  }
+
+  // 2. Set initial loading state for the table
+  if (tableBody) {
+    tableBody.innerHTML = `
+      <tr><td colspan="12" class="text-center py-4 text-gray-500">
+        Cargando nóminas...
+      </td></tr>`;
+  }
+
+  // 3. 🔑 CRITICAL FIX: Automatically activate the default tab content and link
+  if (defaultTabContent) {
+      defaultTabContent.style.display = "block"; // Show the content div
+  }
+  if (defaultTabButton) {
+      defaultTabButton.classList.add("active"); // Set the button's active state
+  }
+});
+
+
+// Note: The rest of the authentication and data loading (auth.onAuthStateChanged)
+// remains in place, running asynchronously to populate the table.
+async function previewPayroll(employee_id, period) {
+  const pdfUrl = `${backendBaseUrl}/api/payroll/pdf/${employee_id}/${period}`;
+  console.log("📄 Loading payroll preview from:", pdfUrl);
+
+  const modal = document.getElementById("pdfModal");
+  const frame = document.getElementById("pdfFrame");
+  const title = document.getElementById("pdfTitle");
+  const closeBtn = document.getElementById("pdfCloseBtn");
+
+  if (!modal || !frame) {
+    console.error("⚠️ Missing modal elements for PDF preview.");
+    return;
+  }
+
+  // Load the PDF
+  frame.src = pdfUrl;
+  title.textContent = `Nómina - ${employee_id} (${period})`;
+
+  // Show modal
+  modal.classList.remove("hidden");
+  modal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+
+  // Handle close button
+  closeBtn.onclick = () => {
+    frame.src = "";
+    modal.classList.add("hidden");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  };
+
+  // Optional: close on ESC key
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !modal.classList.contains("hidden")) {
+      closeBtn.click();
+    }
+  });
+}
+
+document.getElementById("pdfCloseBtn")?.addEventListener("click", () => {
+  const modal = document.getElementById("pdfModal");
+  const frame = document.getElementById("pdfFrame");
+  if (modal && frame) {
+    frame.src = "";
+    modal.classList.add("hidden");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+});
+
+document.getElementById("downloadPdfBtn")?.addEventListener("click", () => {
+  const frame = document.getElementById("pdfFrame");
+  if (!frame || !frame.src) {
+    alert("No hay ningún PDF cargado.");
+    return;
+  }
+  console.log("⬇ Descargando PDF desde:", frame.src);
+
+  // Force download
+  const link = document.createElement("a");
+  link.href = frame.src;
+  link.download = frame.src.split("/").pop() || "nomina.pdf";
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+});
+</script>
+{% endblock %}

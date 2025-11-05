@@ -1,0 +1,2272 @@
+{% extends "base.html" %}
+{% block title %}Contabilidad - ATiempo{% endblock %}
+{% block extra_styles %}
+<style>
+/* ============ Palette & base ============ */
+:root{
+  --primary-color:#004080;
+  --border-inner:2px solid black;
+
+  --brand-700:#004080;
+  --brand-600:#0b66ff;
+  --brand-500:#2d7dff;
+  --brand-300:#a8c5ff;
+
+  --ok-600:#16a34a;
+  --warn-600:#f59e0b;
+  --err-600:#ef4444;
+
+  --bg-1:#f4f7ff;     /* page */
+  --bg-card:#ffffff;  /* cards */
+}
+
+/* Page */
+.main-content{padding:28px 24px; background:var(--bg-1); max-width:none!important; width:100%!important; margin:0!important;}
+#accounting-content{max-width:none!important; width:100%!important;}
+
+/* Cards (lift + shine) */
+.card{
+  background:var(--bg-card);
+  border:2px solid black;               /* ✅ match other pages */
+  border-radius:12px;
+  padding:25px;
+  margin-bottom:20px;
+  box-shadow:0 3px 6px rgba(0,0,0,0.1); /* softer but consistent shadow */
+  transition:transform .18s ease, box-shadow .18s ease;
+  animation:fadeSlide .35s ease both;
+}
+
+.card:hover{transform:translateY(-2px); box-shadow:0 12px 28px rgba(35,64,153,.12);}
+.card h2,.card h3{color:#0f1f3d}
+.card h3{border-bottom:1px solid #edf1ff; padding-bottom:8px}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)}}
+
+/* Sidebar-style button (reused as CTAs) */
+.sidebar-button{
+  display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+  padding:10px 18px; font-size:15px; font-weight:700; color:#fff;
+  background:linear-gradient(180deg,var(--brand-500),var(--brand-700));
+  border:1px solid #173d9a; border-radius:10px; cursor:pointer;
+  box-shadow:0 4px 10px rgba(17,55,160,.18);
+  transition:transform .12s, box-shadow .12s, filter .12s;
+}
+.sidebar-button:hover{transform:translateY(-1px); filter:saturate(1.08); box-shadow:0 8px 16px rgba(17,55,160,.22);}
+.sidebar-button:active{transform:translateY(0)}
+/* Auto-upgrade your green inline buttons */
+.sidebar-button[style*="16a34a"]{
+  background:linear-gradient(180deg,#22c55e,#15803d)!important; border-color:#166534!important;
+  box-shadow:0 4px 10px rgba(22,197,94,.18)!important;
+}
+
+/* Tabs with animated underline */
+.tab{border-bottom:2px solid #e5e7eb; margin-bottom:20px; position:relative}
+.tab .tablinks{
+  background:transparent; border:none; cursor:pointer; padding:14px 16px;
+  font-weight:700; color:#5a6a85; border-radius:10px 10px 0 0; position:relative;
+}
+.tab .tablinks:hover{background:#eef4ff}
+.tab .tablinks.active{color:var(--brand-700)}
+.tab .tablinks::after{
+  content:""; position:absolute; left:50%; bottom:-2px; width:0; height:3px; border-radius:2px;
+  background:linear-gradient(90deg,var(--brand-500),var(--brand-700)); transition:all .25s ease;
+}
+.tab .tablinks.active::after{left:0; width:100%}
+.tabcontent{display:none; animation:fadeEffect .35s ease}
+@keyframes fadeEffect{from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)}}
+
+/* Tables: full width, glossy head, zebra + hover */
+table{width:100%!important; border-collapse:separate; border-spacing:0}
+thead th{
+  position:sticky; top:0; z-index:1; color:#fff; padding:12px; letter-spacing:.02em;
+  background:linear-gradient(180deg,var(--brand-700),#002a66);
+  box-shadow:inset 0 -1px 0 rgba(255,255,255,.2);
+}
+tbody td{padding:10px 12px; border-bottom:1px solid #edf1ff; color:#1f2a44}
+tbody tr:nth-child(odd){background:#f9fbff}
+tbody tr:hover{background:#eef4ff; box-shadow:inset 0 0 0 1px #dbe6ff}
+.card .overflow-x-auto, table, .min-w-full{width:100%!important}
+
+/* Inline table actions */
+tbody td button{font-weight:700}
+.text-blue-600{color:#2563eb}
+.text-blue-600:hover{text-decoration:underline}
+
+/* Chart containers */
+#monthlyTrendChart,#expenseCategoriesChart{
+  width:100%!important; height:340px; border:1px solid #edf1ff; border-radius:12px;
+  background:linear-gradient(180deg,#ffffff,#f7f9ff);
+}
+
+/* Spinner */
+.spinner{display:none;width:30px;height:30px;border:4px solid #f3f3f3;border-top:4px solid #3498db;border-radius:50%;animation:spin 1s linear infinite;margin:8px 0}
+.spinner:not(.hidden){display:block}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Toast / status */
+.status-message{
+  position:fixed; top:20px; left:50%; transform:translateX(-50%);
+  min-width:300px; max-width:90vw; padding:12px 16px; border-radius:12px; text-align:center;
+  z-index:1100; backdrop-filter:blur(6px);
+  background:rgba(255,255,255,.9); border:1px solid #e6ecff; color:#0f1f3d;
+  border-left:6px solid var(--brand-600); box-shadow:0 10px 28px rgba(35,64,153,.16);
+}
+.status-success{border-left-color:var(--ok-600); background:linear-gradient(0deg,#f3fff7,#ffffff)}
+.status-error{border-left-color:var(--err-600); background:linear-gradient(0deg,#fff5f5,#ffffff)}
+.status-warning{border-left-color:var(--warn-600); background:linear-gradient(0deg,#fff9eb,#ffffff)}
+.hidden{display:none!important}
+
+/* Inputs */
+select, input[type="month"], input[type="date"], input[type="number"], textarea{
+  width:100%; border:1px solid #d1d5db; border-radius:6px; padding:.5rem; transition:border-color .12s, box-shadow .12s;
+}
+input:focus, select:focus, textarea:focus{
+  outline:none; border-color:var(--brand-500)!important; box-shadow:0 0 0 3px rgba(45,125,255,.18)!important;
+}
+
+/* Generic modal + PDF modal polish */
+.modal{display:none; position:fixed; inset:0; background:rgba(0,0,0,.4); z-index:1000; justify-content:center; align-items:center}
+.modal .modal-content{background:#fff; border-radius:8px; box-shadow:0 16px 36px rgba(15,31,61,.22)}
+#pdfViewerModal{z-index:1001}
+#pdfViewerModal .modal-content-pdf{
+  background:#fff; padding:20px; border-radius:8px; width:90%; height:90%; max-width:900px;
+  display:flex; flex-direction:column; box-shadow:0 16px 36px rgba(15,31,61,.22); border:1px solid #e7ecff;
+}
+#pdfViewer{flex:1; width:100%; height:100%; border:1px solid #ddd}
+#pdfViewerModal .modal-actions{display:flex; justify-content:flex-end; gap:12px; margin-top:12px}
+#pdfViewerModal .download-btn{background:linear-gradient(180deg,#22c55e,#15803d)!important; color:#fff; padding:12px 20px; border-radius:6px; text-decoration:none}
+#pdfViewerModal .close-btn{background:linear-gradient(180deg,#ef4444,#b91c1c)!important; color:#fff; padding:12px 20px; border-radius:6px}
+
+/* Upload progress */
+.upload-progress{width:100%; height:20px; background:#f3f3f3; border-radius:4px; overflow:hidden; display:none}
+.upload-progress-bar{height:100%; background:#4CAF50; width:0%; transition:width .3s}
+
+/* Utility text classes (fallback if Tailwind isn’t loaded) */
+.text-blue-800{color:#1e40af}.text-gray-600{color:#4b5563}.text-sm{font-size:.875rem}.text-xl{font-size:1.25rem}
+.text-2xl{font-size:1.5rem}.font-semibold{font-weight:600}.font-medium{font-weight:500}.font-bold{font-weight:700}
+.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.p-4{padding:1rem}.rounded-lg{border-radius:.5rem}.shadow-md{box-shadow:0 4px 6px rgba(0,0,0,.1)}
+.grid{display:grid}.grid-cols-1{grid-template-columns:1fr}.gap-4{gap:1rem}.gap-6{gap:1.5rem}
+@media(min-width:1024px){.lg\:grid-cols-2{grid-template-columns:1fr 1fr}}
+.flex{display:flex}.flex-1{flex:1 1 0%}.flex-shrink-0{flex-shrink:0}.items-center{align-items:center}.justify-between{justify-content:space-between}.gap-4{gap:1rem}
+/* 1) Kill any accidental horizontal scroll */
+html, body, .main-content { overflow-x: hidden; }
+* { box-sizing: border-box; }
+
+/* 2) Constrain ONLY the Resumen Presupuestario tab to a readable width */
+.budget-inner {
+  max-width: 1160px;   /* tweak 1080–1280 as you like */
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Ensure charts/canvases never overflow the container */
+#monthlyTrendChart, #expenseCategoriesChart { max-width: 100%; }
+#monthlyTrendChart canvas, #expenseCategoriesChart canvas { max-width: 100%; height: 100%; }
+
+/* Make sure cards respect the container and don’t add extra width */
+#budgetOverview .card { width: 100%; margin-left: auto; margin-right: auto; }
+/* Let budget overview span the full available width */
+#budgetOverview .budget-inner{
+  max-width:none !important;
+  width:100% !important;
+  margin:0 !important;
+  padding:0 !important;
+}
+#budgetOverview .card{ width:100%; margin-left:0; margin-right:0; }
+/* ============================
+   📘 ATiempo Financial Summary
+============================ */
+.summary-box {
+  background: #ffffff;
+  border: 2px solid #003366;
+  border-radius: 12px;
+  padding: 24px 28px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+  margin-top: 24px;
+}
+
+.summary-title {
+  color: #003366;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 18px;
+}
+
+.summary-item label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.summary-value {
+  font-size: 18px;
+  font-weight: bold;
+  color: #004080;
+}
+/* =========================================
+   Refined Styles for Secondary KPI Cards 
+   (The ones inside #summaryContent)
+========================================= */
+
+/* Ensure the wrapper for the four cards is slightly constrained or spaced */
+#summaryContent > div.grid {
+  margin-top: 1.5rem; /* Space from the summary box above */
+}
+
+/* Override the default .card styling for these specific KPI boxes */
+#summaryContent .bg-white {
+  /* Use softer colors and shadows for secondary cards */
+  background: var(--bg-card);
+  border: 1px solid #e7ecff; /* Lighter border than the main cards */
+  border-left: 5px solid var(--brand-700); /* Keep the blue brand line for structure */
+  border-radius: 8px; /* Slightly smaller radius */
+  padding: 16px; /* Reduced padding */
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06); /* Lighter shadow */
+  transition: box-shadow 0.1s;
+}
+
+/* Enhance the card borders based on metric type for better flow */
+#summaryContent .border-l-4.border-blue-500 {
+  border-left-color: var(--brand-500) !important; /* Presupuesto: Blue */
+}
+#summaryContent .border-l-4.border-green-500 {
+  border-left-color: var(--ok-600) !important; /* Ingresos: Green */
+}
+#summaryContent .border-l-4.border-red-500 {
+  border-left-color: var(--err-600) !important; /* Gastos: Red */
+}
+#summaryContent .border-l-4.border-purple-500 {
+  border-left-color: #a855f7 !important; /* Balance Neto: Purple (a distinctive color) */
+}
+
+/* Style the key values (FCFA 0) */
+#summaryContent .text-2xl {
+  font-size: 1.4rem; /* Slightly smaller font for compactness */
+  color: var(--primary-color);
+  margin-bottom: 4px; /* Adjust spacing */
+}
+
+/* Style the descriptive text (e.g., "+0% vs anterior") */
+#summaryContent .text-sm {
+  font-size: 0.82rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+/* Ensure the Comparison Table Card has space below it */
+#summaryContent .bg-white.p-4.rounded-lg.shadow-md:has(h3:contains("Comparativa Detallada")) {
+    margin-bottom: 1.5rem; /* Adds space before the Budget Progress section */
+}
+
+/* Fallback for the Comparison table (if the above selector is too specific) */
+#summaryContent > div:nth-child(2) { 
+    margin-bottom: 1.5rem;
+}
+/* Fix the width of the main content inside the 'Gastos' and 'Ingresos' tabs */
+#expenses .card,
+#income .card {
+    max-width: none !important; /* Override any potential max-width inheritance */
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 25px; /* Ensure default padding is maintained */
+}
+/* Fix the width of the main content inside the 'Gastos' and 'Ingresos' tabs */
+#expenses .card,
+#income .card {
+    max-width: none !important; /* Override any potential max-width inheritance */
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+}
+/* Ensure the parent tab container itself doesn't restrict width */
+#expenses, #income {
+    max-width: none !important;
+    width: 100% !important;
+}
+/* =======================================================
+   ✨ FINAL CSS: Estado del Presupuesto Anual (Horizontal Bar)
+   ======================================================= */
+
+/* Target the specific card container for a subtle lift/focus */
+.card .col-span-2:has(h3:contains("Estado del Presupuesto Anual")) {
+    background-color: #f7f9ff; /* Very light blue background */
+    border: 2px solid var(--brand-300); /* Light blue border */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08); /* Stronger shadow to pop */
+}
+
+/* Ensure the progress bar track is well-defined */
+.w-full.bg-gray-200.rounded-full.h-5 {
+    background-color: #e0e7ff; /* Lighter track color */
+}
+
+/* Define the color for the progress bar itself (used/gastado) */
+#budgetProgressBarAnnual {
+    /* Use a distinct gradient to make the progress bar pop */
+    background: linear-gradient(90deg, var(--brand-500), var(--brand-700));
+    box-shadow: 0 1px 3px rgba(0, 64, 128, 0.4);
+}
+
+/* Highlight the key percentage text */
+#budgetProgressTextAnnual {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--brand-700);
+}
+
+/* Highlight the total/used/remaining values */
+#totalBudgetAnnual, 
+#usedBudgetAnnual, 
+#remainingBudgetAnnual {
+    font-weight: 700;
+    font-size: 1.05rem;
+}
+#usedBudgetAnnual { color: var(--err-600); } /* Used amount in Red */
+#remainingBudgetAnnual { color: var(--ok-600); } /* Remaining amount in Green */
+/* Styling for the large initial placeholder */
+.initial-loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute; /* Cover the entire content area */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--bg-1); /* Match page background */
+    z-index: 50; /* Ensure it's above the hidden content */
+    padding: 50px;
+}
+
+.lottie-container {
+    width: 250px; /* Adjust size of the animation */
+    height: 250px;
+}
+/* 🧾 Consistent Modal Layout (Ingresos / Gastos / Presupuesto) */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(3px);
+}
+
+.modal .modal-content {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 28px 30px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  width: 95%;
+  max-width: 520px;
+  animation: modalPop 0.25s ease-out;
+}
+
+@keyframes modalPop {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 10px;
+  margin-bottom: 18px;
+}
+
+.modal-header h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--brand-700, #004080);
+}
+
+.modal-close-btn {
+  cursor: pointer;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #6b7280;
+  transition: color 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  color: #000000;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 500;
+  color: #1f2937;
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--brand-500, #2d7dff);
+  box-shadow: 0 0 0 3px rgba(45, 125, 255, 0.18);
+}
+
+.modal .flex button {
+  min-width: 100px;
+  font-weight: 600;
+}
+
+</style>
+{% endblock %}
+{% block content %}
+<div class="main-content">
+  <div id="auth-message" class="text-center text-red-600 font-semibold mb-4 hidden">
+    <p>Autenticando...</p>
+  </div>
+  
+
+  <div id="accounting-content" class="hidden">
+    <div class="card mb-6">
+      <h2 class="text-2xl font-semibold text-blue-800 mb-4">Seleccionar Departamento</h2>
+      <div class="flex flex-col md:flex-row md:items-center gap-4">
+        <div class="flex-1">
+          <label for="departmentSelect" class="block text-lg font-medium text-gray-700">Departamento:</label>
+          <select id="departmentSelect" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
+            <option value="">Cargando departamentos...</option>
+          </select>
+        </div>
+        <div class="flex-shrink-0">
+          <button id="cargarDatosButton" class="sidebar-button" disabled>Cargar Datos</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="statusMessage" class="status-message hidden"></div>
+
+<div class="tab">
+  <button class="tablinks active" onclick="openTab(event, 'budgetOverview')" id="defaultOpen">Resumen Presupuestario</button>
+  <button class="tablinks" onclick="openTab(event, 'expenses')">Gastos</button>
+  <button class="tablinks" onclick="openTab(event, 'income')">Ingresos</button>
+</div>
+
+<div id="budgetOverview" class="tabcontent">
+  <div class="budget-inner">
+    <div class="card">
+    <h2 class="text-xl font-semibold mb-4 text-gray-800">
+  Resumen Financiero del Departamento
+</h2>
+
+<div class="flex flex-col md:flex-row gap-4 mb-6 p-4 bg-gray-50 rounded-lg">
+  <div class="flex-1">
+    <label for="selectedMonth" class="block text-sm font-medium text-gray-700 mb-2">Mes:</label>
+    <select id="selectedMonth" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
+      <option value="0">Enero</option><option value="1">Febrero</option><option value="2">Marzo</option>
+      <option value="3">Abril</option><option value="4">Mayo</option><option value="5">Junio</option>
+      <option value="6">Julio</option><option value="7">Agosto</option><option value="8">Septiembre</option>
+      <option value="9">Octubre</option><option value="10">Noviembre</option><option value="11">Diciembre</option>
+    </select>
+  </div>
+
+  <div class="flex-1">
+    <label for="comparisonPeriod" class="block text-sm font-medium text-gray-700 mb-2">Comparar con:</label>
+    <select id="comparisonPeriod" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
+      <option value="previous_month">Mes Anterior</option>
+      <option value="previous_quarter">Trimestre Anterior</option>
+      <option value="previous_year">Mismo Mes Año Anterior</option>
+      <option value="ytd">Acumulado Anual</option>
+    </select>
+  </div>
+
+  <div class="flex-1">
+    <label for="timeRange" class="block text-sm font-medium text-gray-700 mb-2">Rango de Tiempo:</label>
+    <select id="timeRange" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
+      <option value="monthly">Mensual</option>
+      <option value="quarterly">Trimestral</option>
+      <option value="yearly">Anual</option>
+    </select>
+  </div>
+
+  <div class="flex items-end">
+    <button onclick="refreshFinancialView()" class="sidebar-button">Aplicar Filtros</button>
+  </div>
+</div> <div id="analytics-section" class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+
+  <div class="bg-white p-4 rounded-lg shadow-md border border-gray-300 relative">
+    <h3 class="text-lg font-semibold mb-2">📈 Tendencia Mensual de Ingresos, Gastos y Presupuesto</h3>
+    <div class="h-72 relative">
+      <canvas id="trendChartCanvas"></canvas>
+    </div>
+  </div>
+
+  <div class="bg-white p-4 rounded-lg shadow-md border border-gray-300 relative">
+    <h3 class="text-lg font-semibold mb-2">💰 Distribución de Gastos por Categoría</h3>
+    <div id="expenseCategoriesChart" class="h-72 relative">
+      <canvas id="categoryChartCanvas"></canvas>
+    </div>
+  </div>
+
+  <div class="bg-white p-4 rounded-lg shadow-md border border-gray-300 col-span-2">
+    <h3 class="text-lg font-semibold mb-2">📊 Comparación Actual vs Periodo Anterior</h3>
+    <div class="overflow-x-auto">
+      <table class="min-w-full text-sm text-left">
+        <thead class="bg-gray-100 text-gray-700">
+          <tr>
+            <th class="px-4 py-2 font-medium">Métrica</th>
+            <th class="px-4 py-2 text-right font-medium">Actual</th>
+            <th class="px-4 py-2 text-right font-medium">Anterior</th>
+            <th class="px-4 py-2 text-right font-medium">Cambio %</th>
+            <th class="px-4 py-2 text-right font-medium">Tendencia</th>
+          </tr>
+        </thead>
+       <tbody id="comparisonTableBodyAnnual"></tbody> </table>
+      </table>
+    </div>
+  </div>
+
+  <div class="bg-white p-4 rounded-lg shadow-md border border-gray-300 col-span-2">
+    <h3 class="text-lg font-semibold mb-2">💼 Estado del Presupuesto Anual</h3>
+    <div class="w-full bg-gray-200 rounded-full h-5 mb-3 overflow-hidden">
+      <div id="budgetProgressBarAnnual" class="bg-blue-600 h-5 transition-all duration-500" style="width:0%"></div>
+    </div>
+    <p class="text-sm mb-2">
+      <strong>Progreso:</strong> <span id="budgetProgressText">0%</span> utilizado
+    </p>
+   <div class="grid grid-cols-3 text-sm">
+  <div><strong>Total:</strong> <span id="totalBudgetAnnual">FCFA 0</span></div>
+  <div><strong>Gastado:</strong> <span id="usedBudgetAnnual">FCFA 0</span></div>
+  <div><strong>Restante:</strong> <span id="remainingBudgetAnnual">FCFA 0</span></div>
+</div>
+  </div>
+</div>
+
+      </div>
+ <div id="financial-summary" class="summary-box mt-6">
+  <h4 class="summary-title">📊 Resumen Financiero</h4>
+  <div class="summary-grid">
+    <div class="summary-item">
+      <label>Presupuesto Mensual</label>
+      <span id="monthlyBudget" class="summary-value">--</span>
+    </div>
+    <div class="summary-item">
+      <label>Ingresos Actuales</label>
+      <span id="currentIncome" class="summary-value">--</span>
+    </div>
+    <div class="summary-item">
+      <label>Uso de Gastos</label>
+      <span id="expenseUsage" class="summary-value">--</span>
+    </div>
+    <div class="summary-item">
+      <label>Cambio de Ingresos</label>
+      <span id="incomeChange" class="summary-value">--</span>
+    </div>
+  </div>
+</div>
+
+      <div id="summaryLoading" class="spinner mb-4"></div>
+
+      <div id="summaryContent" class="hidden">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-blue-500">
+            <h3 class="text-sm font-medium text-gray-600">Presupuesto Mensual</h3>
+            <p class="text-2xl font-bold" id="kpi_monthlyBudget">FCFA 0</p>
+            <p class="text-sm" id="kpi_budgetUsage">0% utilizado</p>
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-green-500">
+            <h3 class="text-sm font-medium text-gray-600">Ingresos Mes Actual</h3>
+            <p class="text-2xl font-bold" id="kpi_currentIncome">FCFA 0</p>
+            <p class="text-sm" id="kpi_incomeGrowth">+0% vs anterior</p>
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-red-500">
+            <h3 class="text-sm font-medium text-gray-600">Gastos Mes Actual</h3>
+            <p class="text-2xl font-bold" id="kpi_currentExpenses">FCFA 0</p>
+            <p class="text-sm" id="kpi_expenseGrowth">+0% vs anterior</p>
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-purple-500">
+            <h3 class="text-sm font-medium text-gray-600">Balance Neto</h3>
+            <p class="text-2xl font-bold" id="kpi_netBalance">FCFA 0</p>
+            <p class="text-sm" id="kpi_balanceTrend">→ Sin cambio</p>
+          </div>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-md">
+          <h3 class="text-lg font-semibold mb-4">Comparativa Detallada</h3>
+          <div class="overflow-x-auto">
+            <table class="min-w-full">
+              <thead>
+                <tr class="bg-gray-50">
+                  <th class="px-4 py-2 text-left">Métrico</th>
+                  <th class="px-4 py-2 text-right">Período Actual</th>
+                  <th class="px-4 py-2 text-right">Período Anterior</th>
+                  <th class="px-4 py-2 text-right">Variación</th>
+                  <th class="px-4 py-2 text-right">Tendencia</th>
+                </tr>
+              </thead>
+            <tbody id="comparisonTableBodyDetail"> <tr><td colspan="5" class="text-center py-4">Cargando datos comparativos...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="bg-white p-4 rounded-lg shadow-md mt-6">
+          <h3 class="text-lg font-semibold mb-4">Progreso del Presupuesto Anual</h3>
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between mb-1">
+                <span>Presupuesto utilizado</span>
+                <span id="budgetProgressText">0%</span>
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-2.5">
+                <div id="budgetProgressBar" class="bg-blue-600 h-2.5 rounded-full" style="width:0%"></div>
+              </div>
+            </div>
+            <div class="grid grid-cols-3 gap-4 text-sm">
+              <div><span class="text-gray-600">Presupuesto total:</span> <span id="totalBudget">FCFA 0</span></div>
+              <div><span class="text-gray-600">Utilizado:</span> <span id="usedBudget">FCFA 0</span></div>
+              <div><span class="text-gray-600">Disponible:</span> <span id="remainingBudget">FCFA 0</span></div>
+            </div>
+          </div>
+        </div>
+      </div> </div> </div> </div> <div id="expenses" class="tabcontent">
+      <div class="card">
+        <h2 class="text-2xl font-semibold text-blue-800 mb-4">Gestión de Gastos</h2>
+
+        <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-4">
+          <h3 class="text-xl font-medium">Historial de Gastos</h3>
+          <button onclick="openExpenseModal()" class="sidebar-button" style="background:#16a34a;border-color:#0f7a27">+ Añadir Gasto</button>
+        </div>
+
+        <div class="flex flex-col md:flex-row md:items-center gap-4 mb-4">
+          <label for="expensePeriodFilter" class="block text-sm font-medium text-gray-700">Periodo (YYYY-MM):</label>
+          <input type="month" id="expensePeriodFilter" class="flex-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
+          <button onclick="loadExpenses()" class="sidebar-button">Aplicar Filtro</button>
+          <div id="expensePeriodIndicator" class="text-sm text-gray-600">
+            Mostrando datos para: <span id="expenseCurrentPeriod" class="font-semibold"></span>
+          </div>
+        </div>
+
+        <div id="expensesLoading" class="spinner mb-4"></div>
+
+        <div class="overflow-x-auto rounded-lg shadow-md border border-gray-200">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead>
+              <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase">Fecha</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase">Monto</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase">Categoría</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase">Descripción</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase">Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="expensesTableBody" class="bg-white divide-y divide-gray-200">
+              <tr><td colspan="5" class="text-center py-4">Seleccione un departamento y periodo para ver los gastos.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div id="income" class="tabcontent">
+      <div class="card">
+        <h2 class="text-2xl font-semibold text-blue-800 mb-4">Gestión de Ingresos</h2>
+
+        <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-4">
+          <h3 class="text-xl font-medium">Historial de Ingresos</h3>
+          <button class="sidebar-button bg-green-600 hover:bg-green-700" onclick="openIncomeModal()">+ Añadir Ingreso</button>
+        </div>
+
+        <div class="flex flex-col md:flex-row md:items-center gap-4 mb-4">
+          <label for="incomePeriodFilter" class="block text-sm font-medium text-gray-700">Periodo (YYYY-MM):</label>
+          <input type="month" id="incomePeriodFilter" class="form-input" />
+          <button class="sidebar-button bg-blue-600 hover:bg-blue-700" onclick="applyIncomeFilter()">Aplicar Filtro</button>
+          <div id="incomePeriodIndicator" class="text-sm text-gray-600">
+            Mostrando datos para: <span id="incomeCurrentPeriod" class="font-semibold"></span>
+          </div>
+        </div>
+
+        <div id="incomeLoading" class="spinner mb-4"></div>
+
+        <div class="overflow-x-auto rounded-lg shadow-md border border-gray-200">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead>
+              <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase">Fecha</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase">Monto</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase">Fuente</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase">Descripción</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase">Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="incomeTableBody" class="bg-white divide-y divide-gray-200">
+              <tr><td colspan="5" class="text-center py-4">Seleccione un departamento y periodo para ver los ingresos.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div></div><div id="budgetModal" class="modal">
+  <div class="modal-content" style="background:#fff; padding:20px; border-radius:8px; width:90%; max-width:500px;">
+    <div class="modal-header" style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #e5e7eb; padding-bottom:12px; margin-bottom:16px;">
+      <h3>Establecer Presupuesto para <span id="budgetDepartmentName"></span></h3>
+      <span class="modal-close-btn" onclick="closeModal('budgetModal')" style="cursor:pointer;font-size:1.5rem;color:#6b7280">&times;</span>
+    </div>
+    <div class="form-group">
+      <label for="newBudgetAmount">Monto del Presupuesto (FCFA):</label>
+      <input type="number" id="newBudgetAmount" step="0.01" min="0" placeholder="Ej: 1500000">
+    </div>
+    <button onclick="saveBudget()" class="sidebar-button">Guardar Presupuesto</button>
+  </div>
+</div>
+
+<div id="expenseModal" class="modal">
+  <div class="modal-content" style="background:#fff; padding:20px; border-radius:8px; width:90%; max-width:500px;">
+    <div class="modal-header" style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #e5e7eb; padding-bottom:12px; margin-bottom:16px;">
+      <h3 id="expenseModalTitle">Añadir Nuevo Gasto</h3>
+      <span class="modal-close-btn" onclick="closeModal('expenseModal')" style="cursor:pointer;font-size:1.5rem;color:#6b7280">&times;</span>
+    </div>
+    <div class="form-group"><label for="expenseDate">Fecha:</label><input type="date" id="expenseDate"></div>
+    <div class="form-group"><label for="expenseAmount">Monto (FCFA):</label><input type="number" id="expenseAmount" step="0.01" min="0" placeholder="Ej: 50000"></div>
+    <div class="form-group">
+      <label for="expenseCategory">Categoría:</label>
+      <select id="expenseCategory">
+        <option value="">Seleccione una categoría</option>
+        <option value="Salarios">Salarios</option>
+        <option value="Materiales de Oficina">Materiales de Oficina</option>
+        <option value="Viajes">Viajes</option>
+        <option value="Servicios">Servicios</option>
+        <option value="Marketing">Marketing</option>
+        <option value="Otros">Otros</option>
+      </select>
+    </div>
+    <div class="form-group"><label for="expenseDescription">Descripción:</label><textarea id="expenseDescription" rows="3" placeholder="Breve descripción del gasto"></textarea></div>
+
+    <div class="form-group">
+      <label for="expenseReceipt">Comprobante (PDF):</label>
+      <input type="file" id="expenseReceipt" accept=".pdf" class="mt-1 block w-full text-sm text-gray-500">
+      <p class="text-xs text-gray-500 mt-1">Formatos aceptados: PDF (Máx. 5MB)</p>
+      <div class="upload-progress" style="width:100%;height:20px;background:#f3f3f3;border-radius:4px;margin-top:10px;overflow:hidden;display:none;">
+        <div class="upload-progress-bar" style="height:100%;background:#4CAF50;width:0%;transition:width .3s"></div>
+      </div>
+    </div>
+    <div id="existingReceipt" class="hidden mb-3 p-2" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;">
+      <p class="text-sm text-gray-600">Comprobante existente: <span id="receiptFileName"></span></p>
+      <button type="button" onclick="removeExistingReceipt()" class="text-red-600 text-xs mt-1">Eliminar comprobante</button>
+    </div>
+
+    <button onclick="saveExpense()" class="sidebar-button" style="background:#16a34a;border-color:#0f7a27">Guardar Gasto</button>
+  </div>
+</div>
+
+<div id="incomeModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 id="incomeModalTitle">Añadir Ingreso</h3>
+      <span class="modal-close-btn" onclick="closeModal('incomeModal')">&times;</span>
+    </div>
+
+    <div class="form-group">
+      <label for="incomeDate">Fecha:</label>
+      <input type="date" id="incomeDate" />
+    </div>
+
+    <div class="form-group">
+      <label for="incomeAmount">Monto (FCFA):</label>
+      <input type="number" id="incomeAmount" step="0.01" min="0" placeholder="Ej. 1500000" />
+    </div>
+
+    <div class="form-group">
+      <label for="incomeSource">Fuente:</label>
+      <input type="text" id="incomeSource" placeholder="Ej. Servicios o Donaciones" />
+    </div>
+
+    <div class="form-group">
+      <label for="incomeDescription">Descripción:</label>
+      <textarea id="incomeDescription" rows="3" placeholder="Detalle del ingreso..."></textarea>
+    </div>
+
+    <div class="flex justify-end gap-2">
+      <button onclick="saveIncome()" class="sidebar-button bg-green-600 hover:bg-green-700">Guardar</button>
+      <button onclick="closeModal('incomeModal')" class="sidebar-button bg-gray-500 hover:bg-gray-600">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<div id="pdfViewerModal" class="modal">
+  <div class="modal-content-pdf">
+    <embed id="pdfViewer" src="" type="application/pdf" class="w-full h-full">
+    <div class="modal-actions">
+      <a id="downloadPdfButton" href="#" download="factura.pdf" class="download-btn">Descargar Factura</a>
+      <button onclick="closePdfViewerModal()" class="close-btn">Cerrar Vista Previa</button>
+    </div>
+  </div>
+</div>
+
+<div id="incomeModal" class="modal">
+  <div class="modal-content" style="background:#fff; padding:20px; border-radius:8px; width:90%; max-width:500px;">
+    <div class="modal-header" style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #e5e7eb; padding-bottom:12px; margin-bottom:16px;">
+      <h3 id="incomeModalTitle">Añadir Nuevo Ingreso</h3>
+      <span class="modal-close-btn" onclick="closeModal('incomeModal')" style="cursor:pointer;font-size:1.5rem;color:#6b7280">&times;</span>
+    </div>
+    <div class="form-group"><label for="incomeDate">Fecha:</label><input type="date" id="incomeDate"></div>
+    <div class="form-group"><label for="incomeAmount">Monto (FCFA):</label><input type="number" id="incomeAmount" step="0.01" min="0" placeholder="Ej: 100000"></div>
+    <div class="form-group">
+      <label for="incomeSource">Fuente:</label>
+      <select id="incomeSource">
+        <option value="">Seleccione una fuente</option>
+        <option value="Ventas">Ventas</option>
+        <option value="Inversiones">Inversiones</option>
+        <option value="Subvenciones">Subvenciones</option>
+        <option value="Otros">Otros</option>
+      </select>
+    </div>
+    <div class="form-group"><label for="incomeDescription">Descripción:</label><textarea id="incomeDescription" rows="3" placeholder="Breve descripción del ingreso"></textarea></div>
+    <button onclick="saveIncome()" class="sidebar-button" style="background:#16a34a;border-color:#0f7a27">Guardar Ingreso</button>
+  </div>
+</div>
+
+
+  {% endblock %}
+  {% block extra_scripts %}
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+  /* ======================================================
+    1️⃣ GLOBALS + BACKEND CONFIG
+  ====================================================== */
+  let backendBaseUrl = "http://127.0.0.1:5000"; // fallback
+
+  async function loadBackendConfig() {
+    try {
+      const r = await fetch("backend_config.json", { cache: "no-store" });
+      if (!r.ok) throw new Error("backend_config.json not found");
+      const cfg = await r.json();
+      backendBaseUrl = `http://${cfg.host}:${cfg.port}`;
+      console.log("✅ Updated backendBaseUrl:", backendBaseUrl);
+    } catch (e) {
+      console.warn("⚠️ Using fallback backendBaseUrl:", backendBaseUrl, e.message);
+    }
+  }
+  
+/**
+ * Helper to fetch data, automatically ensuring a fresh Firebase ID token.
+ * Handles token refresh on 401 errors for a single retry.
+ */
+async function authFetchJSON(url, options = {}) {
+    let token = firebaseIdToken;
+    let attempts = 0;
+
+    // Use a do-while loop to handle token refresh and retry
+    do {
+        if (!token) {
+            token = await firebase.auth().currentUser?.getIdToken(true);
+            firebaseIdToken = token;
+        }
+
+        const headers = {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            ...(options.headers || {})
+        };
+        
+        try {
+            const res = await fetch(url, { ...options, headers });
+
+            if (res.status === 401 && firebase.auth().currentUser && attempts === 0) {
+                console.warn("⚠️ Token expired or invalid. Forcing refresh and retrying fetch...");
+                // Force a token refresh
+                token = await firebase.auth().currentUser.getIdToken(true);
+                firebaseIdToken = token;
+                attempts++;
+                continue; // Retry the loop with the new token
+            }
+            
+            if (!res.ok) {
+                 const errorText = await res.text();
+                 // Throw a more informative error
+                 throw new Error(`HTTP ${res.status} for ${url}. Server response: ${errorText.slice(0, 50)}...`);
+            }
+
+            // Return JSON or the response object itself
+            try {
+                return await res.json();
+            } catch (e) {
+                return res; // Handle non-JSON responses gracefully (e.g., DELETE returns 200/204)
+            }
+        } catch (e) {
+            throw e; // Re-throw any network or fetch-related errors
+        }
+
+    } while (attempts === 1);
+}
+window.authFetchJSON = authFetchJSON; // Expose globally for other functions
+
+
+  /* ======================================================
+    2️⃣ GLOBAL HELPERS
+  ====================================================== */
+  let firebaseIdToken = null;
+  let currentDepartment = null;
+
+  function formatCurrency(n) {
+    const amt = Number(n || 0);
+    return new Intl.NumberFormat("es-GQ", {
+      style: "currency",
+      currency: "XAF",
+      minimumFractionDigits: 2,
+    }).format(amt);
+  }
+
+function formatMonthYear(input) {
+    if (!input) return new Date().toISOString().slice(0, 7);
+    
+    // Check if the input is already in the YYYY-MM format
+    if (input.match(/^\d{4}-\d{2}$/)) {
+        return input;
+    }
+
+    // Try to parse the input as a Date object if it was locale-formatted
+    try {
+        // This attempts to parse "March 2025" or similar locale strings
+        const date = new Date(input + "-01"); 
+        if (!isNaN(date)) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            return `${year}-${month}`;
+        }
+    } catch (e) {
+        console.warn("Date parsing failed for input:", input);
+    }
+
+    // Fallback: If parsing failed, assume the input field gives YYYY-MM, or default.
+    return input.slice(0, 7); 
+}
+
+  function showStatus(message, type = "info") {
+    const statusMessage = document.getElementById("statusMessage");
+    if (!statusMessage) return;
+    statusMessage.textContent = message;
+    statusMessage.className =
+      "status-message " +
+      (type === "success"
+        ? "status-success"
+        : type === "error"
+        ? "status-error"
+        : type === "warning"
+        ? "status-warning"
+        : "");
+    statusMessage.classList.remove("hidden");
+    setTimeout(() => statusMessage.classList.add("hidden"), 5000);
+  }
+  /* ======================================================
+    3️⃣ TAB HANDLER (Restored)
+  ====================================================== */
+function openTab(evt, tabName) {
+  const tabcontent = document.getElementsByClassName("tabcontent");
+  const tablinks = document.getElementsByClassName("tablinks");
+
+  // 🔹 Ensure we know the current department
+  const select = document.getElementById("departmentSelect");
+  const currentDepartment = select ? select.value : null;
+
+  // Hide all tab contents
+  for (let i = 0; i < tabcontent.length; i++) tabcontent[i].style.display = "none";
+
+  // Remove active class from all tabs
+  for (let i = 0; i < tablinks.length; i++) tablinks[i].className = tablinks[i].className.replace(" active", "");
+
+  // Show selected tab
+  const tab = document.getElementById(tabName);
+  if (tab) tab.style.display = "block";
+  if (evt && evt.currentTarget) evt.currentTarget.className += " active";
+
+  // 🔹 Trigger proper data load depending on the tab selected
+  // Note: We use the IDs from the HTML, which might not perfectly match the names here (e.g., 'expenses' vs 'gastos')
+  if (tabName === "expenses" && typeof loadExpenses === "function") {
+    console.log("🧾 Loading Expenses for", currentDepartment);
+    loadExpenses(); // uses global 'currentDepartment'
+  } else if (tabName === "income" && typeof loadIncome === "function") {
+    console.log("💰 Loading Incomes for", currentDepartment);
+    loadIncome(); // uses global 'currentDepartment'
+  } else if (tabName === "budgetOverview" && typeof loadFinancialSummary === "function") {
+    console.log("📊 Loading Financial Summary for", currentDepartment);
+    loadFinancialSummary(); // uses global 'currentDepartment'
+  }
+}
+window.openTab = openTab;
+
+  /* ======================================================
+    3️⃣ FIREBASE INITIALIZATION
+  ====================================================== */
+  const firebaseConfig = {
+    apiKey: "AIzaSyBTehSBePV6bjKkI_htP6NsU4agckkSOrE",
+    authDomain: "atiempo-9f08a.firebaseapp.com",
+    projectId: "atiempo-9f08a",
+    storageBucket: "atiempo-9f08a.appspot.com",
+    messagingSenderId: "221735208077",
+    appId: "1:221735208077:web:28a3134fa23bd407a20ec4",
+    measurementId: "G-NVPGWJQ9J6",
+  };
+  firebase.initializeApp(firebaseConfig);
+
+  /* ======================================================
+    4️⃣ LOADER HANDLING
+  ====================================================== */
+  function showLoader() {
+    const loader =
+      document.getElementById("firebaseLoader") ||
+      document.getElementById("globalLoader");
+    if (loader) loader.style.display = "flex";
+  }
+
+  function hideLoader() {
+    const loader =
+      document.getElementById("firebaseLoader") ||
+      document.getElementById("globalLoader");
+    if (loader) {
+      loader.style.opacity = "0";
+      setTimeout(() => {
+        loader.style.display = "none";
+      }, 400);
+    }
+  }
+
+/* ======================================================
+   1️⃣ Auth on start — only here we kick off loading
+====================================================== */
+async function authOnStart() {
+  const accountingContent = document.getElementById("accounting-content");
+  const authMessage = document.getElementById("auth-message");
+
+  try {
+    // Wait up to 6s for Firebase rehydration
+    const user = await new Promise((resolve) => {
+      const unsub = firebase.auth().onAuthStateChanged((u) => { unsub(); resolve(u); });
+      setTimeout(() => resolve(null), 6000);
+    });
+
+    if (!user) {
+      console.warn("⚠️ No Firebase user found — showing UI anyway");
+      authMessage && (authMessage.textContent = "No autenticado. Inicie sesión nuevamente.");
+      accountingContent && accountingContent.classList.remove("hidden");
+      hideLoader?.();
+      return;
+    }
+
+    console.log("👤 Firebase user:", user.email);
+    // 🔑 STEP 1: Get the initial fresh token
+    firebaseIdToken = await user.getIdToken();
+    console.log("🔑 Initial Firebase ID Token obtained.");
+
+    await loadBackendConfig(); // your existing function
+    console.log("⚙️ Backend config loaded:", backendBaseUrl);
+
+    // Now it’s safe to hit the API
+    await tryLoadDepartments();            // ⬅️ loads departments
+    
+    // Set currentDepartment to the first loaded one to allow summary load
+    const sel = document.getElementById("departmentSelect");
+    currentDepartment = sel?.value || null;
+    
+    // Auto-load if a department was successfully selected
+    if(currentDepartment) {
+        await loadFinancialSummary(); // loads summary + charts for selected dep
+    }
+
+
+    accountingContent && accountingContent.classList.remove("hidden");
+    authMessage && authMessage.classList.add("hidden");
+  } catch (err) {
+    console.error("Auth init/data load failed:", err);
+    authMessage && (authMessage.textContent = "Error de autenticación / configuración.");
+    accountingContent && accountingContent.classList.remove("hidden");
+  } finally {
+    hideLoader?.();
+  }
+}
+
+
+/* ======================================================
+   2️⃣ Departments
+====================================================== */
+async function tryLoadDepartments() {
+  const sel = document.getElementById("departmentSelect");
+  const cargarBtn = document.getElementById("cargarDatosButton");
+
+  if (!sel) return;
+
+  sel.innerHTML = `<option>Cargando departamentos...</option>`;
+  if(cargarBtn) cargarBtn.disabled = true;
+
+  try {
+    // Use the new authenticated fetch helper
+    const data = await authFetchJSON(`${backendBaseUrl}/api/departments`);
+    // NOTE: Your backend returns an array of strings in 'departments'
+    const departments = Array.isArray(data?.departments) ? data.departments : [];
+
+    if (!departments.length) {
+      sel.innerHTML = `<option>No hay departamentos</option>`;
+      showStatus("No hay departamentos configurados en el backend.", "warning");
+      return;
+    }
+
+    // Map department names to options. The value is the clean, space-removed version
+    // to correctly match the mock data keys in the Python backend (e.g. 'RecursosHumanos')
+    sel.innerHTML = `<option value="">Seleccione un departamento</option>` +
+      departments.map(d => `<option value="${d.replace(/\s/g, '')}">${d}</option>`).join("");
+
+    // Pick first department by default
+    if (!sel.value && departments.length > 0) {
+        // Set the value (space-removed version) and the text (full name)
+        const firstDepValue = departments[0].replace(/\s/g, '');
+        sel.value = firstDepValue;
+        currentDepartment = firstDepValue;
+    }
+
+    if(cargarBtn) cargarBtn.disabled = false;
+    showStatus(`Departamentos cargados. Seleccionado: ${sel.options[sel.selectedIndex].text}`, "success");
+    
+  } catch (e) {
+    console.error("Error loading departments:", e);
+    sel.innerHTML = `<option value="">Error al cargar departamentos</option>`;
+    showStatus(`Error al cargar departamentos: ${e.message}`, "error");
+  }
+}
+// Global chart handles (must be defined once outside functions)
+let trendChart = null;
+let categoryChart = null;
+// Ensure currentDepartment is available globally
+
+
+// 🔄 Helper to read current filter settings from the UI
+function getFilterParams() {
+    const selectedMonth = document.getElementById("selectedMonth")?.value;
+    const comparisonPeriod = document.getElementById("comparisonPeriod")?.value;
+    const timeRange = document.getElementById("timeRange")?.value;
+
+    return new URLSearchParams({
+        // Note: Months are 0-indexed in JS (0=Jan) based on the HTML options (0-11).
+        month: selectedMonth,
+        compare: comparisonPeriod,
+        range: timeRange
+    }).toString();
+}
+
+/**
+ * Resets the UI elements to a loading/clear state before fetching new data.
+ */
+function resetFinancialUI() {
+  // Clear table and progress
+  const tbodyAnnual = document.getElementById("comparisonTableBodyAnnual"); 
+  const tbodyDetail = document.getElementById("comparisonTableBodyDetail"); 
+
+  if (tbodyAnnual) tbodyAnnual.innerHTML = `<tr><td colspan="5" class="text-center py-3 text-gray-400">Cargando datos...</td></tr>`;
+  if (tbodyDetail) tbodyDetail.innerHTML = `<tr><td colspan="5" class="text-center py-3 text-gray-400">Cargando datos...</td></tr>`;
+
+  // Reset Budget Progress
+  document.getElementById("budgetProgressBarAnnual").style.width = "0%";
+  document.getElementById("budgetProgressText").textContent = "0% utilizado";
+  document.getElementById("totalBudgetAnnual").textContent = "FCFA 0";
+  document.getElementById("usedBudgetAnnual").textContent = "FCFA 0";
+  document.getElementById("remainingBudgetAnnual").textContent = "FCFA 0";
+  
+  // Reset KPI Cards (kpi_ prefix)
+  document.getElementById("kpi_monthlyBudget").textContent = "FCFA 0";
+  document.getElementById("kpi_currentIncome").textContent = "FCFA 0";
+  document.getElementById("kpi_budgetUsage").textContent = "0% utilizado";
+  document.getElementById("kpi_incomeGrowth").textContent = "+0% vs anterior";
+  document.getElementById("kpi_currentExpenses").textContent = "FCFA 0";
+  document.getElementById("kpi_expenseGrowth").textContent = "+0% vs anterior";
+  document.getElementById("kpi_netBalance").textContent = "FCFA 0";
+  document.getElementById("kpi_balanceTrend").textContent = "→ Sin cambio";
+  
+  // Reset Financial Summary Box (no prefix)
+  document.getElementById("monthlyBudget").textContent = "--";
+  document.getElementById("currentIncome").textContent = "--";
+  document.getElementById("expenseUsage").textContent = "--";
+  document.getElementById("incomeChange").textContent = "--";
+
+
+  // Reset charts if they exist
+  if (window.trendChart) {
+    window.trendChart.data.datasets.forEach(ds => ds.data = []);
+    window.trendChart.update();
+  }
+  if (window.categoryChart) {
+    window.categoryChart.data.datasets[0].data = [];
+    window.categoryChart.update();
+  }
+}
+
+/**
+ * Main function to fetch and update all financial data based on department and filters.
+ */
+async function loadFinancialSummary() {
+    const departmentSelect = document.getElementById("departmentSelect");
+    const departmentName = departmentSelect?.value?.trim(); // e.g., 'RecursosHumanos'
+
+    if (!departmentName) {
+        showStatus("⚠️ Por favor seleccione un departamento antes de continuar.", "warning");
+        return;
+    }
+
+    const spinner = document.getElementById("summaryLoading");
+    const content = document.getElementById("summaryContent");
+    
+    // Show loading state and clear old data
+    spinner?.classList.remove("hidden");
+    content?.classList.add("hidden");
+    resetFinancialUI(); 
+
+    try {
+        const filters = getFilterParams();
+        
+        // 🔑 FIX: Use the canonical /api/accounting/summary endpoint directly.
+        // The backend logic handles filtering using this route and department name.
+        const url = `${backendBaseUrl}/api/accounting/summary?department=${encodeURIComponent(departmentName)}&${filters}`;
+        
+        console.log(`📦 Fetching financial summary for ${departmentName} from: ${url}`);
+
+        // Use the new authenticated fetch helper
+        const data = await authFetchJSON(url);
+
+        // Your backend returns a structure like: { summary: {...}, expenses: [...], income: [...] }
+        // We will pass the main summary data to the update functions.
+        const summaryData = {
+            ...data.summary, 
+            ...data.expenses[0] || {}, // Quick merge for mock data details
+            ...data.income[0] || {}
+        };
+
+        // Note: You may need to refine how mock data is passed/used if summaryData is incomplete.
+        // For chart trends, we must fetch from the dedicated /api/department/<department>/summary route 
+        // as your /api/accounting/summary route does not return full trend data.
+        
+        // 🔑 RE-FETCH dedicated chart data (if required for charts/tables that need trends)
+        const trendUrl = `${backendBaseUrl}/api/department/${encodeURIComponent(departmentName)}/summary?${filters}`;
+        const chartData = await authFetchJSON(trendUrl);
+        
+        console.log("✅ Chart trend data loaded:", chartData);
+        
+        // --- Core UI Updates ---
+        // Create charts on first load, update them on subsequent loads
+        if (window.trendChart && window.categoryChart) {
+             updateCharts(chartData);
+        } else {
+             renderCharts(chartData);
+        }
+        updateComparisonTable(chartData);
+        updateBudgetProgressAnnualIsolated(chartData);
+        updateBudgetProgress(chartData);
+        updateBottomSummary(chartData);
+        updateKPICards(chartData);
+        hideChartPlaceholders(); // Hide placeholders after charts are rendered
+
+        showStatus(`Resumen financiero cargado para ${departmentName}.`, "success");
+
+    } catch (e) {
+        console.error("💥 loadFinancialSummary error:", e);
+        showStatus(`Error cargando resumen financiero. ${e.message}`, "error");
+    } finally {
+        spinner?.classList.add("hidden");
+        content?.classList.remove("hidden");
+    }
+}
+
+/* ------------------------------------------------------
+   Chart and Table Render/Update Utilities
+------------------------------------------------------ */
+
+function animateValue(obj, start, end, prefix, suffix, duration = 1000) {
+    if (!obj || isNaN(end)) return;
+    
+    // Clean up end value: remove non-numeric chars if passed in as a string
+    end = Number(String(end).replace(/[^\d.-]/g, ''));
+    
+    // If the element already holds a value, use that as the starting point for a smoother transition
+    let currentStart = Number(String(obj.textContent).replace(/[^\d.-]/g, '')) || 0;
+    
+    // Check if the starting point is drastically different to prevent janky animations
+    if (Math.abs(end - currentStart) / Math.max(end, 1) > 0.5) {
+        currentStart = 0; // Reset start if too far off
+    }
+    
+    let startTime = null;
+
+    function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const progress = Math.min((timestamp - startTime) / duration, 1);
+        
+        // Calculate the current value using easing
+        const currentValue = currentStart + (end - currentStart) * progress;
+
+        // Update the element text, keeping the currency format
+        obj.textContent = prefix + currentValue.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + suffix;
+
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        } else {
+            // Ensure the final value is exactly the 'end' value
+            obj.textContent = prefix + end.toLocaleString() + suffix; 
+        }
+    }
+
+    window.requestAnimationFrame(step);
+}
+
+function updateCharts(data) {
+  if (window.trendChart) {
+    window.trendChart.data.labels = data.months || [];
+    window.trendChart.data.datasets[0].data = data.income || [];
+    window.trendChart.data.datasets[1].data = data.expenses || [];
+    window.trendChart.data.datasets[2].data = data.budget || [];
+    window.trendChart.update();
+  }
+
+  if (window.categoryChart) {
+    window.categoryChart.data.labels = Object.keys(data.categories || {});
+    window.categoryChart.data.datasets[0].data = Object.values(data.categories || {});
+    window.categoryChart.update();
+  }
+}
+
+function renderCharts(data) {
+  const trendCanvas = document.getElementById("trendChartCanvas");
+  const catCanvas   = document.getElementById("categoryChartCanvas");
+  if (!trendCanvas || !catCanvas) return;
+
+  // 🔹 destroy old charts before re-creating them
+  if (trendChart)   { trendChart.destroy();   trendChart   = null; }
+  if (categoryChart){ categoryChart.destroy();categoryChart= null; }
+
+  // 🔹 create the new ones on the same <canvas> elements
+  trendChart = new Chart(trendCanvas.getContext("2d"), {
+    type: "line",
+    data: {
+      labels: data.months || [],
+      datasets: [
+        { label: "Ingresos",    data: data.income   || [], borderColor: "#22c55e", tension:0.4, fill:false },
+        { label: "Gastos",      data: data.expenses || [], borderColor: "#ef4444", tension:0.4, fill:false },
+        { label: "Presupuesto", data: data.budget   || [], borderColor: "#3b82f6", borderDash:[5,5], fill:false }
+      ]
+    },
+    options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:"bottom" } } }
+  });
+
+  categoryChart = new Chart(catCanvas.getContext("2d"), {
+    type: "doughnut",
+    data: {
+      labels: Object.keys(data.categories || {}),
+      datasets:[{ data:Object.values(data.categories || {}), backgroundColor:["#3b82f6","#a855f7","#10b981","#f59e0b","#ef4444", "#004080"] }]
+    },
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:"right" } } }
+  });
+}
+
+function updateComparisonTable(data) {
+    // --- Target 1: The large table in the analytics section (new ID) ---
+    const tbodyAnnual = document.getElementById("comparisonTableBodyAnnual"); 
+    
+    // --- Target 2: The smaller table in the detailed summary section (ID from previous step) ---
+    const tbodyDetail = document.getElementById("comparisonTableBodyDetail"); 
+
+    const getChangePct = (current, previous) => 
+        previous ? (((current - previous) / previous) * 100).toFixed(2) + "%" : "N/A";
+    
+    // Use current/previous *balance* for the Balance row
+    const netBalance = data.current_income - data.current_expenses;
+    const previousBalance = data.previous_income - data.previous_expenses;
+
+    const tableHTML = `
+      <tr>
+        <td class="px-4 py-2">Ingresos Totales</td>
+        <td class="px-4 py-2 text-right">FCFA ${data.current_income.toLocaleString()}</td>
+        <td class="px-4 py-2 text-right">FCFA ${data.previous_income.toLocaleString()}</td>
+        <td class="px-4 py-2 text-right">${getChangePct(data.current_income, data.previous_income)}</td>
+        <td class="px-4 py-2 text-right">→</td>
+      </tr>
+      <tr>
+        <td class="px-4 py-2">Gastos Totales</td>
+        <td class="px-4 py-2 text-right">FCFA ${data.current_expenses.toLocaleString()}</td>
+        <td class="px-4 py-2 text-right">FCFA ${data.previous_expenses.toLocaleString()}</td>
+        <td class="px-4 py-2 text-right">${getChangePct(data.current_expenses, data.previous_expenses)}</td>
+        <td class="px-4 py-2 text-right">→</td>
+      </tr>
+      <tr>
+        <td class="px-4 py-2 font-bold">Balance Neto</td>
+        <td class="px-4 py-2 text-right font-bold">FCFA ${netBalance.toLocaleString()}</td>
+        <td class="px-4 py-2 text-right font-bold">FCFA ${previousBalance.toLocaleString()}</td>
+        <td class="px-4 py-2 text-right font-bold">${getChangePct(netBalance, previousBalance)}</td>
+        <td class="px-4 py-2 text-right font-bold">→</td>
+      </tr>
+    `;
+
+    // Populate both tables
+    if (tbodyAnnual) {
+        tbodyAnnual.innerHTML = tableHTML;
+    }
+    if (tbodyDetail) {
+        tbodyDetail.innerHTML = tableHTML;
+    }
+}
+
+function updateBudgetProgress(data) {
+  const annualBudget = data.annual_budget || 0;
+  const totalExpenses = data.total_expenses || 0;
+  const totalBudget = Math.max(annualBudget, 1);
+  const progress = Math.min((totalExpenses / totalBudget) * 100, 100);
+
+  // Target the elements specifically within the #summaryContent card
+  const progressContainer = document.querySelector('#summaryContent .bg-white.p-4.rounded-lg.shadow-md.mt-6');
+
+  if (!progressContainer) {
+    console.error("Could not find Budget Progress container in #summaryContent");
+    return;
+  }
+
+  // Update progress bar and text (these IDs might be unique, so we keep the old style)
+  progressContainer.querySelector("#budgetProgressBar").style.width = `${progress.toFixed(1)}%`;
+  progressContainer.querySelector("#budgetProgressText").textContent = `${progress.toFixed(1)}%`; // Updated to use % only
+
+  // Update the detailed budget numbers (must be queried from the container)
+  progressContainer.querySelector("#totalBudget").textContent = `FCFA ${annualBudget.toLocaleString()}`;
+  progressContainer.querySelector("#usedBudget").textContent = `FCFA ${totalExpenses.toLocaleString()}`;
+  progressContainer.querySelector("#remainingBudget").textContent = `FCFA ${(annualBudget - totalExpenses).toLocaleString()}`;
+}
+
+function updateBottomSummary(data) {
+  // DOM targets in the blue "Resumen Financiero" box
+  const monthlyBudgetEl   = document.getElementById("monthlyBudget");
+  const currentIncomeEl   = document.getElementById("currentIncome");
+  const expenseUsageEl    = document.getElementById("expenseUsage");
+  const incomeChangeEl    = document.getElementById("incomeChange");
+
+  if (!monthlyBudgetEl || !currentIncomeEl || !expenseUsageEl || !incomeChangeEl) {
+    console.warn("⚠️ Bottom summary elements missing in DOM");
+    return;
+  }
+
+  // pull values from backend data
+  const annualBudget      = data.annual_budget || 0;
+  const totalExpenses     = data.total_expenses || 0;
+  const thisIncome        = data.current_income || 0;
+  const prevIncome        = data.previous_income || 0;
+
+  // Calculate annual budget / 12 for a rough monthly value shown in the blue box
+  const monthlyBudgetVal = annualBudget / 12;
+
+  // % of budget used (total expenses vs annual budget)
+  const usagePct = annualBudget
+    ? ((totalExpenses / annualBudget) * 100).toFixed(2)
+    : "0.00";
+
+  // income change %
+  const incomeDeltaPct = prevIncome
+    ? (((thisIncome - prevIncome) / prevIncome) * 100).toFixed(2)
+    : "0.00";
+  
+  const incomeChangeDisplay = (incomeDeltaPct >= 0 ? "+" : "") + incomeDeltaPct + "%";
+
+  // --- Start Animation for Currency Fields (Duration DOUBLED) ---
+  
+  // 1. Presupuesto Mensual (Annual Budget / 12) - now 3000ms
+  animateValue(monthlyBudgetEl, 0, monthlyBudgetVal, 'FCFA ', '', 3000);
+
+  // 2. Ingresos Actuales (Current Income) - now 2000ms
+  animateValue(currentIncomeEl, 0, thisIncome, 'FCFA ', '', 2000);
+
+  // 3. Uso de Gastos (Expense Usage) - Not a currency value, no animation needed
+  expenseUsageEl.textContent = `${usagePct}%`; 
+
+  // 4. Cambio de Ingresos (Income Change) - Not a currency value, no animation needed
+  incomeChangeEl.textContent = incomeChangeDisplay;
+}
+
+function updateKPICards(data) {
+    const annualBudget = data.annual_budget || 0;
+    const totalExpenses = data.total_expenses || 0;
+    const currentIncome = data.current_income || 0;
+    const currentExpenses = data.current_expenses || 0;
+    const prevIncome = data.previous_income || 1; // Use 1 to avoid NaN
+    const prevExpenses = data.previous_expenses || 1;
+    const netBalance = currentIncome - currentExpenses;
+
+    const budgetUsagePct = annualBudget ? ((totalExpenses / annualBudget) * 100).toFixed(1) : 0;
+    const incomeGrowthPct = ((currentIncome - data.previous_income) / prevIncome * 100).toFixed(1);
+    const expenseGrowthPct = ((currentExpenses - data.previous_expenses) / prevExpenses * 100).toFixed(1);
+
+    // --- Start Animation for Currency Fields (Duration DOUBLED) ---
+
+    // 1. Presupuesto Mensual Card (Total Annual Budget)
+    // 🔑 FIX: Use the kpi_ prefix for the secondary cards
+    const budgetTotalEl = document.getElementById('kpi_monthlyBudget'); 
+    if(budgetTotalEl) {
+        animateValue(budgetTotalEl, 0, annualBudget, 'FCFA ', '', 3000);
+    }
+    document.getElementById('kpi_budgetUsage').textContent = `${budgetUsagePct}% utilizado`; 
+
+    // 2. Ingresos Mes Actual Card
+    const incomeEl = document.getElementById('kpi_currentIncome'); 
+    if(incomeEl) {
+        animateValue(incomeEl, 0, currentIncome, 'FCFA ', '', 2000);
+    }
+    document.getElementById('kpi_incomeGrowth').textContent = `${incomeGrowthPct >= 0 ? '+' : ''}${incomeGrowthPct}% vs anterior`; 
+
+    // 3. Gastos Mes Actual Card
+    const expenseEl = document.getElementById('kpi_currentExpenses'); 
+    if(expenseEl) {
+        animateValue(expenseEl, 0, currentExpenses, 'FCFA ', '', 2000);
+    }
+    document.getElementById('kpi_expenseGrowth').textContent = `${expenseGrowthPct >= 0 ? '+' : ''}${expenseGrowthPct}% vs anterior`; 
+
+    // 4. Balance Neto Card
+    const netBalanceEl = document.getElementById('kpi_netBalance'); 
+    if(netBalanceEl) {
+        animateValue(netBalanceEl, 0, netBalance, 'FCFA ', '', 2000);
+    }
+    document.getElementById('kpi_balanceTrend').textContent = netBalance > 0 ? '▲ Positivo' : (netBalance < 0 ? '▼ Negativo' : '→ Sin cambio'); 
+}
+
+
+function updateBudgetProgressAnnualIsolated(data) {
+  // Use data from the backend response
+  const annualBudget = data.annual_budget || 0;
+  const used = data.total_expenses || 0;
+  const totalBudget = Math.max(annualBudget, 1); // Avoid division by zero
+  const progress = Math.min((used / totalBudget) * 100, 100);
+  
+  // 🎯 Target the five specific IDs that exist in the TOP HTML card
+  const progressBar = document.getElementById("budgetProgressBarAnnual"); 
+  const progressText = document.getElementById("budgetProgressText"); // 🔑 NOTE: Targets the non-Annual ID here
+  const totalBudgetEl = document.getElementById("totalBudgetAnnual");
+  const usedBudgetEl = document.getElementById("usedBudgetAnnual");
+  const remainingBudgetEl = document.getElementById("remainingBudgetAnnual");
+
+  // CRITICAL SAFETY CHECK: If ANY element is null, STOP execution gracefully.
+  if (!progressBar || !progressText || !totalBudgetEl || !usedBudgetEl || !remainingBudgetEl) {
+      console.warn("⚠️ Cannot update Estado del Presupuesto Anual (elements not ready or HTML ID mismatch).");
+      return;
+  }
+
+  // 1. Update Progress Bar
+  progressBar.style.width = `${progress.toFixed(1)}%`;
+  
+  // 2. Update Progress Text
+  progressText.textContent = `${progress.toFixed(1)}% utilizado`;
+  
+  // 3. Update Detailed Values
+  totalBudgetEl.textContent = `FCFA ${annualBudget.toLocaleString()}`;
+  usedBudgetEl.textContent = `FCFA ${used.toLocaleString()}`;
+  remainingBudgetEl.textContent = `FCFA ${(annualBudget - used).toLocaleString()}`;
+}
+
+// FIX: Remove inline event listener for departmentSelect (handled by DOMContentLoaded hook)
+// document.getElementById("departmentSelect")?.removeEventListener("change", loadDepartmentData);
+// document.getElementById("departmentSelect")?.addEventListener("change", loadDepartmentData);
+
+
+/**
+ * Called when the "Aplicar Filtros" button is clicked.
+ */
+function refreshFinancialView() {
+    console.log("🔄 Refreshing financial view with new filters...");
+    loadFinancialSummary();
+}
+window.refreshFinancialView = refreshFinancialView;
+
+
+  /* ======================================================
+    8️⃣ BOOTSTRAP
+  ====================================================== */
+  document.addEventListener("DOMContentLoaded", async () => {
+    showLoader();
+    // 🔑 Call Lottie setup before authOnStart finishes
+    showChartPlaceholders();
+    await authOnStart();
+    
+    // FIX: Add listeners after DOM is fully loaded and functions are defined
+    document.getElementById("departmentSelect")?.addEventListener("change", loadDepartmentData);
+    document.getElementById("cargarDatosButton")?.addEventListener("click", loadDepartmentData);
+
+  });
+  </script>
+  <script>
+  /* --- SAFE global exposure: never reference undeclared identifiers --- */
+  (function exposeAccountingGlobals(){
+    const pick = (name) =>
+      (typeof window[name] !== 'undefined' && window[name]) ? window[name]
+      : (typeof globalThis[name] !== 'undefined') ? globalThis[name]
+      : undefined;
+
+    // attach if present; otherwise attach a safe stub
+    window.openTab              = pick('openTab')              || function(){};
+    window.loadExpenses         = pick('loadExpenses')         || (async ()=>{ console.warn('loadExpenses() stub'); });
+    window.loadIncome           = pick('loadIncome')           || (async ()=>{ console.warn('loadIncome() stub'); });
+    window.openExpenseModal     = pick('openExpenseModal')     || function(){};
+    window.saveExpense          = pick('saveExpense')          || (async ()=>{});
+    window.deleteExpense        = pick('deleteExpense')        || (async ()=>{});
+    window.openIncomeModal      = pick('openIncomeModal')      || function(){};
+    window.saveIncome           = pick('saveIncome')           || (async ()=>{});
+    window.deleteIncome         = pick('deleteIncome')         || (async ()=>{});
+    window.loadFinancialSummary = pick('loadFinancialSummary') || (async ()=>{ console.warn('loadFinancialSummary() stub'); });
+    window.loadDepartmentData   = pick('loadDepartmentData')   || (async ()=>{ console.warn('loadDepartmentData() stub'); });
+  })();
+  
+
+/* ======================================================
+  9️⃣ EXPENSES MANAGEMENT (GASTOS) - FINAL FULL BLOCK
+====================================================== */
+
+let currentExpenseId = null; // Used to track which expense is being edited
+
+
+async function loadExpenses() {
+    // Acquire the department name (e.g., "Recursos Humanos") from the global context
+    const departmentSelectEl = document.getElementById("departmentSelect");
+    // 🔑 Use the VALUE, which is the space-removed key (e.g., 'RecursosHumanos')
+    const departmentName = departmentSelectEl?.value?.trim(); 
+    
+    // Create the URL-safe version (e.g., "RecursosHumanos") for the API parameter
+    const safeDepartmentName = departmentName ? departmentName.replace(/\s/g, '') : '';
+    
+    const periodInput = document.getElementById("expensePeriodFilter");
+    
+    // 🔑 FIX: Get the raw input value. If empty, rawPeriodValue is an empty string.
+    const rawPeriodValue = periodInput?.value || '';
+    
+    // If the user entered a value, format it (for display/filter); otherwise, use the empty string.
+    const selectedPeriod = rawPeriodValue ? formatMonthYear(rawPeriodValue) : ''; 
+
+    if (!departmentName) {
+        showStatus("⚠️ Por favor seleccione un departamento primero.", "warning");
+        document.getElementById("expensesTableBody").innerHTML = '<tr><td colspan="5" class="text-center py-4">Seleccione un departamento para ver los gastos.</td></tr>';
+        return;
+    }
+
+    const loadingIndicator = document.getElementById("expensesLoading");
+    const tbody = document.getElementById("expensesTableBody");
+    const periodDisplay = document.getElementById("expenseCurrentPeriod");
+    
+    // 🔑 FIX: Set the display text to 'todos' if the filter input is empty
+    const displayText = rawPeriodValue ? selectedPeriod : 'todos';
+
+    loadingIndicator.classList.remove("hidden");
+    tbody.innerHTML = `<tr><td colspan="5" class="text-center py-4">Cargando gastos...</td></tr>`;
+    periodDisplay.textContent = displayText;
+
+    try {
+        // Construct the URL. Send department=RecursosHumanos and period=YYYY-MM
+        const params = new URLSearchParams({
+            department: safeDepartmentName, 
+            period: rawPeriodValue
+        }).toString();
+        
+        const url = `${backendBaseUrl}/api/accounting/expenses?${params}`;
+        
+        // Use the authenticated fetch helper
+        const data = await authFetchJSON(url);
+        
+        renderExpensesTable(data.expenses || []);
+        showStatus(`Gastos cargados para ${departmentSelectEl.options[departmentSelectEl.selectedIndex].text}. Mostrando datos: ${displayText}`, "success");
+
+    } catch (e) {
+        console.error("💥 loadExpenses error:", e);
+        showStatus(`Error al cargar datos: ${e.message}`, "error");
+        tbody.innerHTML = `<tr><td colspan="5" class="text-center py-4 text-red-600">Error al cargar datos. ${e.message}</td></tr>`;
+    } finally {
+        loadingIndicator.classList.add("hidden");
+    }
+}
+
+window.loadExpenses = loadExpenses;
+
+function closeModal(id) {
+    document.getElementById(id).style.display = 'none';
+    currentExpenseId = null; // Reset ID when modal is closed
+}
+window.closeModal = closeModal;
+
+
+function viewPdf(url) {
+    const pdfViewerModal = document.getElementById("pdfViewerModal");
+    const pdfViewer = document.getElementById("pdfViewer");
+    const downloadButton = document.getElementById("downloadPdfButton");
+
+    // Show modal immediately (keeps it open even if the PDF fails)
+    pdfViewer.src = 'about:blank';
+    pdfViewerModal.style.display = "flex";
+    pdfViewer.style.opacity = 0.5;
+    pdfViewerModal.setAttribute("aria-busy", "true");
+
+    // Use fetch() with token for PDF blob/file retrieval:
+    
+    fetch(url, { headers: { Authorization: "Bearer " + firebaseIdToken } }) // Manual authenticated fetch
+        .then(response => {
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            return response.blob();
+        })
+        .then(pdfBlob => {
+            const blobUrl = URL.createObjectURL(pdfBlob);
+            pdfViewer.src = blobUrl;
+            pdfViewer.style.opacity = 1;
+            pdfViewerModal.removeAttribute("aria-busy");
+            downloadButton.href = blobUrl;
+            downloadButton.download = `comprobante_${new Date().getTime()}.pdf`; 
+        })
+        .catch(error => {
+            console.error("❌ Error loading PDF:", error);
+            pdfViewer.srcdoc = `
+              <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:#b91c1c;text-align:center;">
+                <p style="font-size:18px;font-weight:600;">Error al cargar el comprobante</p>
+                <p style="font-size:14px;">${error.message}</p>
+                <button onclick="closePdfViewerModal()" style="margin-top:12px;padding:6px 12px;background:#004080;color:white;border:none;border-radius:6px;cursor:pointer;">
+                  Cerrar
+                </button>
+              </div>`;
+            pdfViewer.style.opacity = 1;
+            pdfViewerModal.removeAttribute("aria-busy");
+        });
+}
+window.viewPdf = viewPdf;
+
+function closePdfViewerModal() {
+    document.getElementById("pdfViewerModal").style.display = "none";
+    document.getElementById("pdfViewer").src = "";
+}
+window.closePdfViewerModal = closePdfViewerModal;
+
+function removeExistingReceipt() {
+    document.getElementById("existingReceipt").classList.add("hidden");
+    document.getElementById("expenseReceipt").value = '';
+    showStatus("Comprobante eliminado del registro. Guarde para confirmar el cambio.", "warning");
+}
+window.removeExistingReceipt = removeExistingReceipt;
+
+
+function renderExpensesTable(expenses) {
+    const tbody = document.getElementById("expensesTableBody");
+    if (!tbody) return;
+
+    if (expenses.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" class="text-center py-4">No se encontraron gastos para este periodo.</td></tr>`;
+        return;
+    }
+
+    tbody.innerHTML = expenses.map(expense => {
+        const amountDisplay = formatCurrency(expense.amount);
+        const dateDisplay = expense.date ? new Date(expense.date).toLocaleDateString('es-GQ') : 'N/A';
+        
+        // 🔑 FINAL FIX: Construct the PDF URL for ALL entries dynamically
+        const pdfParams = new URLSearchParams({
+            id: expense.id,
+            department: expense.department,
+            date: expense.date,
+            amount: expense.amount,
+            category: expense.category,
+            description: expense.description
+        }).toString();
+        
+        // This URL points to your dynamic PDF generation route
+        const pdfGeneratorUrl = `${backendBaseUrl}/api/accounting/generate-expense-pdf?${pdfParams}`;
+
+        const actionsHtml = `
+            <button onclick="openExpenseModal('${expense.id}')" class="text-blue-600 font-medium mr-2">Editar</button>
+            <button onclick="deleteExpense('${expense.id}')" class="text-red-600 font-medium mr-2">Eliminar</button>
+            
+            <button onclick="viewPdf('${pdfGeneratorUrl}')" class="sidebar-button" style="background:#22c55e; border-color:#16a34a; padding: 6px 10px; font-size: 13px;">Ver Comprobante</button>
+        `;
+
+        return `
+            <tr>
+                <td class="px-6 py-4 whitespace-nowrap">${dateDisplay}</td>
+                <td class="px-6 py-4 whitespace-nowrap">${amountDisplay}</td>
+                <td class="px-6 py-4 whitespace-nowrap">${expense.category || 'Sin Categoría'}</td>
+                <td class="px-6 py-4">${expense.description || ''}</td>
+                <td class="px-6 py-4 whitespace-nowrap">${actionsHtml}</td>
+            </tr>
+        `;
+    }).join('');
+}
+// --- Modal and CRUD Operations ---
+
+async function openExpenseModal(expenseId = null) {
+    const departmentName = document.getElementById("departmentSelect")?.value?.trim();
+    if (!departmentName) {
+        showStatus("Seleccione un departamento antes de editar/añadir.", "warning");
+        return;
+    }
+
+    const modal = document.getElementById("expenseModal");
+    const modalTitle = document.getElementById("expenseModalTitle");
+    const existingReceiptDiv = document.getElementById("existingReceipt");
+    currentExpenseId = expenseId;
+
+    // Reset form fields
+    document.getElementById("expenseDate").value = new Date().toISOString().slice(0, 10);
+    document.getElementById("expenseAmount").value = '';
+    document.getElementById("expenseCategory").value = '';
+    document.getElementById("expenseDescription").value = '';
+    document.getElementById("expenseReceipt").value = '';
+    existingReceiptDiv.classList.add("hidden");
+    
+    modalTitle.textContent = expenseId ? "Editar Gasto" : "Añadir Nuevo Gasto";
+
+    if (expenseId) {
+        try {
+            // ✅ CORRECTED URL PATH: Uses /api/accounting/expenses/<id>
+            const url = `${backendBaseUrl}/api/accounting/expenses/${expenseId}`;
+            const data = await authFetchJSON(url);
+            const expense = data.expense || data; 
+
+            // Populate form for editing
+            document.getElementById("expenseDate").value = expense.date.slice(0, 10);
+            document.getElementById("expenseAmount").value = expense.amount;
+            document.getElementById("expenseCategory").value = expense.category;
+            document.getElementById("expenseDescription").value = expense.description;
+            
+            // Handle existing receipt display
+            if (expense.receipt_url) {
+                document.getElementById("receiptFileName").textContent = expense.receipt_filename || "Comprobante cargado";
+                existingReceiptDiv.classList.remove("hidden");
+                existingReceiptDiv.dataset.receiptUrl = expense.receipt_url;
+                existingReceiptDiv.dataset.receiptFilename = expense.receipt_filename; 
+            }
+
+        } catch (e) {
+            showStatus(`Error cargando detalles del gasto para editar: ${e.message}`, "error");
+            console.error("Load expense detail error:", e);
+            return;
+        }
+    }
+
+    modal.style.display = "flex";
+}
+window.openExpenseModal = openExpenseModal;
+
+
+async function saveExpense() {
+    const departmentName = document.getElementById("departmentSelect")?.value?.trim();
+    if (!departmentName) {
+        showStatus("Seleccione un departamento antes de guardar.", "warning");
+        return;
+    }
+
+    const date = document.getElementById("expenseDate").value;
+    const amount = parseFloat(document.getElementById("expenseAmount").value);
+    const category = document.getElementById("expenseCategory").value;
+    const description = document.getElementById("expenseDescription").value;
+    const fileInput = document.getElementById("expenseReceipt");
+    const file = fileInput.files[0];
+
+    if (!date || isNaN(amount) || amount <= 0 || !category) {
+        showStatus("Por favor complete la fecha, el monto y la categoría.", "warning");
+        return;
+    }
+
+    const expenseData = { department: departmentName, date, amount, category, description };
+    let method = currentExpenseId ? 'PUT' : 'POST';
+    // ✅ Use the correct CRUD endpoints for saving/updating
+    let url = currentExpenseId 
+        ? `${backendBaseUrl}/api/accounting/expenses/${currentExpenseId}` 
+        : `${backendBaseUrl}/api/accounting/expense`;
+
+    // 1. File Upload (Placeholder)
+    if (file) {
+        showStatus("La subida de archivos está en curso...", "info");
+        // NOTE: Full Firebase Storage logic is omitted here but would update expenseData.receiptUrl
+    }
+
+    // 2. Save Expense to Backend
+    try {
+        const res = await authFetchJSON(url, {
+            method: method,
+            body: JSON.stringify(expenseData),
+        });
+
+        // authFetchJSON handles res.ok check and error throwing
+        
+        closeModal('expenseModal');
+        showStatus(`Gasto ${currentExpenseId ? 'actualizado' : 'añadido'} con éxito.`, "success");
+        loadExpenses();
+        loadFinancialSummary();
+
+    } catch (e) {
+        console.error("Save expense error:", e);
+        showStatus(`Error al guardar el gasto: ${e.message}`, "error");
+    }
+}
+window.saveExpense = saveExpense;
+
+async function deleteExpense(expenseId) {
+    if (!confirm("¿Está seguro de que desea eliminar este gasto?")) return;
+
+    const departmentName = document.getElementById("departmentSelect")?.value?.trim();
+    if (!departmentName) return;
+
+    try {
+        // ✅ Use the correct DELETE endpoint
+        const url = `${backendBaseUrl}/api/accounting/expenses/${expenseId}`;
+        await authFetchJSON(url, { method: 'DELETE' });
+
+        showStatus("Gasto eliminado con éxito.", "success");
+        loadExpenses();
+        loadFinancialSummary();
+        
+    } catch (e) {
+        console.error("Delete expense error:", e);
+        showStatus(`Error al eliminar el gasto: ${e.message}`, "error");
+    }
+}
+
+window.deleteExpense = deleteExpense;
+
+
+/* ======================================================
+   💰 LOAD INCOME DATA (with detailed debug logging)
+====================================================== */
+async function loadIncome() {
+  const department = currentDepartment;
+  const tbody = document.querySelector("#incomeTableBody");
+  tbody.innerHTML = `
+    <tr><td colspan="5" class="text-center text-gray-500">Cargando ingresos...</td></tr>
+  `;
+
+  if (!department) {
+    console.warn("⚠️ No department selected. Aborting income load.");
+    return;
+  }
+
+  try {
+    console.log(`📊 Loading income for department: ${department}`);
+    const url = `${backendBaseUrl}/api/accounting/${encodeURIComponent(department)}/incomes`;
+
+    console.log("🔗 Fetching incomes from:", url);
+
+    const data = await authFetchJSON(url);
+
+    if (data.status !== "success" || !Array.isArray(data.incomes)) {
+      console.warn("⚠️ No income data found or invalid format.");
+      renderIncomeTable([]);
+      return;
+    }
+
+    console.log(`📊 Parsed ${data.incomes.length} income entries successfully.`);
+    renderIncomeTable(data.incomes);
+
+  } catch (err) {
+    console.error("💥 loadIncome() fatal error:", err);
+    tbody.innerHTML = `
+      <tr><td colspan="5" class="text-center text-red-500">Error al cargar ingresos. ${err.message}</td></tr>
+    `;
+  }
+}
+
+/* ======================================================
+   🧾 RENDER INCOME TABLE
+====================================================== */
+function renderIncomeTable(incomes) {
+  const tbody = document.querySelector("#incomeTableBody");
+  if (!tbody) return;
+
+  tbody.innerHTML = "";
+
+  if (!incomes || incomes.length === 0) {
+    tbody.innerHTML = `
+      <tr><td colspan="5" class="text-center py-4 text-gray-500">No hay registros de ingresos.</td></tr>
+    `;
+    return;
+  }
+
+  incomes.forEach((inc) => {
+    const amountDisplay = Number(inc.amount || 0).toLocaleString("es-GQ");
+    const dateDisplay = inc.date ? inc.date : "N/A";
+
+    // 🔗 Build PDF URL dynamically (like Expenses)
+    const pdfParams = new URLSearchParams({
+      id: inc.id,
+      department: inc.department,
+      date: inc.date,
+      amount: inc.amount,
+      source: inc.source,
+      description: inc.description,
+    }).toString();
+
+    const pdfGeneratorUrl = `${backendBaseUrl}/api/accounting/generate-income-pdf?${pdfParams}`;
+
+    // ✨ Add full actions (Ver PDF / Edit / Delete)
+    const actionsHtml = `
+      <button onclick="viewPdf('${pdfGeneratorUrl}')" class="sidebar-button" 
+        style="background:#22c55e; border-color:#16a34a; padding:6px 10px; font-size:13px;">Ver PDF</button>
+      <button onclick="openIncomeModal('${inc.id}')" class="text-blue-600 font-medium mr-2">Editar</button>
+      <button onclick="deleteIncome('${inc.id}')" class="text-red-600 font-medium">Eliminar</button>
+    `;
+
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td class="px-6 py-4 whitespace-nowrap">${dateDisplay}</td>
+      <td class="px-6 py-4 whitespace-nowrap">FCFA ${amountDisplay}</td>
+      <td class="px-6 py-4 whitespace-nowrap">${inc.source || "—"}</td>
+      <td class="px-6 py-4">${inc.description || ""}</td>
+      <td class="px-6 py-4 whitespace-nowrap">${actionsHtml}</td>
+    `;
+    tbody.appendChild(row);
+  });
+}
+
+
+/* ======================================================
+   🪟 VIEW INCOME DETAILS
+====================================================== */
+function viewIncome(id) {
+  alert(`📄 Mostrar detalles del ingreso con ID: ${id}`);
+}
+
+window.loadIncome = loadIncome;
+
+/* ======================================================
+   💰 INCOME MANAGEMENT (CREATE / EDIT / DELETE / FILTER)
+====================================================== */
+let currentIncomeId = null;
+
+function openIncomeModal(incomeId = null) {
+  const modal = document.getElementById("incomeModal");
+  const title = document.getElementById("incomeModalTitle");
+  
+  // Reset fields
+  document.getElementById("incomeDate").value = new Date().toISOString().slice(0, 10);
+  document.getElementById("incomeAmount").value = "";
+  document.getElementById("incomeSource").value = "";
+  document.getElementById("incomeDescription").value = "";
+  currentIncomeId = incomeId;
+
+  if (incomeId) {
+    title.textContent = "Editar Ingreso";
+    // Fetch details from backend
+    authFetchJSON(`${backendBaseUrl}/api/accounting/income/${incomeId}`)
+      .then(data => {
+        const inc = data.income;
+        document.getElementById("incomeDate").value = inc.date;
+        document.getElementById("incomeAmount").value = inc.amount;
+        document.getElementById("incomeSource").value = inc.source;
+        document.getElementById("incomeDescription").value = inc.description;
+      })
+      .catch(e => console.error("❌ Error fetching income details:", e));
+  } else {
+    title.textContent = "Añadir Ingreso";
+  }
+
+  modal.style.display = "flex";
+}
+window.openIncomeModal = openIncomeModal;
+
+async function saveIncome() {
+  const department = currentDepartment;
+  if (!department) {
+    showStatus("⚠️ Seleccione un departamento antes de guardar.", "warning");
+    return;
+  }
+
+  const payload = {
+    department,
+    date: document.getElementById("incomeDate").value,
+    amount: parseFloat(document.getElementById("incomeAmount").value),
+    source: document.getElementById("incomeSource").value,
+    description: document.getElementById("incomeDescription").value
+  };
+
+  if (!payload.date || !payload.amount || !payload.source) {
+    showStatus("⚠️ Complete los campos obligatorios.", "warning");
+    return;
+  }
+
+  const url = currentIncomeId
+    ? `${backendBaseUrl}/api/accounting/income/${currentIncomeId}`
+    : `${backendBaseUrl}/api/accounting/income`;
+  const method = currentIncomeId ? "PUT" : "POST";
+
+  try {
+    await authFetchJSON(url, {
+      method,
+      body: JSON.stringify(payload)
+    });
+
+    showStatus(`Ingreso ${currentIncomeId ? "actualizado" : "añadido"} correctamente.`, "success");
+    closeModal("incomeModal");
+    loadIncome(currentDepartment);
+    loadFinancialSummary();
+
+  } catch (e) {
+    console.error("💥 saveIncome error:", e);
+    showStatus(`Error al guardar el ingreso: ${e.message}`, "error");
+  }
+}
+window.saveIncome = saveIncome;
+
+async function deleteIncome(id) {
+  if (!confirm("¿Eliminar este ingreso?")) return;
+  try {
+    await authFetchJSON(`${backendBaseUrl}/api/accounting/income/${id}`, {
+      method: "DELETE"
+    });
+    showStatus("Ingreso eliminado con éxito.", "success");
+    loadIncome(currentDepartment);
+    loadFinancialSummary();
+  } catch (e) {
+    console.error("❌ deleteIncome error:", e);
+    showStatus(`Error al eliminar ingreso: ${e.message}`, "error");
+  }
+}
+window.deleteIncome = deleteIncome;
+
+/* ======================================================
+   📅 FILTER INCOMES BY PERIOD
+====================================================== */
+async function applyIncomeFilter() {
+  const department = currentDepartment;
+  const rawPeriod = document.getElementById("incomePeriodFilter")?.value || "";
+  const formatted = formatMonthYear(rawPeriod);
+  const tbody = document.querySelector("#incomeTableBody");
+  
+  tbody.innerHTML = `<tr><td colspan="5" class="text-center py-4">Filtrando...</td></tr>`;
+
+  // 🔑 FIX: Correct URL endpoint for filtered income
+  const url = `${backendBaseUrl}/api/accounting/${encodeURIComponent(department)}/incomes?period=${formatted}`;
+  
+  try {
+    const data = await authFetchJSON(url);
+    renderIncomeTable(data.incomes || []);
+    showStatus(`Mostrando ingresos para ${formatted}`, "success");
+  } catch (e) {
+    console.error("Error filtering incomes:", e);
+    showStatus(`Error al aplicar filtro: ${e.message}`, "error");
+  }
+}
+window.applyIncomeFilter = applyIncomeFilter;
+
+/* ======================================================
+   📄 VIEW PDF COMPROBANTE (same as expenses)
+====================================================== */
+function viewIncome(id) {
+  const url = `${backendBaseUrl}/api/accounting/generate-income-pdf?id=${id}`;
+  viewPdf(url); // uses your existing PDF viewer modal logic
+}
+window.viewIncome = viewIncome;
+
+/* ======================================================
+   ⏳ LOTTIE PLACEHOLDER (for charts before selection)
+====================================================== */
+function showChartPlaceholders() {
+  const placeholders = [
+    { id: "trendChartCanvas", title: "Tendencia Mensual de Ingresos, Gastos y Presupuesto" },
+    { id: "categoryChartCanvas", title: "Distribución de Gastos por Categoría" }
+  ];
+
+  // 🔑 FIX: Only run Lottie setup if the element is not already a chart
+  placeholders.forEach(({ id }) => {
+    const container = document.getElementById(id)?.parentElement; // Get parent div of canvas
+    if (!container) return;
+    
+    // Check if a Chart.js instance exists on this canvas
+    if (window[id.replace('Canvas', 'Chart')]) return; 
+    
+    // Check if the placeholder is already injected
+    if (container.querySelector('.chart-placeholder')) return;
+
+    // Inject the placeholder wrapper
+     container.innerHTML = `
+      <div class="chart-placeholder" 
+           style="position:absolute; inset:0; display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;opacity:1;transition:opacity 0.8s ease;">
+        <lottie-player 
+          src="https://assets9.lottiefiles.com/packages/lf20_yr6zz3wv.json"  
+          background="transparent"  
+          speed="1"  
+          style="width:120px;height:120px;"  
+          loop  
+          autoplay>
+        </lottie-player>
+        <p style="margin-top:8px;color:#555;font-size:13px;">
+          Esperando selección de departamento...
+        </p>
+      </div>` + container.innerHTML; // Prepend placeholder
+    
+    // Ensure the canvas is temporarily hidden until data loads
+    const canvas = document.getElementById(id);
+    if(canvas) canvas.style.visibility = 'hidden';
+  });
+}
+
+/* ======================================================
+   ✨ FADE-OUT PLACEHOLDER (when charts are loaded)
+====================================================== */
+function hideChartPlaceholders() {
+  const placeholders = document.querySelectorAll(".chart-placeholder");
+  placeholders.forEach((ph) => {
+    ph.style.opacity = "0";
+    // Also make the associated canvas visible
+    const canvas = ph.parentElement.querySelector('canvas');
+    if(canvas) canvas.style.visibility = 'visible';
+    
+    setTimeout(() => ph.remove(), 800); // remove after fade
+  });
+}
+
+/* ======================================================
+   📊 When Department is Selected -> Load Data
+====================================================== */
+async function loadDepartmentData() {
+  const departmentSelect = document.getElementById("departmentSelect");
+  // 🔑 IMPORTANT: Use the VALUE (space-removed key) for the API call
+  const departmentName = departmentSelect?.value?.trim(); 
+  
+  if (!departmentName) {
+    showStatus("⚠️ Por favor seleccione un departamento.", "warning");
+    return;
+  }
+
+  currentDepartment = departmentName;
+  await loadFinancialSummary();
+
+  // Load secondary tab data for the currently selected department
+  if (typeof loadExpenses === 'function') loadExpenses();
+  if (typeof loadIncome === 'function') loadIncome();
+  
+  // Update UI if user manually hits 'Cargar Datos' button after selection
+  const defaultOpenTab = document.getElementById("defaultOpen");
+  if(defaultOpenTab) defaultOpenTab.click();
+}
+window.loadDepartmentData = loadDepartmentData;
+
+
+  </script>
+  {% endblock %}

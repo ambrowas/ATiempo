@@ -1,0 +1,80 @@
+appId: com.iniciativas.atiempo
+productName: ATiempo
+artifactName: "${productName}-${version}-${os}-${arch}.${ext}"
+
+directories:
+  output: release
+  buildResources: public/assets
+
+files:
+  - main.js
+  - preload.js
+  - package.json
+  - backend_config.json
+  - templates/**
+  - static/**
+  - backend_dist/**
+  - public/assets/**
+  - app/**
+  - refranes.json
+  - atiempo-9f08a-firebase-adminsdk-fbsvc-e5a274b0b2.json
+
+extraResources:
+  - from: dist/atiempo_backend
+    to: backend_dist/
+  - from: refranes.json
+    to: refranes.json
+  - from: atiempo-9f08a-firebase-adminsdk-fbsvc-e5a274b0b2.json
+    to: atiempo-9f08a-firebase-adminsdk-fbsvc-e5a274b0b2.json
+
+mac:
+  target:
+    - dmg
+    - zip
+  category: public.app-category.utilities
+  icon: public/assets/icons/atiempologo.icns
+  hardenedRuntime: false
+  gatekeeperAssess: false
+  identity: null
+  extendInfo:
+    NSHighResolutionCapable: true
+    LSApplicationCategoryType: public.app-category.productivity
+
+dmg:
+  background: public/assets/icons/dmg-background.png
+  icon: public/assets/icons/atiempologo.icns
+  iconSize: 128
+  window:
+    width: 540
+    height: 380
+  contents:
+  - x: 140
+    y: 200
+    type: file
+  - x: 400
+    y: 200
+    type: link
+    path: /Applications
+
+
+win:
+  target:
+    - nsis
+    - zip
+  icon: public/assets/icons/atiempologo.ico
+  artifactName: "${productName}-Setup-${version}.exe"
+
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: "ATiempo"
+  license: "public/assets/license.txt"
+  installerSidebar: public/assets/icons/atiempologo.bmp
+  uninstallDisplayName: "ATiempo"
+  deleteAppDataOnUninstall: true
+
+asar: true
+compression: maximum
+publish: null

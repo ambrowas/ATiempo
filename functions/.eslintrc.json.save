@@ -1,0 +1,29 @@
+{
+  "env": {
+    "node": true
+  },
+  "extends": ["eslint:recommended", "google"],
+  "parserOptions": {
+    "ecmaVersion": 2020
+  },
+  "rules": {
+    "max-len": ["off"],
+    "new-cap": ["off"],
+    "object-curly-spacing": ["off"],
+    "indent": ["error", 2],
+    "comma-dangle": ["off"]
+  }
+}
+{
+  "extends": ["eslint:recommended", "google"],
+  "parserOptions": {
+    "ecmaVersion": 2020
+  },
+  "rules": {
+    "max-len": ["off"],
+    "new-cap": ["off"],
+    "object-curly-spacing": ["off"],
+    "indent": ["error", 2],
+    "comma-dangle": ["off"]
+  }
+}
