@@ -12,8 +12,8 @@
     "preview": "vite preview",
     "electron": "concurrently -k \"vite\" \"wait-on http://localhost:5173 && electron ./electron/main.cjs\"",
     "typecheck": "tsc --noEmit",
-    "dist": "npm run build && npm_config_build_from_source=1 electron-builder --mac",
-    "dist:win": "npm run build && npm_config_build_from_source=1 electron-builder --win",
+    "dist": "npm run build && cross-env npm_config_build_from_source=1 electron-builder --mac",
+    "dist:win": "npm run build && cross-env npm_config_build_from_source=1 electron-builder --win",
     "reset:db": "node scripts/reset-db.cjs"
   },
   "dependencies": {
@@ -40,6 +40,7 @@
     "@types/react-dom": "^18.2.17",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.22",
+    "cross-env": "^7.0.3",
     "concurrently": "^9.2.1",
     "electron": "^39.1.1",
     "electron-builder": "^24.6.0",
