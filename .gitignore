@@ -23,6 +23,7 @@ yarn-error.log*
 # Firebase credentials & local configs
 *.json
 !package.json
+!package-lock.json
 !backend_config.json
 
 # IDE / OS
