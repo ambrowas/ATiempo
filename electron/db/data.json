@@ -1,0 +1,299 @@
+{
+  "empleados": [
+    {
+      "id": 202001,
+      "nombre": "Victor Manuel",
+      "puesto": "Consejero Delegado (CEO)",
+      "departamento": "Dirección General",
+      "correo": "eleela@iniciativaselebi.com",
+      "telefono": "+240555251430",
+      "direccion": "Oficinas Centrales, Malabo",
+      "url_foto": "/Users/eleela/Documents/atiempo/electron/db/fotos/Victor Manuel Ele Ela.jpeg",
+      "fecha_incorporacion": "2020-01-10",
+      "descripcion_puesto": "El Consejero Delegado de Iniciativas Elebi es el máximo responsable ejecutivo de la compañía. Dirige las operaciones generales, la estrategia tecnológica y comercial, y garantiza el crecimiento sostenible del ecosistema digital de la empresa.",
+      "responsabilidades": [
+        "Definir y ejecutar la estrategia general en coordinación con el Consejo de Administración.",
+        "Liderar el desarrollo de productos tecnológicos innovadores.",
+        "Supervisar ingeniería, finanzas, marketing y soporte técnico.",
+        "Promover alianzas estratégicas públicas y privadas.",
+        "Velar por la cultura corporativa y el cumplimiento de normas internas.",
+        "Representar a la empresa ante clientes, socios e instituciones."
+      ],
+      "jerarquia": "Consejo de Administración → CEO → Directores de Área → Responsables de Proyecto → Equipo Técnico",
+      "next_of_kin": "Maria Jose Biong Bill",
+      "contacto_emergencia": "Maria Jose Biong Bill",
+      "contacto_emergencia_telefono": "+240222783333",
+      "numero_dependientes": 3,
+      "seguro_medico": "Kaiser Permanente",
+      "numero_poliza": "23434",
+      "grupo_sanguineo": "AB+",
+      "supervisor_directo": "Consejo de Admon.",
+      "fecha_ingreso": "23-02-2016",
+      "tipo_contrato": "Indefinido",
+      "modalidad_trabajo": "Mùltiples sitios",
+      "habilidades_tecnicas": "",
+      "habilidades_blandas": "",
+      "proyectos_destacados": "Guinealogia, AfrikaNaOne, laGEmeroteca, Pasatiempos Elebi",
+      "ultima_evaluacion": "",
+      "apellidos": "Ele Ela",
+      "sexo": "Hombre",
+      "genero": "Masculino",
+      "fecha_nacimiento": "13-10-1984",
+      "lugar_nacimiento": "Mongomo, WN",
+      "nacionalidad": "Ecuatoguineana",
+      "estado_civil": "Casado",
+      "telefono_personal": "+240222780886",
+      "email_personal": "eleelavm@gmail.com",
+      "direccion_personal": "124 Avda Mercedes Buna Meloco, Serra Mongolo, Malabo, BN",
+      "numero_identificacion": "000298456",
+      "banco": "Ecobank",
+      "numerocuenta": "8979938456338",
+      "tipo_cuenta": "Corriente",
+      "codigo_swift": "679767",
+      "salario_base": 5400000,
+      "nombres": "Victor Manuel",
+      "nombrecompleto": "Victor Manuel Ele Ela",
+      "foto": "/fotos_empleados/Victor Manuel Ele Ela.jpeg",
+      "activo": true,
+      "email_oficial": "eleela@iniciativaselebi.com",
+      "telefono_oficial": "+240555251430",
+      "ubicacion": "Oficinas Centrales, Malabo",
+      "informacion_personal": {
+        "fecha_nacimiento": "13-10-1984",
+        "lugar_nacimiento": "Mongomo, WN",
+        "genero": "Masculino",
+        "estado_civil": "Casado",
+        "nacionalidad": "Ecuatoguineana",
+        "telefono_personal": "+240222780886",
+        "email_personal": "eleelavm@gmail.com",
+        "direccion_personal": "124 Avda Mercedes Buna Meloco, Serra Mongolo, Malabo, BN",
+        "dependientes": 3,
+        "grupo_sanguineo": "AB+"
+      },
+      "informacion_familiar": {
+        "nombre_conyuge": "Maria Jose Biong Bill",
+        "numero_dependientes": 3,
+        "contacto_emergencia_nombre": "Maria Jose Biong Bill",
+        "contacto_emergencia_telefono": "+240222783333",
+        "contacto_emergencia_relacion": "Esposa",
+        "seguro_medico": "Kaiser Permanente",
+        "numero_poliza": "23434",
+        "observaciones": ""
+      },
+      "informacion_bancaria": {
+        "banco": "Ecobank",
+        "numero_cuenta": "8979938456338",
+        "tipo_cuenta": "Corriente",
+        "moneda": "",
+        "salario_mensual_cfa": 5400000,
+        "salario_anual_cfa": 65000000,
+        "codigo_swift": "679767"
+      },
+      "datos_carrera": {
+        "fecha_ingreso": "23-02-2016",
+        "tipo_contrato": "Indefinido",
+        "descripcion_puesto": "El Consejero Delegado de Iniciativas Elebi es el máximo responsable ejecutivo de la compañía. Dirige las operaciones generales, la estrategia tecnológica y comercial, y garantiza el crecimiento sostenible del ecosistema digital de la empresa.",
+        "responsabilidades": [
+          "Definir visión y metas institucionales.",
+          "Liderar la expansión internacional.",
+          "Supervisar innovación tecnológica."
+        ],
+        "jerarquia": "Consejo de Administración → CEO → Directores de Área",
+        "modalidad_trabajo": "Mùltiples sitios",
+        "supervisor_directo": "Consejo de Admon.",
+        "clasificacion": "",
+        "proyectos_principales": [
+          "Guinealogia",
+          "AfrikaNaOne",
+          "laGEmeroteca",
+          "Pasatiempos Elebi"
+        ],
+        "habilidades_tecnicas": [],
+        "habilidades_blandas": [],
+        "evaluacion_anual": "",
+        "puesto": "Consejero Delegado (CEO)",
+        "departamento": "Dirección General"
+      },
+      "documentacion": {
+        "contrato_actual_pdf": "/documentos_empleados/202001/Contrato_Actual.pdf",
+        "dip_pdf": "/documentos_empleados/202001/DIP.pdf",
+        "curriculum_pdf": "/documentos_empleados/202001/Curriculum.pdf",
+        "evaluacion_anual_pdf": "/documentos_empleados/202001/Evaluacion_Anual.pdf",
+        "id_empleado_elebi_pdf": "/documentos_empleados/202001/ID_Empleado_ELEBI.pdf"
+      }
+    },
+    {
+      "id": 202002,
+      "nombre": "Maria Jose Biong Bill",
+      "puesto": "Directora de Operaciones (COO)",
+      "departamento": "Operaciones y Logística",
+      "correo": "maria.biong@iniciativaselebi.com",
+      "telefono": "+240222000002",
+      "direccion": "Sede Central, Malabo",
+      "url_foto": null,
+      "fecha_incorporacion": "2021-02-15",
+      "descripcion_puesto": "La Directora de Operaciones gestiona la ejecución de proyectos tecnológicos y coordina los equipos de desarrollo, diseño y soporte para garantizar la entrega eficiente y puntual de productos digitales.",
+      "responsabilidades": [
+        "Planificar y supervisar la ejecución de proyectos de software.",
+        "Optimizar procesos internos y flujos de trabajo.",
+        "Coordinar las áreas técnicas y de soporte.",
+        "Garantizar estándares de calidad y cumplimiento de plazos."
+      ],
+      "jerarquia": "CEO → COO → Responsables de Proyecto → Personal Técnico"
+    },
+    {
+      "id": 202103,
+      "nombre": "Pedro German Nve Ela",
+      "puesto": "Director Financiero (CFO)",
+      "departamento": "Finanzas y Control",
+      "correo": "pedro.nve@iniciativaselebi.com",
+      "telefono": "+240222000003",
+      "direccion": "Oficina de Finanzas, Malabo",
+      "url_foto": null,
+      "fecha_incorporacion": "2020-06-01",
+      "descripcion_puesto": "El Director Financiero supervisa la salud económica de la empresa, gestiona presupuestos, evalúa la rentabilidad de proyectos y garantiza la transparencia contable y fiscal de Iniciativas Elebi.",
+      "responsabilidades": [
+        "Administrar los presupuestos generales y de proyectos.",
+        "Preparar informes financieros y auditorías.",
+        "Garantizar la viabilidad económica de nuevas iniciativas.",
+        "Supervisar nóminas, pagos y cumplimiento fiscal."
+      ],
+      "jerarquia": "CEO → CFO → Contabilidad → Asistentes Financieros"
+    },
+    {
+      "id": 202104,
+      "nombre": "Policarpo Obugase Mbuña",
+      "puesto": "Director de Tecnología (CTO)",
+      "departamento": "Innovación y Desarrollo",
+      "correo": "policarpo.mbuna@iniciativaselebi.com",
+      "telefono": "+240222000004",
+      "direccion": "Departamento de Ingeniería, Malabo",
+      "url_foto": null,
+      "fecha_incorporacion": "2020-03-20",
+      "descripcion_puesto": "El Director de Tecnología lidera el desarrollo de plataformas digitales, supervisa arquitecturas de software y garantiza la seguridad, escalabilidad y rendimiento de los sistemas de Iniciativas Elebi.",
+      "responsabilidades": [
+        "Diseñar la arquitectura técnica de los productos digitales.",
+        "Supervisar al equipo de ingenieros y desarrolladores.",
+        "Asegurar la integración de nuevas tecnologías.",
+        "Mantener la seguridad y la innovación continua."
+      ],
+      "jerarquia": "CEO → CTO → Ingenieros Líderes → Equipo de Desarrollo"
+    },
+    {
+      "id": 202405,
+      "nombre": "Damian Ondo Mañe",
+      "puesto": "Jefe de Proyectos Digitales",
+      "departamento": "Gestión de Proyectos",
+      "correo": "damian.mane@iniciativaselebi.com",
+      "telefono": "+240222000005",
+      "direccion": "División de Proyectos, Malabo",
+      "url_foto": null,
+      "fecha_incorporacion": "2022-01-05",
+      "descripcion_puesto": "El Jefe de Proyectos coordina el desarrollo de aplicaciones y plataformas, asegurando la correcta ejecución técnica y administrativa de cada fase de los proyectos de Iniciativas Elebi.",
+      "responsabilidades": [
+        "Coordinar la planificación y ejecución de proyectos.",
+        "Supervisar equipos multidisciplinarios.",
+        "Controlar plazos, costos y calidad de entregables.",
+        "Reportar avances al Director de Operaciones."
+      ],
+      "jerarquia": "COO → Jefe de Proyectos → Ingenieros y Diseñadores"
+    },
+    {
+      "id": 202406,
+      "nombre": "Ernesto Candido Nguema Onguene",
+      "puesto": "Analista de Sistemas",
+      "departamento": "Desarrollo e Integración",
+      "correo": "ernesto.nguema@iniciativaselebi.com",
+      "telefono": "+240222000006",
+      "direccion": "Oficina Técnica, Malabo",
+      "url_foto": null,
+      "fecha_incorporacion": "2021-09-09",
+      "descripcion_puesto": "El Analista de Sistemas evalúa, diseña y mejora los sistemas internos de Iniciativas Elebi, garantizando su interoperabilidad, eficiencia y escalabilidad.",
+      "responsabilidades": [
+        "Analizar requerimientos funcionales y técnicos.",
+        "Proponer soluciones optimizadas.",
+        "Supervisar pruebas y despliegues.",
+        "Documentar los procesos técnicos."
+      ],
+      "jerarquia": "CTO → Analista de Sistemas → Equipo Técnico"
+    },
+    {
+      "id": 202507,
+      "nombre": "Belinda Oto Angue",
+      "puesto": "Diseñadora UX/UI",
+      "departamento": "Diseño y Experiencia de Usuario",
+      "correo": "belinda.oto@iniciativaselebi.com",
+      "telefono": "+240222000007",
+      "direccion": "Laboratorio Creativo, Malabo",
+      "url_foto": null,
+      "fecha_incorporacion": "2022-06-20",
+      "descripcion_puesto": "La Diseñadora UX/UI define la experiencia de usuario y la interfaz visual de los productos digitales, asegurando coherencia estética y usabilidad óptima.",
+      "responsabilidades": [
+        "Diseñar interfaces modernas e intuitivas.",
+        "Realizar pruebas de experiencia de usuario.",
+        "Colaborar con desarrolladores y analistas.",
+        "Asegurar consistencia con la identidad visual de la marca."
+      ],
+      "jerarquia": "COO → Diseño → UX/UI → Equipo de Producto"
+    },
+    {
+      "id": 202305,
+      "nombre": "Felipe Alivio Makina Ondo",
+      "puesto": "Administrador de Base de Datos",
+      "departamento": "Infraestructura y Datos",
+      "correo": "felipe.makina@iniciativaselebi.com",
+      "telefono": "+240222000008",
+      "direccion": "Departamento de Datos, Malabo",
+      "url_foto": null,
+      "fecha_incorporacion": "2021-11-10",
+      "descripcion_puesto": "El Administrador de Base de Datos garantiza la integridad, seguridad y rendimiento de las bases de datos que sustentan los sistemas de Iniciativas Elebi.",
+      "responsabilidades": [
+        "Mantener la seguridad y respaldo de datos.",
+        "Optimizar consultas y rendimiento de bases de datos.",
+        "Colaborar en integraciones con Firebase y Firestore.",
+        "Soportar requerimientos analíticos de la dirección técnica."
+      ],
+      "jerarquia": "CTO → DBA → Desarrolladores y Analistas"
+    },
+    {
+      "id": 202508,
+      "nombre": "Genevive Suarez Vivar",
+      "puesto": "Responsable de Comunicación y Marketing",
+      "departamento": "Comunicación y Relaciones Públicas",
+      "correo": "genevive.suarez@iniciativaselebi.com",
+      "telefono": "+240222000009",
+      "direccion": "Oficina de Comunicación, Malabo",
+      "url_foto": null,
+      "fecha_incorporacion": "2023-03-03",
+      "descripcion_puesto": "La Responsable de Comunicación gestiona la imagen institucional, campañas de marketing digital y relaciones estratégicas con medios y socios internacionales.",
+      "responsabilidades": [
+        "Diseñar campañas de comunicación y branding.",
+        "Gestionar redes sociales y relaciones públicas.",
+        "Supervisar materiales de prensa y eventos.",
+        "Promover la cultura corporativa dentro y fuera de la empresa."
+      ],
+      "jerarquia": "CEO → Comunicación → Marketing → Equipo de Prensa"
+    },
+    {
+      "id": 202409,
+      "nombre": "Franscia Djangani Rondo",
+      "puesto": "Asistente Administrativa",
+      "departamento": "Administración General",
+      "correo": "franscia.djangani@iniciativaselebi.com",
+      "telefono": "+240222000010",
+      "direccion": "Administración Central, Malabo",
+      "url_foto": null,
+      "fecha_incorporacion": "2022-08-01",
+      "descripcion_puesto": "La Asistente Administrativa brinda apoyo operativo y documental a las diferentes áreas de Iniciativas Elebi, asegurando orden y eficiencia en los procesos administrativos.",
+      "responsabilidades": [
+        "Gestionar documentación interna y correspondencia.",
+        "Apoyar la organización de reuniones y eventos.",
+        "Asistir en la logística y control de inventarios.",
+        "Coordinar tareas con Recursos Humanos y Finanzas."
+      ],
+      "jerarquia": "CFO → Administración → Asistentes → Personal de Apoyo"
+    }
+  ],
+  "asistencia": [],
+  "nominas": []
+}

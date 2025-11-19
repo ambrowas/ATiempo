@@ -1,0 +1,105 @@
+[
+  {
+    "departamento": "Consolidado General",
+    "presupuesto": 165000000,
+    "ingresos": 249000000,
+    "gastos": 141000000,
+    "meses": ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio"],
+    "ingresosMes": [23000000, 27000000, 42500000, 50500000, 49000000, 57000000],
+    "gastosMes": [17000000, 20500000, 24000000, 30500000, 26500000, 23500000],
+    "categorias": {
+      "Sueldos y Honorarios": 65000000,
+      "Infraestructura y Licencias": 24000000,
+      "Marketing y Promoción": 17000000,
+      "Servicios Generales": 12000000,
+      "Suministros y Equipos": 9000000
+    },
+    "gastos": [
+      { "fecha": "2025-01-20", "monto": 13000000, "categoria": "Sueldos y Honorarios", "descripcion": "Pago de nóminas globales de enero" },
+      { "fecha": "2025-02-15", "monto": 8500000, "categoria": "Infraestructura y Licencias", "descripcion": "Renovación global de plataformas AWS, Firebase, y dominio Elebi" },
+      { "fecha": "2025-03-30", "monto": 7000000, "categoria": "Marketing y Promoción", "descripcion": "Campaña publicitaria anual Iniciativas Elebi 2025" },
+      { "fecha": "2025-05-12", "monto": 9500000, "categoria": "Servicios Generales", "descripcion": "Gastos de transporte, logística y limpieza general" }
+    ],
+    "ingresos": [
+      { "fecha": "2025-02-01", "monto": 50000000, "fuente": "Ministerio de Asuntos Exteriores", "descripcion": "Fondo institucional para innovación y digitalización" },
+      { "fecha": "2025-03-25", "monto": 65000000, "fuente": "Proyectos institucionales GE", "descripcion": "Financiación de sistemas consulares digitales" },
+      { "fecha": "2025-06-05", "monto": 134000000, "fuente": "Clientes y Licencias Comerciales", "descripcion": "Ingresos consolidados por licencias de software y consultoría" }
+    ]
+  },
+  {
+    "departamento": "Desarrollo de Software",
+    "presupuesto": 85000000,
+    "ingresos": 142000000,
+    "gastos": 73000000,
+    "meses": ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio"],
+    "ingresosMes": [11000000, 12500000, 25000000, 30000000, 28000000, 36000000],
+    "gastosMes": [8000000, 9500000, 12000000, 16000000, 14000000, 13500000],
+    "categorias": {
+      "Sueldos Técnicos": 42000000,
+      "Servidores y Licencias": 16000000,
+      "Hardware y Equipos": 8000000,
+      "Capacitación": 7000000
+    },
+    "gastos": [
+      { "fecha": "2025-01-10", "monto": 5500000, "categoria": "Sueldos Técnicos", "descripcion": "Pago mensual equipo frontend" },
+      { "fecha": "2025-02-20", "monto": 6500000, "categoria": "Sueldos Técnicos", "descripcion": "Pago mensual backend + QA" },
+      { "fecha": "2025-03-05", "monto": 3000000, "categoria": "Servidores y Licencias", "descripcion": "Renovación AWS y Firebase" },
+      { "fecha": "2025-04-10", "monto": 5000000, "categoria": "Hardware y Equipos", "descripcion": "Compra de 2 MacBook Pro para desarrollo" }
+    ],
+    "ingresos": [
+      { "fecha": "2025-02-02", "monto": 35000000, "fuente": "Contrato @TIEMPO (Embajada)", "descripcion": "Pago primera fase del sistema de asistencia" },
+      { "fecha": "2025-04-15", "monto": 50000000, "fuente": "Proyecto Afrika Na One", "descripcion": "Licencia educativa y comercialización regional" },
+      { "fecha": "2025-05-05", "monto": 57000000, "fuente": "Clientes privados", "descripcion": "Mantenimiento de plataformas y API corporativas" }
+    ]
+  },
+  {
+    "departamento": "Marketing y Comunicación",
+    "presupuesto": 30000000,
+    "ingresos": 45000000,
+    "gastos": 27000000,
+    "meses": ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio"],
+    "ingresosMes": [4000000, 5000000, 7000000, 9500000, 9000000, 10500000],
+    "gastosMes": [3000000, 4000000, 4500000, 5500000, 4000000, 4500000],
+    "categorias": {
+      "Campañas Digitales": 9000000,
+      "Eventos y Promoción": 8000000,
+      "Diseño y Branding": 5000000,
+      "Material Audiovisual": 5000000
+    },
+    "gastos": [
+      { "fecha": "2025-01-25", "monto": 3000000, "categoria": "Campañas Digitales", "descripcion": "Promoción Afrika Na One en redes" },
+      { "fecha": "2025-03-10", "monto": 3500000, "categoria": "Eventos y Promoción", "descripcion": "Evento de presentación @TIEMPO en Washington DC" },
+      { "fecha": "2025-04-22", "monto": 2800000, "categoria": "Diseño y Branding", "descripcion": "Diseño de materiales publicitarios y cartelería" }
+    ],
+    "ingresos": [
+      { "fecha": "2025-02-12", "monto": 12000000, "fuente": "Embajada GE", "descripcion": "Campaña institucional cultural 2025" },
+      { "fecha": "2025-03-05", "monto": 18000000, "fuente": "Bonafide S.A.", "descripcion": "Estrategia publicitaria conjunta" },
+      { "fecha": "2025-05-17", "monto": 15000000, "fuente": "Contratos externos", "descripcion": "Campañas audiovisuales regionales" }
+    ]
+  },
+  {
+    "departamento": "Administración y Finanzas",
+    "presupuesto": 50000000,
+    "ingresos": 62000000,
+    "gastos": 41000000,
+    "meses": ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio"],
+    "ingresosMes": [8000000, 9500000, 10500000, 11000000, 12000000, 11000000],
+    "gastosMes": [6000000, 7000000, 7500000, 9000000, 8500000, 8000000],
+    "categorias": {
+      "Sueldos Administrativos": 23000000,
+      "Contabilidad y Auditoría": 8000000,
+      "Servicios Generales": 6000000,
+      "Suministros de Oficina": 4000000
+    },
+    "gastos": [
+      { "fecha": "2025-01-05", "monto": 4200000, "categoria": "Sueldos Administrativos", "descripcion": "Pago mensual del personal contable" },
+      { "fecha": "2025-03-25", "monto": 2500000, "categoria": "Contabilidad y Auditoría", "descripcion": "Servicios de auditoría trimestral" },
+      { "fecha": "2025-05-08", "monto": 3200000, "categoria": "Suministros de Oficina", "descripcion": "Compra de impresoras, papel, tóner y archivos" }
+    ],
+    "ingresos": [
+      { "fecha": "2025-02-28", "monto": 18000000, "fuente": "Transferencia del Tesoro GE", "descripcion": "Subvención trimestral operativa" },
+      { "fecha": "2025-04-18", "monto": 22000000, "fuente": "Iniciativas Elebi S.A.", "descripcion": "Reintegro de fondos interdepartamentales" },
+      { "fecha": "2025-06-02", "monto": 22000000, "fuente": "Bonafide Partnership", "descripcion": "Cobro de servicios contables y administrativos" }
+    ]
+  }
+]

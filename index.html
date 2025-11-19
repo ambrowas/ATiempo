@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Atiempo</title>
+    <script>
+      // Global polyfill for __publicField used by bundled libraries
+      if (typeof window.__publicField !== "function") {
+        window.__publicField = function (obj, key, value) {
+          key = typeof key === "symbol" ? key.description || "" : key;
+          try {
+            Object.defineProperty(obj, key, {
+              value,
+              enumerable: true,
+              configurable: true,
+              writable: true,
+            });
+          } catch {
+            obj[key] = value;
+          }
+          return value;
+        };
+      }
+      // Ensure the global identifier exists (non-module scripts attach vars to window)
+      // eslint-disable-next-line no-var
+      var __publicField = window.__publicField;
+    </script>
+    <link rel="stylesheet" href="/index.css">
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/index.tsx"></script>
+</body>
+</html>

@@ -1,48 +1,25 @@
-# Python
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-venv/
-.venv/
-env/
-ENV/
-*.egg-info/
-*.egg
-
-# Node / Electron
-node_modules/
-dist/
-out/
-build/
+# Logs
+logs
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# Firebase credentials & local configs
-*.json
-!package.json
-!package-lock.json
-!backend_config.json
+node_modules
+dist
+dist-ssr
+release
+*.local
 
-# IDE / OS
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
 .DS_Store
-.vscode/
-.idea/
-*.swp
-*.swo
-*.bak
-Thumbs.db
-
-# PyInstaller build
-*.spec
-backend_dist/
-
-# Cache & temporary files
-__cache__/
-tmp/
-*.tmp
-
-# Lottie / asset previews
-*.zip
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

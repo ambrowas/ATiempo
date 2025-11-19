@@ -1,0 +1,906 @@
+[
+  {
+    "id": 202001,
+    "nombres": "Victor Manuel",
+    "apellidos": "Ele Ela",
+    "nombrecompleto": "Victor Manuel Ele Ela",
+    "puesto": "Consejero Delegado (CEO)",
+    "departamento": "Dirección General",
+    "foto": "./fotos_empleados/Victor Manuel Ele Ela.jpeg",
+    "activo": true,
+    "email_oficial": "eleela@iniciativaselebi.com",
+    "telefono_oficial": "+240555251430",
+    "ubicacion": "Oficinas Centrales, Malabo",
+    "informacion_personal": {
+      "fecha_nacimiento": "13-10-1984",
+      "lugar_nacimiento": "Mongomo, WN",
+      "genero": "Masculino",
+      "estado_civil": "Casado",
+      "nacionalidad": "Ecuatoguineana",
+      "telefono_personal": "+240222780886",
+      "email_personal": "eleelavm@gmail.com",
+      "direccion_personal": "124 Avda Mercedes Buna Meloco, Serra Mongolo, Malabo, BN",
+      "dependientes": 3,
+      "grupo_sanguineo": "AB+",
+      "numero_identificacion": "000298456"
+    },
+    "informacion_familiar": {
+      "nombre_conyuge": "Maria Jose Biong Bill",
+      "numero_dependientes": 3,
+      "contacto_emergencia_nombre": "Maria Jose Biong Bill",
+      "contacto_emergencia_telefono": "+240222783333",
+      "contacto_emergencia_relacion": "Esposa",
+      "seguro_medico": "Kaiser Permanente",
+      "numero_poliza": "23434",
+      "observaciones": ""
+    },
+    "informacion_bancaria": {
+      "banco": "Ecobank",
+      "numero_cuenta": "8979938456338",
+      "tipo_cuenta": "Corriente",
+      "moneda": "",
+      "salario_mensual_cfa": 5400000,
+      "salario_anual_cfa": 65000000,
+      "codigo_swift": "679767"
+    },
+    "datos_carrera": {
+      "fecha_ingreso": "23-02-2016",
+      "tipo_contrato": "Indefinido",
+      "descripcion_puesto": "El Consejero Delegado de Iniciativas Elebi es el máximo responsable ejecutivo de la compañía. Dirige las operaciones generales, la estrategia tecnológica y comercial, y garantiza el crecimiento sostenible del ecosistema digital de la empresa.",
+      "responsabilidades": [
+        "Definir visión y metas institucionales.",
+        "Liderar la expansión internacional.",
+        "Supervisar innovación tecnológica."
+      ],
+      "jerarquia": "Consejo de Administración → CEO → Directores de Área",
+      "modalidad_trabajo": "Mùltiples sitios",
+      "supervisor_directo": "Consejo de Admon.",
+      "clasificacion": "Directivo",
+      "proyectos_principales": [
+        "Guinealogia",
+        "AfrikaNaOne",
+        "laGEmeroteca",
+        "Pasatiempos Elebi"
+      ],
+      "habilidades_tecnicas": [
+        "Gobernanza corporativa",
+        "Transformación digital",
+        "Negociación estratégica"
+      ],
+      "habilidades_blandas": [
+        "Liderazgo visionario",
+        "Comunicación ejecutiva",
+        "Gestión del cambio"
+      ],
+      "evaluacion_anual": "Satisfactorio"
+    },
+    "documentacion": {
+      "contrato_actual_pdf": "./documentos_empleados/202001/Contrato_Actual.pdf",
+      "dip_pdf": "./documentos_empleados/202001/DIP.pdf",
+      "curriculum_pdf": "./documentos_empleados/202001/Curriculum.pdf",
+      "evaluacion_anual_pdf": "./documentos_empleados/202001/Evaluacion_Anual.pdf",
+      "id_empleado_elebi_pdf": "./documentos_empleados/202001/ID_Empleado_ELEBI.pdf"
+    },
+    "banco": "Ecobank",
+    "tipo_cuenta": "Corriente",
+    "codigo_swift": "679767",
+    "salario_base": 5400000,
+    "contacto_emergencia": "Maria Jose Biong Bill",
+    "contacto_emergencia_telefono": "+240222783333",
+    "numero_dependientes": 3,
+    "seguro_medico": "Kaiser Permanente",
+    "numero_poliza": "23434",
+    "grupo_sanguineo": "AB+",
+    "nombre": "Victor Manuel",
+    "sexo": "Hombre",
+    "correo": "eleela@iniciativaselebi.com",
+    "telefono": "+240555251430",
+    "numero_identificacion": "000298456"
+  },
+  {
+    "id": 202002,
+    "nombres": "Maria Jose",
+    "apellidos": "Biong Bill",
+    "nombrecompleto": "Maria Jose Biong Bill",
+    "puesto": "Directora de Contabilidad, Finanzas y Recursos Humanos (CFO)",
+    "departamento": "Recursos Humanos",
+    "foto": "./fotos_empleados/Maria Jose Biong Bill.jpeg",
+    "activo": true,
+    "email_oficial": "",
+    "telefono_oficial": "",
+    "ubicacion": "",
+    "informacion_personal": {
+      "fecha_nacimiento": "19-03-1985",
+      "lugar_nacimiento": "San Pedro de Lea, LT",
+      "genero": "Femenino",
+      "estado_civil": "Casada",
+      "nacionalidad": "Ecuatoguineana",
+      "telefono_personal": "+240222000002",
+      "email_personal": "maria.biong@iniciativaselebi.com",
+      "direccion_personal": "Sede Central, Malabo",
+      "dependientes": 3
+    },
+    "informacion_familiar": {
+      "nombre_conyuge": "Victor Manuel Ele Ela",
+      "numero_dependientes": 3,
+      "contacto_emergencia_nombre": "Víctor Manuel Ele Ela",
+      "contacto_emergencia_telefono": "+240222780886",
+      "contacto_emergencia_relacion": "Esposo",
+      "seguro_medico": "Kaiser Permanente",
+      "numero_poliza": "",
+      "observaciones": ""
+    },
+    "informacion_bancaria": {
+      "banco": "BGFI",
+      "numero_cuenta": "BGFI2310098845",
+      "tipo_cuenta": "Corriente",
+      "moneda": "",
+      "salario_mensual_cfa": 4000000,
+      "salario_anual_cfa": 48000000
+    },
+    "datos_carrera": {
+      "fecha_ingreso": "2021-02-15",
+      "tipo_contrato": "Indefinido",
+      "descripcion_puesto": "Elabora y ejecuta los presupuestos, supervisa el reclutamiento y la retención de talento.",
+      "responsabilidades": [
+        "Planificación estratégica.",
+        "Supervisión de los departamentos de Finanzas y  Recursos Humanos.",
+        "Gestión de contablidad y finanzas.",
+        "Gestión de personal y nómina ."
+      ],
+      "jerarquia": "CEO → COO → Responsables de Area",
+      "modalidad_trabajo": "Presencial",
+      "supervisor_directo": "Maria Inmaculada Avomo Obama",
+      "clasificacion": "Operativo",
+      "proyectos_principales": [
+        "Plan de talento",
+        "Formación y clima laboral",
+        "Programas de bienestar"
+      ],
+      "habilidades_tecnicas": "Gestión avanzada de procesos en recursos humanos.",
+      "habilidades_blandas": "Liderazgo, comunicación efectiva y resolución de problemas.",
+      "evaluacion_anual": "Satisfactorio"
+    },
+    "documentacion": {
+      "contrato_actual_pdf": "./documentos_empleados/202002/Contrato_Actual.pdf",
+      "dip_pdf": "./documentos_empleados/202002/DIP.pdf",
+      "curriculum_pdf": "./documentos_empleados/202002/Curriculum.pdf",
+      "evaluacion_anual_pdf": "./documentos_empleados/202002/Evaluacion_Anual.pdf",
+      "id_empleado_elebi_pdf": "./documentos_empleados/202002/ID_Empleado_ELEBI.pdf"
+    }
+  },
+  {
+    "id": 202003,
+    "nombres": "Pedro German",
+    "apellidos": "Nve Ela",
+    "nombrecompleto": "Pedro German Nve Ela",
+    "puesto": "Director Logística y Suministros",
+    "departamento": "Logística y Suministros",
+    "foto": "./fotos_empleados/Pedro German Nve Ela.jpeg",
+    "activo": true,
+    "email_oficial": "",
+    "telefono_oficial": "",
+    "ubicacion": "",
+    "informacion_personal": {
+      "fecha_nacimiento": "1980-11-06",
+      "lugar_nacimiento": "Región Continental, Guinea Ecuatorial",
+      "genero": "Masculino",
+      "estado_civil": "Casado",
+      "nacionalidad": "Ecuatoguineana",
+      "telefono_personal": "+240222000003",
+      "email_personal": "pedro.nve@iniciativaselebi.com",
+      "direccion_personal": "Oficina de Finanzas, Malabo",
+      "dependientes": 1
+    },
+    "informacion_familiar": {
+      "nombre_conyuge": "Leticia Ela",
+      "numero_dependientes": 1,
+      "contacto_emergencia_nombre": "Leticia Ela",
+      "contacto_emergencia_telefono": "+240222787654",
+      "contacto_emergencia_relacion": "Esposa",
+      "seguro_medico": "BANGE Salud",
+      "numero_poliza": "",
+      "observaciones": ""
+    },
+    "informacion_bancaria": {
+      "banco": "BGFI",
+      "numero_cuenta": "BGFI8923321134",
+      "tipo_cuenta": "Corriente",
+      "moneda": "",
+      "salario_mensual_cfa": 4900000,
+      "salario_anual_cfa": 59000000
+    },
+    "datos_carrera": {
+      "fecha_ingreso": "2020-06-01",
+      "tipo_contrato": "Indefinido",
+      "descripcion_puesto": "Gestiona la salud económica de la empresa.",
+      "responsabilidades": [
+        "Supervisar contabilidad general.",
+        "Control de presupuesto y flujo de caja.",
+        "Auditorías internas y externas."
+      ],
+      "jerarquia": "CEO → CFO → Contabilidad → Asistentes",
+      "modalidad_trabajo": "Presencial",
+      "supervisor_directo": "Pedro German Nve Ela",
+      "clasificacion": "Operativo",
+      "proyectos_principales": [
+        "Gestión de flota",
+        "Abastecimiento estratégico",
+        "Optimización de inventarios"
+      ],
+      "habilidades_tecnicas": "Gestión avanzada de procesos en logística y suministros.",
+      "habilidades_blandas": "Liderazgo, comunicación efectiva y resolución de problemas.",
+      "evaluacion_anual": "Satisfactorio"
+    },
+    "documentacion": {
+      "contrato_actual_pdf": "./documentos_empleados/202003/Contrato_Actual.pdf",
+      "dip_pdf": "./documentos_empleados/202003/DIP.pdf",
+      "curriculum_pdf": "./documentos_empleados/202003/Curriculum.pdf",
+      "evaluacion_anual_pdf": "./documentos_empleados/202003/Evaluacion_Anual.pdf",
+      "id_empleado_elebi_pdf": "./documentos_empleados/202003/ID_Empleado_ELEBI.pdf"
+    }
+  },
+  {
+    "id": 202004,
+    "nombres": "Maria Inmaculada",
+    "apellidos": "Avomo Obama",
+    "nombrecompleto": "Maria Inmaculada Avomo Obama",
+    "puesto": "Directora de Recursos Humanos",
+    "departamento": "Recursos Humanos",
+    "foto": "./fotos_empleados/Maria Inmaculada Avomo Obama.jpg",
+    "activo": true,
+    "email_oficial": "",
+    "telefono_oficial": "",
+    "ubicacion": "",
+    "informacion_personal": {
+      "fecha_nacimiento": "1985-05-15",
+      "lugar_nacimiento": "Malabo, Guinea Ecuatorial",
+      "genero": "Femenino",
+      "estado_civil": "Casada",
+      "nacionalidad": "Ecuatoguineana",
+      "telefono_personal": "+240222000004",
+      "email_personal": "maria.avomo@iniciativaselebi.com",
+      "direccion_personal": "Caracolas, Malabo",
+      "dependientes": 1
+    },
+    "informacion_familiar": {
+      "nombre_conyuge": "Carlos Eyang",
+      "numero_dependientes": 1,
+      "contacto_emergencia_nombre": "Carlos Eyang",
+      "contacto_emergencia_telefono": "+240555778899",
+      "contacto_emergencia_relacion": "Esposo",
+      "seguro_medico": "MAPFRE Salud",
+      "numero_poliza": "",
+      "observaciones": ""
+    },
+    "informacion_bancaria": {
+      "banco": "Ecobank",
+      "numero_cuenta": "ECO5543210004",
+      "tipo_cuenta": "Corriente",
+      "moneda": "",
+      "salario_mensual_cfa": 3100000,
+      "salario_anual_cfa": 37200000
+    },
+    "datos_carrera": {
+      "fecha_ingreso": "2021-06-01",
+      "tipo_contrato": "Indefinido",
+      "descripcion_puesto": "Gestiona talento, bienestar y cumplimiento institucional.",
+      "responsabilidades": [
+        "Contrataciones y desarrollo profesional.",
+        "Cumplimiento interno.",
+        "Cultura organizacional."
+      ],
+      "jerarquia": "CEO → HR Director → Técnicos",
+      "modalidad_trabajo": "Presencial",
+      "supervisor_directo": "Maria Inmaculada Avomo Obama",
+      "clasificacion": "Operativo",
+      "proyectos_principales": [
+        "Plan de talento",
+        "Formación y clima laboral",
+        "Programas de bienestar"
+      ],
+      "habilidades_tecnicas": "Gestión avanzada de procesos en recursos humanos.",
+      "habilidades_blandas": "Liderazgo, comunicación efectiva y resolución de problemas.",
+      "evaluacion_anual": "Satisfactorio"
+    },
+    "documentacion": {
+      "contrato_actual_pdf": "./documentos_empleados/202004/Contrato_Actual.pdf",
+      "dip_pdf": "./documentos_empleados/202004/DIP.pdf",
+      "curriculum_pdf": "./documentos_empleados/202004/Curriculum.pdf",
+      "evaluacion_anual_pdf": "./documentos_empleados/202004/Evaluacion_Anual.pdf",
+      "id_empleado_elebi_pdf": "./documentos_empleados/202004/ID_Empleado_ELEBI.pdf"
+    }
+  },
+  {
+    "id": 202005,
+    "nombres": "Santiago",
+    "apellidos": "Abaga Nchama",
+    "nombrecompleto": "Santiago Abaga Nchama",
+    "puesto": "Director de Tecnología (CTO)",
+    "departamento": "Tecnologías de la Información",
+    "foto": "./fotos_empleados/Santiago Abaga Nchama.jpg",
+    "activo": true,
+    "email_oficial": "santiago.abaga@iniciativaselebi.com",
+    "telefono_oficial": "+240222000005",
+    "ubicacion": "",
+    "informacion_personal": {
+      "fecha_nacimiento": "1987-09-02",
+      "lugar_nacimiento": "Bata, Guinea Ecuatorial",
+      "genero": "Masculino",
+      "estado_civil": "Casado",
+      "nacionalidad": "Ecuatoguineana",
+      "telefono_personal": "+240222000005",
+      "email_personal": "santiago.abaga@iniciativaselebi.com",
+      "direccion_personal": "Sampaka, Malabo",
+      "dependientes": 2
+    },
+    "informacion_familiar": {
+      "nombre_conyuge": "Gloria Mba",
+      "numero_dependientes": 2,
+      "contacto_emergencia_nombre": "Gloria Mba",
+      "contacto_emergencia_telefono": "+240555999000",
+      "contacto_emergencia_relacion": "Esposa",
+      "seguro_medico": "BANGE Salud",
+      "numero_poliza": "098965",
+      "observaciones": ""
+    },
+    "informacion_bancaria": {
+      "banco": "BGFI",
+      "numero_cuenta": "BGFI880054003",
+      "tipo_cuenta": "Corriente",
+      "moneda": "",
+      "salario_mensual_cfa": 4800000,
+      "salario_anual_cfa": 57600000
+    },
+    "datos_carrera": {
+      "fecha_ingreso": "2020-05-01",
+      "tipo_contrato": "Indefinido",
+      "descripcion_puesto": "Lidera la arquitectura y estrategia tecnológica de Iniciativas Elebi.",
+      "responsabilidades": [
+        "Gestión de sistemas internos.",
+        "Supervisión de desarrollo y seguridad digital.",
+        "Innovación e infraestructura."
+      ],
+      "jerarquia": "CEO → CTO → Ingenieros",
+      "modalidad_trabajo": "Presencial",
+      "supervisor_directo": "Santiago Abaga Nchama",
+      "clasificacion": "Operativo",
+      "proyectos_principales": [
+        "Soporte crítico",
+        "Modernización ATIEMPO",
+        "Seguridad de la información"
+      ],
+      "habilidades_tecnicas": "Gestión avanzada de procesos en tecnologías de la información.",
+      "habilidades_blandas": "Liderazgo, comunicación efectiva y resolución de problemas.",
+      "evaluacion_anual": "Satisfactorio"
+    },
+    "documentacion": {
+      "contrato_actual_pdf": "./documentos_empleados/202005/Contrato_Actual.pdf",
+      "dip_pdf": "./documentos_empleados/202005/DIP.pdf",
+      "curriculum_pdf": "./documentos_empleados/202005/Curriculum.pdf",
+      "evaluacion_anual_pdf": "./documentos_empleados/202005/Evaluacion_Anual.pdf",
+      "id_empleado_elebi_pdf": "./documentos_empleados/202005/ID_Empleado_ELEBI.pdf"
+    },
+    "correo": "santiago.abaga@iniciativaselebi.com",
+    "telefono": "+240222000005",
+    "direccion": "Sampaka, Malabo",
+    "contacto_emergencia": "Gloria Mba",
+    "contacto_emergencia_telefono": "+240555999000",
+    "numero_dependientes": 2,
+    "seguro_medico": "BANGE Salud",
+    "numero_poliza": "098965"
+  },
+  {
+    "id": 202006,
+    "nombres": "Carla",
+    "apellidos": "Ndong Avomo",
+    "nombrecompleto": "Carla Ndong Avomo",
+    "puesto": "Ingeniera de Software Senior",
+    "departamento": "Tecnologías de la Información",
+    "foto": "./fotos_empleados/Carla Ndong Avomo .jpg",
+    "activo": true,
+    "email_oficial": "carla.ndong@iniciativaselebi.com",
+    "telefono_oficial": "+240222000006",
+    "ubicacion": "",
+    "informacion_personal": {
+      "fecha_nacimiento": "1990-04-11",
+      "lugar_nacimiento": "Malabo, Guinea Ecuatorial",
+      "genero": "Femenino",
+      "estado_civil": "Soltera",
+      "nacionalidad": "Ecuatoguineana",
+      "telefono_personal": "+240222000006",
+      "email_personal": "carla.ndong@iniciativaselebi.com",
+      "direccion_personal": "Zona Los Ángeles, Malabo II",
+      "dependientes": 2
+    },
+    "informacion_familiar": {
+      "nombre_conyuge": "",
+      "numero_dependientes": 2,
+      "contacto_emergencia_nombre": "Marta Avomo",
+      "contacto_emergencia_telefono": "+240555111222",
+      "contacto_emergencia_relacion": "Madre",
+      "seguro_medico": "NSIA Salud",
+      "numero_poliza": "645654",
+      "observaciones": ""
+    },
+    "informacion_bancaria": {
+      "banco": "Ecobank",
+      "numero_cuenta": "ECO77889922",
+      "tipo_cuenta": "Ahorro",
+      "moneda": "",
+      "salario_mensual_cfa": 2800000,
+      "salario_anual_cfa": 33600000
+    },
+    "datos_carrera": {
+      "fecha_ingreso": "2021-03-10",
+      "tipo_contrato": "Indefinido",
+      "descripcion_puesto": "Diseño y mantenimiento de sistemas backend críticos.",
+      "responsabilidades": [
+        "Desarrollo en Python y Firebase.",
+        "Integración con Electron y Android.",
+        "Gestión de APIs seguras."
+      ],
+      "jerarquia": "CTO → Ingeniería → Backend",
+      "modalidad_trabajo": "Presencial",
+      "supervisor_directo": "Santiago Abaga Nchama",
+      "clasificacion": "Operativo",
+      "proyectos_principales": [
+        "Soporte crítico",
+        "Modernización ATIEMPO",
+        "Seguridad de la información"
+      ],
+      "habilidades_tecnicas": "Gestión avanzada de procesos en tecnologías de la información.",
+      "habilidades_blandas": "Liderazgo, comunicación efectiva y resolución de problemas.",
+      "evaluacion_anual": "Satisfactorio"
+    },
+    "documentacion": {
+      "contrato_actual_pdf": "./documentos_empleados/202006/Contrato_Actual.pdf",
+      "dip_pdf": "./documentos_empleados/202006/DIP.pdf",
+      "curriculum_pdf": "./documentos_empleados/202006/Curriculum.pdf",
+      "evaluacion_anual_pdf": "./documentos_empleados/202006/Evaluacion_Anual.pdf",
+      "id_empleado_elebi_pdf": "./documentos_empleados/202006/ID_Empleado_ELEBI.pdf"
+    },
+    "correo": "carla.ndong@iniciativaselebi.com",
+    "telefono": "+240222000006",
+    "direccion": "Zona Los Ángeles, Malabo II",
+    "contacto_emergencia": "Marta Avomo",
+    "contacto_emergencia_telefono": "+240555111222",
+    "numero_dependientes": 2,
+    "seguro_medico": "NSIA Salud",
+    "numero_poliza": "645654"
+  },
+  {
+    "id": 202007,
+    "nombres": "Jessica",
+    "apellidos": "Esono Obama",
+    "nombrecompleto": "Jessica Esono Obama",
+    "puesto": "Diseñadora UX/UI",
+    "departamento": "Diseño y Experiencia de Usuario",
+    "foto": "./fotos_empleados/Jessica Esono Obama.jpg",
+    "activo": true,
+    "email_oficial": "",
+    "telefono_oficial": "",
+    "ubicacion": "",
+    "informacion_personal": {
+      "fecha_nacimiento": "1993-09-20",
+      "lugar_nacimiento": "Bata, Guinea Ecuatorial",
+      "genero": "Femenino",
+      "estado_civil": "Soltera",
+      "nacionalidad": "Ecuatoguineana",
+      "telefono_personal": "+240222000007",
+      "email_personal": "jessica.esono@iniciativaselebi.com",
+      "direccion_personal": "Barrio Ela Nguema, Malabo",
+      "dependientes": 0
+    },
+    "informacion_familiar": {
+      "nombre_conyuge": "",
+      "numero_dependientes": 0,
+      "contacto_emergencia_nombre": "Elvira Obama",
+      "contacto_emergencia_telefono": "+240555772211",
+      "contacto_emergencia_relacion": "Madre",
+      "seguro_medico": "MAPFRE Salud",
+      "numero_poliza": "",
+      "observaciones": ""
+    },
+    "informacion_bancaria": {
+      "banco": "BGFI",
+      "numero_cuenta": "BGFI55662277",
+      "tipo_cuenta": "Ahorro",
+      "moneda": "",
+      "salario_mensual_cfa": 2100000,
+      "salario_anual_cfa": 25200000
+    },
+    "datos_carrera": {
+      "fecha_ingreso": "2022-01-05",
+      "tipo_contrato": "Indefinido",
+      "descripcion_puesto": "Diseña interfaces y experiencias centradas en el usuario para productos Elebi.",
+      "responsabilidades": [
+        "Diseño visual y prototipado Figma.",
+        "Pruebas de usabilidad y accesibilidad.",
+        "Colaboración con ingeniería front-end."
+      ],
+      "jerarquia": "CTO → Diseño UX/UI",
+      "modalidad_trabajo": "Presencial",
+      "supervisor_directo": "Jessica Esono Obama",
+      "clasificacion": "Operativo",
+      "proyectos_principales": [
+        "Guías de diseño",
+        "Investigación UX continua",
+        "Prototipado rápido"
+      ],
+      "habilidades_tecnicas": "Gestión avanzada de procesos en diseño y experiencia de usuario.",
+      "habilidades_blandas": "Liderazgo, comunicación efectiva y resolución de problemas.",
+      "evaluacion_anual": "Satisfactorio"
+    },
+    "documentacion": {
+      "contrato_actual_pdf": "./documentos_empleados/202007/Contrato_Actual.pdf",
+      "dip_pdf": "./documentos_empleados/202007/DIP.pdf",
+      "curriculum_pdf": "./documentos_empleados/202007/Curriculum.pdf",
+      "evaluacion_anual_pdf": "./documentos_empleados/202007/Evaluacion_Anual.pdf",
+      "id_empleado_elebi_pdf": "./documentos_empleados/202007/ID_Empleado_ELEBI.pdf"
+    }
+  },
+  {
+    "id": 202008,
+    "nombres": "Luis",
+    "apellidos": "Bioko Dougan",
+    "nombrecompleto": "Luis Bioko Dougan",
+    "puesto": "Contable Senior",
+    "departamento": "Finanzas y Control",
+    "foto": "./fotos_empleados/Luis Bioko Dougan.jpg",
+    "activo": true,
+    "email_oficial": "",
+    "telefono_oficial": "",
+    "ubicacion": "",
+    "informacion_personal": {
+      "fecha_nacimiento": "1989-12-03",
+      "lugar_nacimiento": "Luba, BN",
+      "genero": "Masculino",
+      "estado_civil": "Casado",
+      "nacionalidad": "Ecuatoguineana",
+      "telefono_personal": "+240222000008",
+      "email_personal": "luis.bioko@iniciativaselebi.com",
+      "direccion_personal": "Centro Urbano de Malabo",
+      "dependientes": 3
+    },
+    "informacion_familiar": {
+      "nombre_conyuge": "Elena Seriche",
+      "numero_dependientes": 3,
+      "contacto_emergencia_nombre": "Elena Seriche",
+      "contacto_emergencia_telefono": "+240555223344",
+      "contacto_emergencia_relacion": "Esposa",
+      "seguro_medico": "BANGE Salud",
+      "numero_poliza": "",
+      "observaciones": ""
+    },
+    "informacion_bancaria": {
+      "banco": "BGFI",
+      "numero_cuenta": "BGFI22080008",
+      "tipo_cuenta": "Corriente",
+      "moneda": "",
+      "salario_mensual_cfa": 2600000,
+      "salario_anual_cfa": 31200000
+    },
+    "datos_carrera": {
+      "fecha_ingreso": "2020-09-15",
+      "tipo_contrato": "Indefinido",
+      "descripcion_puesto": "Controla registros contables y conciliaciones bancarias.",
+      "responsabilidades": [
+        "Elaborar informes financieros mensuales.",
+        "Gestión de facturación y pagos.",
+        "Auditoría interna básica."
+      ],
+      "jerarquia": "CFO → Contabilidad → Asistentes",
+      "modalidad_trabajo": "Presencial",
+      "supervisor_directo": "Maria Jose Biong Bill",
+      "clasificacion": "Operativo",
+      "proyectos_principales": [
+        "Presupuesto anual",
+        "Control financiero mensual",
+        "Auditoría interna"
+      ],
+      "habilidades_tecnicas": "Gestión avanzada de procesos en finanzas y control.",
+      "habilidades_blandas": "Liderazgo, comunicación efectiva y resolución de problemas.",
+      "evaluacion_anual": "Satisfactorio"
+    },
+    "documentacion": {
+      "contrato_actual_pdf": "./documentos_empleados/202008/Contrato_Actual.pdf",
+      "dip_pdf": "./documentos_empleados/202008/DIP.pdf",
+      "curriculum_pdf": "./documentos_empleados/202008/Curriculum.pdf",
+      "evaluacion_anual_pdf": "./documentos_empleados/202008/Evaluacion_Anual.pdf",
+      "id_empleado_elebi_pdf": "./documentos_empleados/202008/ID_Empleado_ELEBI.pdf"
+    }
+  },
+  {
+    "id": 202009,
+    "nombres": "Gabriel",
+    "apellidos": "Epiko Massoko",
+    "nombrecompleto": "Gabriel Epiko Massoko",
+    "puesto": "Responsable de Marketing Digital",
+    "departamento": "Marketing y Comunicación",
+    "foto": "./fotos_empleados/Gabriel Epiko Massoko.jpg",
+    "activo": true,
+    "email_oficial": "",
+    "telefono_oficial": "",
+    "ubicacion": "",
+    "informacion_personal": {
+      "fecha_nacimiento": "1992-05-21",
+      "lugar_nacimiento": "Bata, Guinea Ecuatorial",
+      "genero": "Masculino",
+      "estado_civil": "Soltero",
+      "nacionalidad": "Ecuatoguineana",
+      "telefono_personal": "+240222000009",
+      "email_personal": "gabriel.esono@iniciativaselebi.com",
+      "direccion_personal": "Malabo II, cerca del Estadio",
+      "dependientes": 0
+    },
+    "informacion_familiar": {
+      "nombre_conyuge": "",
+      "numero_dependientes": 0,
+      "contacto_emergencia_nombre": "Cristina Esono",
+      "contacto_emergencia_telefono": "+240555111999",
+      "contacto_emergencia_relacion": "Hermana",
+      "seguro_medico": "Sanitas EG",
+      "numero_poliza": "",
+      "observaciones": ""
+    },
+    "informacion_bancaria": {
+      "banco": "BGFI",
+      "numero_cuenta": "BGFI22090009",
+      "tipo_cuenta": "Ahorro",
+      "moneda": "",
+      "salario_mensual_cfa": 2400000,
+      "salario_anual_cfa": 28800000
+    },
+    "datos_carrera": {
+      "fecha_ingreso": "2021-02-11",
+      "tipo_contrato": "Indefinido",
+      "descripcion_puesto": "Coordina campañas y comunicación digital de marca.",
+      "responsabilidades": [
+        "Gestión de redes sociales y anuncios.",
+        "Producción de material promocional.",
+        "Métricas y estrategia digital."
+      ],
+      "jerarquia": "COO → Marketing",
+      "modalidad_trabajo": "Presencial",
+      "supervisor_directo": "Policarpo Obugase Mbuña",
+      "clasificacion": "Operativo",
+      "proyectos_principales": [
+        "Campañas ATL/BTL",
+        "Narrativa corporativa",
+        "Marketing digital"
+      ],
+      "habilidades_tecnicas": "Gestión avanzada de procesos en marketing y comunicación.",
+      "habilidades_blandas": "Liderazgo, comunicación efectiva y resolución de problemas.",
+      "evaluacion_anual": "Satisfactorio"
+    },
+    "documentacion": {
+      "contrato_actual_pdf": "./documentos_empleados/202009/Contrato_Actual.pdf",
+      "dip_pdf": "./documentos_empleados/202009/DIP.pdf",
+      "curriculum_pdf": "./documentos_empleados/202009/Curriculum.pdf",
+      "evaluacion_anual_pdf": "./documentos_empleados/202009/Evaluacion_Anual.pdf",
+      "id_empleado_elebi_pdf": "./documentos_empleados/202009/ID_Empleado_ELEBI.pdf"
+    }
+  },
+  {
+    "id": 202010,
+    "nombres": "Anselmo",
+    "apellidos": "Medina Sisa",
+    "nombrecompleto": "Anselmo Medina Sisa",
+    "puesto": "Técnico de Soporte y Redes",
+    "departamento": "Tecnologías de la Información",
+    "foto": "./fotos_empleados/Anselmo Medina Sisa.jpg",
+    "activo": true,
+    "email_oficial": "anselmo.medina@iniciativaselebi.com",
+    "telefono_oficial": "+240222000010",
+    "ubicacion": "Ela Nguema, Malabo",
+    "informacion_personal": {
+      "fecha_nacimiento": "1995-08-30",
+      "lugar_nacimiento": "San Antonio de Palea, AN",
+      "genero": "Masculino",
+      "estado_civil": "Soltero",
+      "nacionalidad": "Ecuatoguineana",
+      "telefono_personal": "+240222000010",
+      "email_personal": "anselmo.medina@iniciativaselebi.com",
+      "direccion_personal": "Ela Nguema, Malabo",
+      "dependientes": 5
+    },
+    "informacion_familiar": {
+      "nombre_conyuge": "",
+      "numero_dependientes": 5,
+      "contacto_emergencia_nombre": "Nicanor Mba",
+      "contacto_emergencia_telefono": "+240555444555",
+      "contacto_emergencia_relacion": "Padre",
+      "seguro_medico": "NSIA Salud",
+      "numero_poliza": "6754654",
+      "observaciones": ""
+    },
+    "informacion_bancaria": {
+      "banco": "Ecobank",
+      "numero_cuenta": "ECO22100010",
+      "tipo_cuenta": "Ahorro",
+      "moneda": "",
+      "salario_mensual_cfa": 1800000,
+      "salario_anual_cfa": 21600000
+    },
+    "datos_carrera": {
+      "fecha_ingreso": "2022-04-20",
+      "tipo_contrato": "Indefinido",
+      "descripcion_puesto": "Proporciona asistencia técnica y mantiene la infraestructura de red.",
+      "responsabilidades": [
+        "Configuración de hardware y software.",
+        "Mantenimiento de redes y servidores.",
+        "Soporte a usuarios internos."
+      ],
+      "jerarquia": "CTO → Soporte Técnico",
+      "modalidad_trabajo": "Presencial",
+      "supervisor_directo": "Santiago Abaga Nchama",
+      "clasificacion": "Operativo",
+      "proyectos_principales": [
+        "Soporte crítico",
+        "Modernización ATIEMPO",
+        "Seguridad de la información"
+      ],
+      "habilidades_tecnicas": "Gestión avanzada de procesos en tecnologías de la información.",
+      "habilidades_blandas": "Liderazgo, comunicación efectiva y resolución de problemas.",
+      "evaluacion_anual": "Satisfactorio"
+    },
+    "documentacion": {
+      "contrato_actual_pdf": "./documentos_empleados/202010/Contrato_Actual.pdf",
+      "dip_pdf": "./documentos_empleados/202010/DIP.pdf",
+      "curriculum_pdf": "./documentos_empleados/202010/Curriculum.pdf",
+      "evaluacion_anual_pdf": "./documentos_empleados/202010/Evaluacion_Anual.pdf",
+      "id_empleado_elebi_pdf": "./documentos_empleados/202010/ID_Empleado_ELEBI.pdf"
+    }
+  },
+  {
+    "id": "202411",
+    "nombres": "Damian Ondo",
+    "apellidos": "Mañe Nchama",
+    "nombrecompleto": "Damian Ondo Mañe Nchama",
+    "puesto": "Director de Proyectos e Inversiones",
+    "departamento": "Dirección de Proyectos",
+    "foto": "./fotos_empleados/Damian Ondo Mañe Nchama.jpg",
+    "activo": true,
+    "email_oficial": "damian.mane@elebi.co",
+    "telefono_oficial": "+240222781112",
+    "ubicacion": "Malabo, Guinea Ecuatorial",
+    "informacion_personal": {
+      "fecha_nacimiento": "1982-04-25",
+      "lugar_nacimiento": "Bata, Guinea Ecuatorial",
+      "genero": "Masculino",
+      "estado_civil": "Casado",
+      "nacionalidad": "Guineana",
+      "telefono_personal": "+240555778901",
+      "email_personal": "damian.ondo@gmail.com",
+      "direccion_personal": "Caracolas, Malabo II",
+      "dependientes": 3
+    },
+    "informacion_familiar": {
+      "nombre_conyuge": "María Esengono Mba",
+      "numero_dependientes": 3,
+      "contacto_emergencia_nombre": "Ondo",
+      "contacto_emergencia_telefono": "+240222780886",
+      "contacto_emergencia_relacion": "Familiar",
+      "seguro_medico": "NSIA Seguros – Póliza N° NSIA-DM-2025-008",
+      "numero_poliza": "343545",
+      "observaciones": "Familia reside en Malabo"
+    },
+    "informacion_bancaria": {
+      "banco": "BANGE",
+      "numero_cuenta": "GE12100001234567890001",
+      "tipo_cuenta": "Corriente",
+      "moneda": "CFA",
+      "salario_mensual_cfa": 2000000,
+      "salario_anual_cfa": 24000000
+    },
+    "datos_carrera": {
+      "fecha_ingreso": "2016-03-01",
+      "tipo_contrato": "Indefinido",
+      "descripcion_puesto": "Funciones propias del puesto de Director de Proyectos e Inversiones.",
+      "responsabilidades": [
+        "Planificar y ejecutar iniciativas clave del área de Dirección de Proyectos.",
+        "Supervisar al equipo asignado y reportar avances periódicos.",
+        "Asegurar el cumplimiento de los estándares de Iniciativas Elebi."
+      ],
+      "jerarquia": "Dirección de Proyectos",
+      "modalidad_trabajo": "Presencial",
+      "supervisor_directo": "Victor Manuel Ele Ela",
+      "clasificacion": "Directivo",
+      "proyectos_principales": [
+        "Sistema de Gestión de Embajadas (ATiempo)",
+        "Guinealogía Digital",
+        "Lotería Nacional de Guinea Ecuatorial"
+      ],
+      "habilidades_tecnicas": [
+        "Gestión avanzada de portafolios",
+        "Modelado financiero",
+        "PMO y control de hitos"
+      ],
+      "habilidades_blandas": [
+        "Orientación a resultados",
+        "Trabajo transversal",
+        "Mentoría de equipos técnicos"
+      ],
+      "evaluacion_anual": "Excelente"
+    },
+    "documentacion": {
+      "contrato_actual_pdf": "./documentos_empleados/202411/Contrato_Actual.pdf",
+      "dip_pdf": "./documentos_empleados/202411/DIP.pdf",
+      "curriculum_pdf": "./documentos_empleados/202411/Curriculum.pdf",
+      "evaluacion_anual_pdf": "./documentos_empleados/202411/Evaluacion_Anual.pdf",
+      "id_empleado_elebi_pdf": "./documentos_empleados/202411/ID_Empleado_ELEBI.pdf"
+    }
+  },
+  {
+    "id": "202412",
+    "nombres": "Policarpo Obugase",
+    "apellidos": "Mbuña",
+    "nombrecompleto": "Policarpo Obugase Mbuña",
+    "puesto": "Director de Marketing y Ventas",
+    "departamento": "Dirección Comercial",
+    "foto": "./fotos_empleados/Policarpo Obugase Mbuña.jpeg",
+    "activo": true,
+    "email_oficial": "policarpo.mbuna@elebi.co",
+    "telefono_oficial": "+240222781115",
+    "ubicacion": "Washington, D.C., EE. UU.",
+    "informacion_personal": {
+      "fecha_nacimiento": "1985-08-14",
+      "lugar_nacimiento": "Evinayong, Guinea Ecuatorial",
+      "genero": "Masculino",
+      "estado_civil": "Casado",
+      "nacionalidad": "Guineana",
+      "telefono_personal": "+1-202-450-8890",
+      "email_personal": "policarpo.mbuna@gmail.com",
+      "direccion_personal": "Silver Spring, Maryland, USA",
+      "dependientes": 0
+    },
+    "informacion_familiar": {
+      "nombre_conyuge": "Lucía Mba Nguema",
+      "numero_dependientes": 2,
+      "contacto_emergencia_nombre": "Mbuña",
+      "contacto_emergencia_telefono": "+240222780886",
+      "contacto_emergencia_relacion": "Familiar",
+      "seguro_medico": "BlueCross Africa – Póliza N° BCAM-2025-045",
+      "numero_poliza": "",
+      "observaciones": "Familia establecida en EE.UU."
+    },
+    "informacion_bancaria": {
+      "banco": "ECOBANK",
+      "numero_cuenta": "GE99100001234567890002",
+      "tipo_cuenta": "Corriente",
+      "moneda": "CFA",
+      "salario_mensual_cfa": 2000000,
+      "salario_anual_cfa": 24000000
+    },
+    "datos_carrera": {
+      "fecha_ingreso": "2018-07-15",
+      "tipo_contrato": "Indefinido",
+      "descripcion_puesto": "Funciones propias del puesto de Director de Marketing y Ventas.",
+      "responsabilidades": [
+        "Planificar y ejecutar iniciativas clave del área de Dirección Comercial.",
+        "Supervisar al equipo asignado y reportar avances periódicos.",
+        "Asegurar el cumplimiento de los estándares de Iniciativas Elebi."
+      ],
+      "jerarquia": "Dirección Comercial",
+      "modalidad_trabajo": "Presencial",
+      "supervisor_directo": "Victor Manuel Ele Ela",
+      "clasificacion": "Directivo",
+      "proyectos_principales": [
+        "Campañas Promocionales AfrikaNaOne",
+        "Expansión Comercial en África Occidental",
+        "Marketing Digital Corporativo Iniciativas Elebi"
+      ],
+      "habilidades_tecnicas": "Gestión avanzada de procesos en dirección comercial.",
+      "habilidades_blandas": "Liderazgo, comunicación efectiva y resolución de problemas.",
+      "evaluacion_anual": "Sobresaliente"
+    },
+    "documentacion": {
+      "contrato_actual_pdf": "./documentos_empleados/202412/Contrato_Actual.pdf",
+      "dip_pdf": "./documentos_empleados/202412/DIP.pdf",
+      "curriculum_pdf": "./documentos_empleados/202412/Curriculum.pdf",
+      "evaluacion_anual_pdf": "./documentos_empleados/202412/Evaluacion_Anual.pdf",
+      "id_empleado_elebi_pdf": "./documentos_empleados/202412/ID_Empleado_ELEBI.pdf"
+    }
+  }
+]

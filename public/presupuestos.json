@@ -1,0 +1,3357 @@
+{
+  "anio": 2025,
+  "departamentos": [
+    {
+      "nombre": "Dirección General",
+      "presupuesto_anual": 120000000,
+      "presupuesto_mensual": {
+        "enero": {
+          "plan": 10000000,
+          "ingresos": 13500000,
+          "gastos": 8200000
+        },
+        "febrero": {
+          "plan": 9500000,
+          "ingresos": 14000000,
+          "gastos": 9000000
+        },
+        "marzo": {
+          "plan": 10000000,
+          "ingresos": 15500000,
+          "gastos": 9400000
+        },
+        "abril": {
+          "plan": 10500000,
+          "ingresos": 16000000,
+          "gastos": 10200000
+        },
+        "mayo": {
+          "plan": 11000000,
+          "ingresos": 15000000,
+          "gastos": 9800000
+        },
+        "junio": {
+          "plan": 11500000,
+          "ingresos": 16200000,
+          "gastos": 10100000
+        },
+        "julio": {
+          "plan": 12000000,
+          "ingresos": 16800000,
+          "gastos": 10300000
+        },
+        "agosto": {
+          "plan": 12200000,
+          "ingresos": 17000000,
+          "gastos": 10500000
+        },
+        "septiembre": {
+          "plan": 12500000,
+          "ingresos": 17500000,
+          "gastos": 10800000
+        },
+        "octubre": {
+          "plan": 12800000,
+          "ingresos": 17800000,
+          "gastos": 11000000
+        },
+        "noviembre": {
+          "plan": 13000000,
+          "ingresos": 18200000,
+          "gastos": 11200000
+        },
+        "diciembre": {
+          "plan": 13500000,
+          "ingresos": 18800000,
+          "gastos": 11500000
+        }
+      },
+      "categorias_gasto": [
+        {
+          "nombre": "Consejo y asesoría",
+          "monto": 22000000
+        },
+        {
+          "nombre": "Alianzas institucionales",
+          "monto": 14500000
+        },
+        {
+          "nombre": "Viajes estratégicos",
+          "monto": 12000000
+        },
+        {
+          "nombre": "Comunicaciones corporativas",
+          "monto": 9000000
+        }
+      ],
+      "ingresos": [
+        {
+          "fecha": "2025-01-05",
+          "monto": 7425000,
+          "fuente": "Contrato estratégico Enero",
+          "descripcion": "Desembolso principal de Dirección General en Enero"
+        },
+        {
+          "fecha": "2025-01-20",
+          "monto": 6075000,
+          "fuente": "Servicios operativos Enero",
+          "descripcion": "Ingresos complementarios de Dirección General en Enero"
+        },
+        {
+          "fecha": "2025-02-05",
+          "monto": 7700000,
+          "fuente": "Contrato estratégico Febrero",
+          "descripcion": "Desembolso principal de Dirección General en Febrero"
+        },
+        {
+          "fecha": "2025-02-20",
+          "monto": 6300000,
+          "fuente": "Servicios operativos Febrero",
+          "descripcion": "Ingresos complementarios de Dirección General en Febrero"
+        },
+        {
+          "fecha": "2025-03-05",
+          "monto": 8525000,
+          "fuente": "Contrato estratégico Marzo",
+          "descripcion": "Desembolso principal de Dirección General en Marzo"
+        },
+        {
+          "fecha": "2025-03-20",
+          "monto": 6975000,
+          "fuente": "Servicios operativos Marzo",
+          "descripcion": "Ingresos complementarios de Dirección General en Marzo"
+        },
+        {
+          "fecha": "2025-04-05",
+          "monto": 8800000,
+          "fuente": "Contrato estratégico Abril",
+          "descripcion": "Desembolso principal de Dirección General en Abril"
+        },
+        {
+          "fecha": "2025-04-20",
+          "monto": 7200000,
+          "fuente": "Servicios operativos Abril",
+          "descripcion": "Ingresos complementarios de Dirección General en Abril"
+        },
+        {
+          "fecha": "2025-05-05",
+          "monto": 8250000,
+          "fuente": "Contrato estratégico Mayo",
+          "descripcion": "Desembolso principal de Dirección General en Mayo"
+        },
+        {
+          "fecha": "2025-05-20",
+          "monto": 6750000,
+          "fuente": "Servicios operativos Mayo",
+          "descripcion": "Ingresos complementarios de Dirección General en Mayo"
+        },
+        {
+          "fecha": "2025-06-05",
+          "monto": 8910000,
+          "fuente": "Contrato estratégico Junio",
+          "descripcion": "Desembolso principal de Dirección General en Junio"
+        },
+        {
+          "fecha": "2025-06-20",
+          "monto": 7290000,
+          "fuente": "Servicios operativos Junio",
+          "descripcion": "Ingresos complementarios de Dirección General en Junio"
+        },
+        {
+          "fecha": "2025-07-05",
+          "monto": 9240000,
+          "fuente": "Contrato estratégico Julio",
+          "descripcion": "Desembolso principal de Dirección General en Julio"
+        },
+        {
+          "fecha": "2025-07-20",
+          "monto": 7560000,
+          "fuente": "Servicios operativos Julio",
+          "descripcion": "Ingresos complementarios de Dirección General en Julio"
+        },
+        {
+          "fecha": "2025-08-05",
+          "monto": 9350000,
+          "fuente": "Contrato estratégico Agosto",
+          "descripcion": "Desembolso principal de Dirección General en Agosto"
+        },
+        {
+          "fecha": "2025-08-20",
+          "monto": 7650000,
+          "fuente": "Servicios operativos Agosto",
+          "descripcion": "Ingresos complementarios de Dirección General en Agosto"
+        },
+        {
+          "fecha": "2025-09-05",
+          "monto": 9625000,
+          "fuente": "Contrato estratégico Septiembre",
+          "descripcion": "Desembolso principal de Dirección General en Septiembre"
+        },
+        {
+          "fecha": "2025-09-20",
+          "monto": 7875000,
+          "fuente": "Servicios operativos Septiembre",
+          "descripcion": "Ingresos complementarios de Dirección General en Septiembre"
+        },
+        {
+          "fecha": "2025-10-05",
+          "monto": 9790000,
+          "fuente": "Contrato estratégico Octubre",
+          "descripcion": "Desembolso principal de Dirección General en Octubre"
+        },
+        {
+          "fecha": "2025-10-20",
+          "monto": 8010000,
+          "fuente": "Servicios operativos Octubre",
+          "descripcion": "Ingresos complementarios de Dirección General en Octubre"
+        },
+        {
+          "fecha": "2025-11-05",
+          "monto": 10010000,
+          "fuente": "Contrato estratégico Noviembre",
+          "descripcion": "Desembolso principal de Dirección General en Noviembre"
+        },
+        {
+          "fecha": "2025-11-20",
+          "monto": 8190000,
+          "fuente": "Servicios operativos Noviembre",
+          "descripcion": "Ingresos complementarios de Dirección General en Noviembre"
+        },
+        {
+          "fecha": "2025-12-05",
+          "monto": 10340000,
+          "fuente": "Contrato estratégico Diciembre",
+          "descripcion": "Desembolso principal de Dirección General en Diciembre"
+        },
+        {
+          "fecha": "2025-12-20",
+          "monto": 8460000,
+          "fuente": "Servicios operativos Diciembre",
+          "descripcion": "Ingresos complementarios de Dirección General en Diciembre"
+        }
+      ],
+      "gastos": [
+        {
+          "fecha": "2025-01-10",
+          "monto": 4756000,
+          "categoria": "Viajes estratégicos",
+          "descripcion": "Ejecución operativa (Viajes estratégicos) Enero"
+        },
+        {
+          "fecha": "2025-01-25",
+          "monto": 3444000,
+          "categoria": "Comunicaciones corporativas",
+          "descripcion": "Actividad complementaria (Comunicaciones corporativas) Enero"
+        },
+        {
+          "fecha": "2025-02-10",
+          "monto": 5220000,
+          "categoria": "Consejo y asesoría",
+          "descripcion": "Ejecución operativa (Consejo y asesoría) Febrero"
+        },
+        {
+          "fecha": "2025-02-25",
+          "monto": 3780000,
+          "categoria": "Alianzas institucionales",
+          "descripcion": "Actividad complementaria (Alianzas institucionales) Febrero"
+        },
+        {
+          "fecha": "2025-03-10",
+          "monto": 5452000,
+          "categoria": "Viajes estratégicos",
+          "descripcion": "Ejecución operativa (Viajes estratégicos) Marzo"
+        },
+        {
+          "fecha": "2025-03-25",
+          "monto": 3948000,
+          "categoria": "Comunicaciones corporativas",
+          "descripcion": "Actividad complementaria (Comunicaciones corporativas) Marzo"
+        },
+        {
+          "fecha": "2025-04-10",
+          "monto": 5916000,
+          "categoria": "Consejo y asesoría",
+          "descripcion": "Ejecución operativa (Consejo y asesoría) Abril"
+        },
+        {
+          "fecha": "2025-04-25",
+          "monto": 4284000,
+          "categoria": "Alianzas institucionales",
+          "descripcion": "Actividad complementaria (Alianzas institucionales) Abril"
+        },
+        {
+          "fecha": "2025-05-10",
+          "monto": 5684000,
+          "categoria": "Viajes estratégicos",
+          "descripcion": "Ejecución operativa (Viajes estratégicos) Mayo"
+        },
+        {
+          "fecha": "2025-05-25",
+          "monto": 4116000,
+          "categoria": "Comunicaciones corporativas",
+          "descripcion": "Actividad complementaria (Comunicaciones corporativas) Mayo"
+        },
+        {
+          "fecha": "2025-06-10",
+          "monto": 5858000,
+          "categoria": "Consejo y asesoría",
+          "descripcion": "Ejecución operativa (Consejo y asesoría) Junio"
+        },
+        {
+          "fecha": "2025-06-25",
+          "monto": 4242000,
+          "categoria": "Alianzas institucionales",
+          "descripcion": "Actividad complementaria (Alianzas institucionales) Junio"
+        },
+        {
+          "fecha": "2025-07-10",
+          "monto": 5974000,
+          "categoria": "Viajes estratégicos",
+          "descripcion": "Ejecución operativa (Viajes estratégicos) Julio"
+        },
+        {
+          "fecha": "2025-07-25",
+          "monto": 4326000,
+          "categoria": "Comunicaciones corporativas",
+          "descripcion": "Actividad complementaria (Comunicaciones corporativas) Julio"
+        },
+        {
+          "fecha": "2025-08-10",
+          "monto": 6090000,
+          "categoria": "Consejo y asesoría",
+          "descripcion": "Ejecución operativa (Consejo y asesoría) Agosto"
+        },
+        {
+          "fecha": "2025-08-25",
+          "monto": 4410000,
+          "categoria": "Alianzas institucionales",
+          "descripcion": "Actividad complementaria (Alianzas institucionales) Agosto"
+        },
+        {
+          "fecha": "2025-09-10",
+          "monto": 6264000,
+          "categoria": "Viajes estratégicos",
+          "descripcion": "Ejecución operativa (Viajes estratégicos) Septiembre"
+        },
+        {
+          "fecha": "2025-09-25",
+          "monto": 4536000,
+          "categoria": "Comunicaciones corporativas",
+          "descripcion": "Actividad complementaria (Comunicaciones corporativas) Septiembre"
+        },
+        {
+          "fecha": "2025-10-10",
+          "monto": 6380000,
+          "categoria": "Consejo y asesoría",
+          "descripcion": "Ejecución operativa (Consejo y asesoría) Octubre"
+        },
+        {
+          "fecha": "2025-10-25",
+          "monto": 4620000,
+          "categoria": "Alianzas institucionales",
+          "descripcion": "Actividad complementaria (Alianzas institucionales) Octubre"
+        },
+        {
+          "fecha": "2025-11-10",
+          "monto": 6496000,
+          "categoria": "Viajes estratégicos",
+          "descripcion": "Ejecución operativa (Viajes estratégicos) Noviembre"
+        },
+        {
+          "fecha": "2025-11-25",
+          "monto": 4704000,
+          "categoria": "Comunicaciones corporativas",
+          "descripcion": "Actividad complementaria (Comunicaciones corporativas) Noviembre"
+        },
+        {
+          "fecha": "2025-12-10",
+          "monto": 6670000,
+          "categoria": "Consejo y asesoría",
+          "descripcion": "Ejecución operativa (Consejo y asesoría) Diciembre"
+        },
+        {
+          "fecha": "2025-12-25",
+          "monto": 4830000,
+          "categoria": "Alianzas institucionales",
+          "descripcion": "Actividad complementaria (Alianzas institucionales) Diciembre"
+        }
+      ]
+    },
+    {
+      "nombre": "Dirección Comercial",
+      "presupuesto_anual": 68000000,
+      "presupuesto_mensual": {
+        "enero": {
+          "plan": 5200000,
+          "ingresos": 7600000,
+          "gastos": 4300000
+        },
+        "febrero": {
+          "plan": 5400000,
+          "ingresos": 8200000,
+          "gastos": 4600000
+        },
+        "marzo": {
+          "plan": 5600000,
+          "ingresos": 9000000,
+          "gastos": 4800000
+        },
+        "abril": {
+          "plan": 5800000,
+          "ingresos": 9800000,
+          "gastos": 5100000
+        },
+        "mayo": {
+          "plan": 6000000,
+          "ingresos": 10100000,
+          "gastos": 5200000
+        },
+        "junio": {
+          "plan": 6200000,
+          "ingresos": 10800000,
+          "gastos": 5400000
+        },
+        "julio": {
+          "plan": 6400000,
+          "ingresos": 11200000,
+          "gastos": 5500000
+        },
+        "agosto": {
+          "plan": 6600000,
+          "ingresos": 11500000,
+          "gastos": 5600000
+        },
+        "septiembre": {
+          "plan": 6800000,
+          "ingresos": 11800000,
+          "gastos": 5800000
+        },
+        "octubre": {
+          "plan": 7000000,
+          "ingresos": 12000000,
+          "gastos": 6000000
+        },
+        "noviembre": {
+          "plan": 7200000,
+          "ingresos": 12300000,
+          "gastos": 6100000
+        },
+        "diciembre": {
+          "plan": 7400000,
+          "ingresos": 12600000,
+          "gastos": 6200000
+        }
+      },
+      "categorias_gasto": [
+        {
+          "nombre": "Feria y eventos",
+          "monto": 12000000
+        },
+        {
+          "nombre": "CRM y licencias",
+          "monto": 8000000
+        },
+        {
+          "nombre": "Representaciones internacionales",
+          "monto": 7200000
+        }
+      ],
+      "ingresos": [
+        {
+          "fecha": "2025-01-05",
+          "monto": 4180000,
+          "fuente": "Contrato estratégico Enero",
+          "descripcion": "Desembolso principal de Dirección Comercial en Enero"
+        },
+        {
+          "fecha": "2025-01-20",
+          "monto": 3420000,
+          "fuente": "Servicios operativos Enero",
+          "descripcion": "Ingresos complementarios de Dirección Comercial en Enero"
+        },
+        {
+          "fecha": "2025-02-05",
+          "monto": 4510000,
+          "fuente": "Contrato estratégico Febrero",
+          "descripcion": "Desembolso principal de Dirección Comercial en Febrero"
+        },
+        {
+          "fecha": "2025-02-20",
+          "monto": 3690000,
+          "fuente": "Servicios operativos Febrero",
+          "descripcion": "Ingresos complementarios de Dirección Comercial en Febrero"
+        },
+        {
+          "fecha": "2025-03-05",
+          "monto": 4950000,
+          "fuente": "Contrato estratégico Marzo",
+          "descripcion": "Desembolso principal de Dirección Comercial en Marzo"
+        },
+        {
+          "fecha": "2025-03-20",
+          "monto": 4050000,
+          "fuente": "Servicios operativos Marzo",
+          "descripcion": "Ingresos complementarios de Dirección Comercial en Marzo"
+        },
+        {
+          "fecha": "2025-04-05",
+          "monto": 5390000,
+          "fuente": "Contrato estratégico Abril",
+          "descripcion": "Desembolso principal de Dirección Comercial en Abril"
+        },
+        {
+          "fecha": "2025-04-20",
+          "monto": 4410000,
+          "fuente": "Servicios operativos Abril",
+          "descripcion": "Ingresos complementarios de Dirección Comercial en Abril"
+        },
+        {
+          "fecha": "2025-05-05",
+          "monto": 5555000,
+          "fuente": "Contrato estratégico Mayo",
+          "descripcion": "Desembolso principal de Dirección Comercial en Mayo"
+        },
+        {
+          "fecha": "2025-05-20",
+          "monto": 4545000,
+          "fuente": "Servicios operativos Mayo",
+          "descripcion": "Ingresos complementarios de Dirección Comercial en Mayo"
+        },
+        {
+          "fecha": "2025-06-05",
+          "monto": 5940000,
+          "fuente": "Contrato estratégico Junio",
+          "descripcion": "Desembolso principal de Dirección Comercial en Junio"
+        },
+        {
+          "fecha": "2025-06-20",
+          "monto": 4860000,
+          "fuente": "Servicios operativos Junio",
+          "descripcion": "Ingresos complementarios de Dirección Comercial en Junio"
+        },
+        {
+          "fecha": "2025-07-05",
+          "monto": 6160000,
+          "fuente": "Contrato estratégico Julio",
+          "descripcion": "Desembolso principal de Dirección Comercial en Julio"
+        },
+        {
+          "fecha": "2025-07-20",
+          "monto": 5040000,
+          "fuente": "Servicios operativos Julio",
+          "descripcion": "Ingresos complementarios de Dirección Comercial en Julio"
+        },
+        {
+          "fecha": "2025-08-05",
+          "monto": 6325000,
+          "fuente": "Contrato estratégico Agosto",
+          "descripcion": "Desembolso principal de Dirección Comercial en Agosto"
+        },
+        {
+          "fecha": "2025-08-20",
+          "monto": 5175000,
+          "fuente": "Servicios operativos Agosto",
+          "descripcion": "Ingresos complementarios de Dirección Comercial en Agosto"
+        },
+        {
+          "fecha": "2025-09-05",
+          "monto": 6490000,
+          "fuente": "Contrato estratégico Septiembre",
+          "descripcion": "Desembolso principal de Dirección Comercial en Septiembre"
+        },
+        {
+          "fecha": "2025-09-20",
+          "monto": 5310000,
+          "fuente": "Servicios operativos Septiembre",
+          "descripcion": "Ingresos complementarios de Dirección Comercial en Septiembre"
+        },
+        {
+          "fecha": "2025-10-05",
+          "monto": 6600000,
+          "fuente": "Contrato estratégico Octubre",
+          "descripcion": "Desembolso principal de Dirección Comercial en Octubre"
+        },
+        {
+          "fecha": "2025-10-20",
+          "monto": 5400000,
+          "fuente": "Servicios operativos Octubre",
+          "descripcion": "Ingresos complementarios de Dirección Comercial en Octubre"
+        },
+        {
+          "fecha": "2025-11-05",
+          "monto": 6765000,
+          "fuente": "Contrato estratégico Noviembre",
+          "descripcion": "Desembolso principal de Dirección Comercial en Noviembre"
+        },
+        {
+          "fecha": "2025-11-20",
+          "monto": 5535000,
+          "fuente": "Servicios operativos Noviembre",
+          "descripcion": "Ingresos complementarios de Dirección Comercial en Noviembre"
+        },
+        {
+          "fecha": "2025-12-05",
+          "monto": 6930000,
+          "fuente": "Contrato estratégico Diciembre",
+          "descripcion": "Desembolso principal de Dirección Comercial en Diciembre"
+        },
+        {
+          "fecha": "2025-12-20",
+          "monto": 5670000,
+          "fuente": "Servicios operativos Diciembre",
+          "descripcion": "Ingresos complementarios de Dirección Comercial en Diciembre"
+        }
+      ],
+      "gastos": [
+        {
+          "fecha": "2025-01-10",
+          "monto": 2494000,
+          "categoria": "Representaciones internacionales",
+          "descripcion": "Ejecución operativa (Representaciones internacionales) Enero"
+        },
+        {
+          "fecha": "2025-01-25",
+          "monto": 1806000,
+          "categoria": "Feria y eventos",
+          "descripcion": "Actividad complementaria (Feria y eventos) Enero"
+        },
+        {
+          "fecha": "2025-02-10",
+          "monto": 2668000,
+          "categoria": "CRM y licencias",
+          "descripcion": "Ejecución operativa (CRM y licencias) Febrero"
+        },
+        {
+          "fecha": "2025-02-25",
+          "monto": 1932000,
+          "categoria": "Representaciones internacionales",
+          "descripcion": "Actividad complementaria (Representaciones internacionales) Febrero"
+        },
+        {
+          "fecha": "2025-03-10",
+          "monto": 2784000,
+          "categoria": "Feria y eventos",
+          "descripcion": "Ejecución operativa (Feria y eventos) Marzo"
+        },
+        {
+          "fecha": "2025-03-25",
+          "monto": 2016000,
+          "categoria": "CRM y licencias",
+          "descripcion": "Actividad complementaria (CRM y licencias) Marzo"
+        },
+        {
+          "fecha": "2025-04-10",
+          "monto": 2958000,
+          "categoria": "Representaciones internacionales",
+          "descripcion": "Ejecución operativa (Representaciones internacionales) Abril"
+        },
+        {
+          "fecha": "2025-04-25",
+          "monto": 2142000,
+          "categoria": "Feria y eventos",
+          "descripcion": "Actividad complementaria (Feria y eventos) Abril"
+        },
+        {
+          "fecha": "2025-05-10",
+          "monto": 3016000,
+          "categoria": "CRM y licencias",
+          "descripcion": "Ejecución operativa (CRM y licencias) Mayo"
+        },
+        {
+          "fecha": "2025-05-25",
+          "monto": 2184000,
+          "categoria": "Representaciones internacionales",
+          "descripcion": "Actividad complementaria (Representaciones internacionales) Mayo"
+        },
+        {
+          "fecha": "2025-06-10",
+          "monto": 3132000,
+          "categoria": "Feria y eventos",
+          "descripcion": "Ejecución operativa (Feria y eventos) Junio"
+        },
+        {
+          "fecha": "2025-06-25",
+          "monto": 2268000,
+          "categoria": "CRM y licencias",
+          "descripcion": "Actividad complementaria (CRM y licencias) Junio"
+        },
+        {
+          "fecha": "2025-07-10",
+          "monto": 3190000,
+          "categoria": "Representaciones internacionales",
+          "descripcion": "Ejecución operativa (Representaciones internacionales) Julio"
+        },
+        {
+          "fecha": "2025-07-25",
+          "monto": 2310000,
+          "categoria": "Feria y eventos",
+          "descripcion": "Actividad complementaria (Feria y eventos) Julio"
+        },
+        {
+          "fecha": "2025-08-10",
+          "monto": 3248000,
+          "categoria": "CRM y licencias",
+          "descripcion": "Ejecución operativa (CRM y licencias) Agosto"
+        },
+        {
+          "fecha": "2025-08-25",
+          "monto": 2352000,
+          "categoria": "Representaciones internacionales",
+          "descripcion": "Actividad complementaria (Representaciones internacionales) Agosto"
+        },
+        {
+          "fecha": "2025-09-10",
+          "monto": 3364000,
+          "categoria": "Feria y eventos",
+          "descripcion": "Ejecución operativa (Feria y eventos) Septiembre"
+        },
+        {
+          "fecha": "2025-09-25",
+          "monto": 2436000,
+          "categoria": "CRM y licencias",
+          "descripcion": "Actividad complementaria (CRM y licencias) Septiembre"
+        },
+        {
+          "fecha": "2025-10-10",
+          "monto": 3480000,
+          "categoria": "Representaciones internacionales",
+          "descripcion": "Ejecución operativa (Representaciones internacionales) Octubre"
+        },
+        {
+          "fecha": "2025-10-25",
+          "monto": 2520000,
+          "categoria": "Feria y eventos",
+          "descripcion": "Actividad complementaria (Feria y eventos) Octubre"
+        },
+        {
+          "fecha": "2025-11-10",
+          "monto": 3538000,
+          "categoria": "CRM y licencias",
+          "descripcion": "Ejecución operativa (CRM y licencias) Noviembre"
+        },
+        {
+          "fecha": "2025-11-25",
+          "monto": 2562000,
+          "categoria": "Representaciones internacionales",
+          "descripcion": "Actividad complementaria (Representaciones internacionales) Noviembre"
+        },
+        {
+          "fecha": "2025-12-10",
+          "monto": 3596000,
+          "categoria": "Feria y eventos",
+          "descripcion": "Ejecución operativa (Feria y eventos) Diciembre"
+        },
+        {
+          "fecha": "2025-12-25",
+          "monto": 2604000,
+          "categoria": "CRM y licencias",
+          "descripcion": "Actividad complementaria (CRM y licencias) Diciembre"
+        }
+      ]
+    },
+    {
+      "nombre": "Dirección de Proyectos",
+      "presupuesto_anual": 90000000,
+      "presupuesto_mensual": {
+        "enero": {
+          "plan": 7000000,
+          "ingresos": 11800000,
+          "gastos": 6200000
+        },
+        "febrero": {
+          "plan": 7200000,
+          "ingresos": 12000000,
+          "gastos": 6400000
+        },
+        "marzo": {
+          "plan": 7600000,
+          "ingresos": 13500000,
+          "gastos": 6800000
+        },
+        "abril": {
+          "plan": 7800000,
+          "ingresos": 14000000,
+          "gastos": 7100000
+        },
+        "mayo": {
+          "plan": 8000000,
+          "ingresos": 14500000,
+          "gastos": 6900000
+        },
+        "junio": {
+          "plan": 8200000,
+          "ingresos": 15000000,
+          "gastos": 7200000
+        },
+        "julio": {
+          "plan": 8400000,
+          "ingresos": 15200000,
+          "gastos": 7400000
+        },
+        "agosto": {
+          "plan": 8600000,
+          "ingresos": 15500000,
+          "gastos": 7600000
+        },
+        "septiembre": {
+          "plan": 8800000,
+          "ingresos": 15800000,
+          "gastos": 7800000
+        },
+        "octubre": {
+          "plan": 9000000,
+          "ingresos": 16200000,
+          "gastos": 7900000
+        },
+        "noviembre": {
+          "plan": 9200000,
+          "ingresos": 16500000,
+          "gastos": 8000000
+        },
+        "diciembre": {
+          "plan": 9400000,
+          "ingresos": 16800000,
+          "gastos": 8200000
+        }
+      },
+      "categorias_gasto": [
+        {
+          "nombre": "PMO y consultoría",
+          "monto": 26000000
+        },
+        {
+          "nombre": "Sistemas de seguimiento",
+          "monto": 15000000
+        },
+        {
+          "nombre": "Formación del equipo",
+          "monto": 9000000
+        }
+      ],
+      "ingresos": [
+        {
+          "fecha": "2025-01-05",
+          "monto": 6490000,
+          "fuente": "Contrato estratégico Enero",
+          "descripcion": "Desembolso principal de Dirección de Proyectos en Enero"
+        },
+        {
+          "fecha": "2025-01-20",
+          "monto": 5310000,
+          "fuente": "Servicios operativos Enero",
+          "descripcion": "Ingresos complementarios de Dirección de Proyectos en Enero"
+        },
+        {
+          "fecha": "2025-02-05",
+          "monto": 6600000,
+          "fuente": "Contrato estratégico Febrero",
+          "descripcion": "Desembolso principal de Dirección de Proyectos en Febrero"
+        },
+        {
+          "fecha": "2025-02-20",
+          "monto": 5400000,
+          "fuente": "Servicios operativos Febrero",
+          "descripcion": "Ingresos complementarios de Dirección de Proyectos en Febrero"
+        },
+        {
+          "fecha": "2025-03-05",
+          "monto": 7425000,
+          "fuente": "Contrato estratégico Marzo",
+          "descripcion": "Desembolso principal de Dirección de Proyectos en Marzo"
+        },
+        {
+          "fecha": "2025-03-20",
+          "monto": 6075000,
+          "fuente": "Servicios operativos Marzo",
+          "descripcion": "Ingresos complementarios de Dirección de Proyectos en Marzo"
+        },
+        {
+          "fecha": "2025-04-05",
+          "monto": 7700000,
+          "fuente": "Contrato estratégico Abril",
+          "descripcion": "Desembolso principal de Dirección de Proyectos en Abril"
+        },
+        {
+          "fecha": "2025-04-20",
+          "monto": 6300000,
+          "fuente": "Servicios operativos Abril",
+          "descripcion": "Ingresos complementarios de Dirección de Proyectos en Abril"
+        },
+        {
+          "fecha": "2025-05-05",
+          "monto": 7975000,
+          "fuente": "Contrato estratégico Mayo",
+          "descripcion": "Desembolso principal de Dirección de Proyectos en Mayo"
+        },
+        {
+          "fecha": "2025-05-20",
+          "monto": 6525000,
+          "fuente": "Servicios operativos Mayo",
+          "descripcion": "Ingresos complementarios de Dirección de Proyectos en Mayo"
+        },
+        {
+          "fecha": "2025-06-05",
+          "monto": 8250000,
+          "fuente": "Contrato estratégico Junio",
+          "descripcion": "Desembolso principal de Dirección de Proyectos en Junio"
+        },
+        {
+          "fecha": "2025-06-20",
+          "monto": 6750000,
+          "fuente": "Servicios operativos Junio",
+          "descripcion": "Ingresos complementarios de Dirección de Proyectos en Junio"
+        },
+        {
+          "fecha": "2025-07-05",
+          "monto": 8360000,
+          "fuente": "Contrato estratégico Julio",
+          "descripcion": "Desembolso principal de Dirección de Proyectos en Julio"
+        },
+        {
+          "fecha": "2025-07-20",
+          "monto": 6840000,
+          "fuente": "Servicios operativos Julio",
+          "descripcion": "Ingresos complementarios de Dirección de Proyectos en Julio"
+        },
+        {
+          "fecha": "2025-08-05",
+          "monto": 8525000,
+          "fuente": "Contrato estratégico Agosto",
+          "descripcion": "Desembolso principal de Dirección de Proyectos en Agosto"
+        },
+        {
+          "fecha": "2025-08-20",
+          "monto": 6975000,
+          "fuente": "Servicios operativos Agosto",
+          "descripcion": "Ingresos complementarios de Dirección de Proyectos en Agosto"
+        },
+        {
+          "fecha": "2025-09-05",
+          "monto": 8690000,
+          "fuente": "Contrato estratégico Septiembre",
+          "descripcion": "Desembolso principal de Dirección de Proyectos en Septiembre"
+        },
+        {
+          "fecha": "2025-09-20",
+          "monto": 7110000,
+          "fuente": "Servicios operativos Septiembre",
+          "descripcion": "Ingresos complementarios de Dirección de Proyectos en Septiembre"
+        },
+        {
+          "fecha": "2025-10-05",
+          "monto": 8910000,
+          "fuente": "Contrato estratégico Octubre",
+          "descripcion": "Desembolso principal de Dirección de Proyectos en Octubre"
+        },
+        {
+          "fecha": "2025-10-20",
+          "monto": 7290000,
+          "fuente": "Servicios operativos Octubre",
+          "descripcion": "Ingresos complementarios de Dirección de Proyectos en Octubre"
+        },
+        {
+          "fecha": "2025-11-05",
+          "monto": 9075000,
+          "fuente": "Contrato estratégico Noviembre",
+          "descripcion": "Desembolso principal de Dirección de Proyectos en Noviembre"
+        },
+        {
+          "fecha": "2025-11-20",
+          "monto": 7425000,
+          "fuente": "Servicios operativos Noviembre",
+          "descripcion": "Ingresos complementarios de Dirección de Proyectos en Noviembre"
+        },
+        {
+          "fecha": "2025-12-05",
+          "monto": 9240000,
+          "fuente": "Contrato estratégico Diciembre",
+          "descripcion": "Desembolso principal de Dirección de Proyectos en Diciembre"
+        },
+        {
+          "fecha": "2025-12-20",
+          "monto": 7560000,
+          "fuente": "Servicios operativos Diciembre",
+          "descripcion": "Ingresos complementarios de Dirección de Proyectos en Diciembre"
+        }
+      ],
+      "gastos": [
+        {
+          "fecha": "2025-01-10",
+          "monto": 3596000,
+          "categoria": "Formación del equipo",
+          "descripcion": "Ejecución operativa (Formación del equipo) Enero"
+        },
+        {
+          "fecha": "2025-01-25",
+          "monto": 2604000,
+          "categoria": "PMO y consultoría",
+          "descripcion": "Actividad complementaria (PMO y consultoría) Enero"
+        },
+        {
+          "fecha": "2025-02-10",
+          "monto": 3712000,
+          "categoria": "Sistemas de seguimiento",
+          "descripcion": "Ejecución operativa (Sistemas de seguimiento) Febrero"
+        },
+        {
+          "fecha": "2025-02-25",
+          "monto": 2688000,
+          "categoria": "Formación del equipo",
+          "descripcion": "Actividad complementaria (Formación del equipo) Febrero"
+        },
+        {
+          "fecha": "2025-03-10",
+          "monto": 3944000,
+          "categoria": "PMO y consultoría",
+          "descripcion": "Ejecución operativa (PMO y consultoría) Marzo"
+        },
+        {
+          "fecha": "2025-03-25",
+          "monto": 2856000,
+          "categoria": "Sistemas de seguimiento",
+          "descripcion": "Actividad complementaria (Sistemas de seguimiento) Marzo"
+        },
+        {
+          "fecha": "2025-04-10",
+          "monto": 4118000,
+          "categoria": "Formación del equipo",
+          "descripcion": "Ejecución operativa (Formación del equipo) Abril"
+        },
+        {
+          "fecha": "2025-04-25",
+          "monto": 2982000,
+          "categoria": "PMO y consultoría",
+          "descripcion": "Actividad complementaria (PMO y consultoría) Abril"
+        },
+        {
+          "fecha": "2025-05-10",
+          "monto": 4002000,
+          "categoria": "Sistemas de seguimiento",
+          "descripcion": "Ejecución operativa (Sistemas de seguimiento) Mayo"
+        },
+        {
+          "fecha": "2025-05-25",
+          "monto": 2898000,
+          "categoria": "Formación del equipo",
+          "descripcion": "Actividad complementaria (Formación del equipo) Mayo"
+        },
+        {
+          "fecha": "2025-06-10",
+          "monto": 4176000,
+          "categoria": "PMO y consultoría",
+          "descripcion": "Ejecución operativa (PMO y consultoría) Junio"
+        },
+        {
+          "fecha": "2025-06-25",
+          "monto": 3024000,
+          "categoria": "Sistemas de seguimiento",
+          "descripcion": "Actividad complementaria (Sistemas de seguimiento) Junio"
+        },
+        {
+          "fecha": "2025-07-10",
+          "monto": 4292000,
+          "categoria": "Formación del equipo",
+          "descripcion": "Ejecución operativa (Formación del equipo) Julio"
+        },
+        {
+          "fecha": "2025-07-25",
+          "monto": 3108000,
+          "categoria": "PMO y consultoría",
+          "descripcion": "Actividad complementaria (PMO y consultoría) Julio"
+        },
+        {
+          "fecha": "2025-08-10",
+          "monto": 4408000,
+          "categoria": "Sistemas de seguimiento",
+          "descripcion": "Ejecución operativa (Sistemas de seguimiento) Agosto"
+        },
+        {
+          "fecha": "2025-08-25",
+          "monto": 3192000,
+          "categoria": "Formación del equipo",
+          "descripcion": "Actividad complementaria (Formación del equipo) Agosto"
+        },
+        {
+          "fecha": "2025-09-10",
+          "monto": 4524000,
+          "categoria": "PMO y consultoría",
+          "descripcion": "Ejecución operativa (PMO y consultoría) Septiembre"
+        },
+        {
+          "fecha": "2025-09-25",
+          "monto": 3276000,
+          "categoria": "Sistemas de seguimiento",
+          "descripcion": "Actividad complementaria (Sistemas de seguimiento) Septiembre"
+        },
+        {
+          "fecha": "2025-10-10",
+          "monto": 4582000,
+          "categoria": "Formación del equipo",
+          "descripcion": "Ejecución operativa (Formación del equipo) Octubre"
+        },
+        {
+          "fecha": "2025-10-25",
+          "monto": 3318000,
+          "categoria": "PMO y consultoría",
+          "descripcion": "Actividad complementaria (PMO y consultoría) Octubre"
+        },
+        {
+          "fecha": "2025-11-10",
+          "monto": 4640000,
+          "categoria": "Sistemas de seguimiento",
+          "descripcion": "Ejecución operativa (Sistemas de seguimiento) Noviembre"
+        },
+        {
+          "fecha": "2025-11-25",
+          "monto": 3360000,
+          "categoria": "Formación del equipo",
+          "descripcion": "Actividad complementaria (Formación del equipo) Noviembre"
+        },
+        {
+          "fecha": "2025-12-10",
+          "monto": 4756000,
+          "categoria": "PMO y consultoría",
+          "descripcion": "Ejecución operativa (PMO y consultoría) Diciembre"
+        },
+        {
+          "fecha": "2025-12-25",
+          "monto": 3444000,
+          "categoria": "Sistemas de seguimiento",
+          "descripcion": "Actividad complementaria (Sistemas de seguimiento) Diciembre"
+        }
+      ]
+    },
+    {
+      "nombre": "Diseño y Experiencia de Usuario",
+      "presupuesto_anual": 30000000,
+      "presupuesto_mensual": {
+        "enero": {
+          "plan": 2500000,
+          "ingresos": 4200000,
+          "gastos": 2100000
+        },
+        "febrero": {
+          "plan": 2400000,
+          "ingresos": 4300000,
+          "gastos": 2000000
+        },
+        "marzo": {
+          "plan": 2600000,
+          "ingresos": 4600000,
+          "gastos": 2300000
+        },
+        "abril": {
+          "plan": 2700000,
+          "ingresos": 4800000,
+          "gastos": 2400000
+        },
+        "mayo": {
+          "plan": 2800000,
+          "ingresos": 5000000,
+          "gastos": 2500000
+        },
+        "junio": {
+          "plan": 2900000,
+          "ingresos": 5200000,
+          "gastos": 2600000
+        },
+        "julio": {
+          "plan": 3000000,
+          "ingresos": 5400000,
+          "gastos": 2700000
+        },
+        "agosto": {
+          "plan": 3050000,
+          "ingresos": 5500000,
+          "gastos": 2750000
+        },
+        "septiembre": {
+          "plan": 3100000,
+          "ingresos": 5600000,
+          "gastos": 2800000
+        },
+        "octubre": {
+          "plan": 3150000,
+          "ingresos": 5700000,
+          "gastos": 2850000
+        },
+        "noviembre": {
+          "plan": 3200000,
+          "ingresos": 5800000,
+          "gastos": 2900000
+        },
+        "diciembre": {
+          "plan": 3250000,
+          "ingresos": 6000000,
+          "gastos": 2950000
+        }
+      },
+      "categorias_gasto": [
+        {
+          "nombre": "Investigación UX",
+          "monto": 6500000
+        },
+        {
+          "nombre": "Herramientas de diseño",
+          "monto": 5200000
+        },
+        {
+          "nombre": "Testing y laboratorios",
+          "monto": 4200000
+        }
+      ],
+      "ingresos": [
+        {
+          "fecha": "2025-01-05",
+          "monto": 2310000,
+          "fuente": "Contrato estratégico Enero",
+          "descripcion": "Desembolso principal de Diseño y Experiencia de Usuario en Enero"
+        },
+        {
+          "fecha": "2025-01-20",
+          "monto": 1890000,
+          "fuente": "Servicios operativos Enero",
+          "descripcion": "Ingresos complementarios de Diseño y Experiencia de Usuario en Enero"
+        },
+        {
+          "fecha": "2025-02-05",
+          "monto": 2365000,
+          "fuente": "Contrato estratégico Febrero",
+          "descripcion": "Desembolso principal de Diseño y Experiencia de Usuario en Febrero"
+        },
+        {
+          "fecha": "2025-02-20",
+          "monto": 1935000,
+          "fuente": "Servicios operativos Febrero",
+          "descripcion": "Ingresos complementarios de Diseño y Experiencia de Usuario en Febrero"
+        },
+        {
+          "fecha": "2025-03-05",
+          "monto": 2530000,
+          "fuente": "Contrato estratégico Marzo",
+          "descripcion": "Desembolso principal de Diseño y Experiencia de Usuario en Marzo"
+        },
+        {
+          "fecha": "2025-03-20",
+          "monto": 2070000,
+          "fuente": "Servicios operativos Marzo",
+          "descripcion": "Ingresos complementarios de Diseño y Experiencia de Usuario en Marzo"
+        },
+        {
+          "fecha": "2025-04-05",
+          "monto": 2640000,
+          "fuente": "Contrato estratégico Abril",
+          "descripcion": "Desembolso principal de Diseño y Experiencia de Usuario en Abril"
+        },
+        {
+          "fecha": "2025-04-20",
+          "monto": 2160000,
+          "fuente": "Servicios operativos Abril",
+          "descripcion": "Ingresos complementarios de Diseño y Experiencia de Usuario en Abril"
+        },
+        {
+          "fecha": "2025-05-05",
+          "monto": 2750000,
+          "fuente": "Contrato estratégico Mayo",
+          "descripcion": "Desembolso principal de Diseño y Experiencia de Usuario en Mayo"
+        },
+        {
+          "fecha": "2025-05-20",
+          "monto": 2250000,
+          "fuente": "Servicios operativos Mayo",
+          "descripcion": "Ingresos complementarios de Diseño y Experiencia de Usuario en Mayo"
+        },
+        {
+          "fecha": "2025-06-05",
+          "monto": 2860000,
+          "fuente": "Contrato estratégico Junio",
+          "descripcion": "Desembolso principal de Diseño y Experiencia de Usuario en Junio"
+        },
+        {
+          "fecha": "2025-06-20",
+          "monto": 2340000,
+          "fuente": "Servicios operativos Junio",
+          "descripcion": "Ingresos complementarios de Diseño y Experiencia de Usuario en Junio"
+        },
+        {
+          "fecha": "2025-07-05",
+          "monto": 2970000,
+          "fuente": "Contrato estratégico Julio",
+          "descripcion": "Desembolso principal de Diseño y Experiencia de Usuario en Julio"
+        },
+        {
+          "fecha": "2025-07-20",
+          "monto": 2430000,
+          "fuente": "Servicios operativos Julio",
+          "descripcion": "Ingresos complementarios de Diseño y Experiencia de Usuario en Julio"
+        },
+        {
+          "fecha": "2025-08-05",
+          "monto": 3025000,
+          "fuente": "Contrato estratégico Agosto",
+          "descripcion": "Desembolso principal de Diseño y Experiencia de Usuario en Agosto"
+        },
+        {
+          "fecha": "2025-08-20",
+          "monto": 2475000,
+          "fuente": "Servicios operativos Agosto",
+          "descripcion": "Ingresos complementarios de Diseño y Experiencia de Usuario en Agosto"
+        },
+        {
+          "fecha": "2025-09-05",
+          "monto": 3080000,
+          "fuente": "Contrato estratégico Septiembre",
+          "descripcion": "Desembolso principal de Diseño y Experiencia de Usuario en Septiembre"
+        },
+        {
+          "fecha": "2025-09-20",
+          "monto": 2520000,
+          "fuente": "Servicios operativos Septiembre",
+          "descripcion": "Ingresos complementarios de Diseño y Experiencia de Usuario en Septiembre"
+        },
+        {
+          "fecha": "2025-10-05",
+          "monto": 3135000,
+          "fuente": "Contrato estratégico Octubre",
+          "descripcion": "Desembolso principal de Diseño y Experiencia de Usuario en Octubre"
+        },
+        {
+          "fecha": "2025-10-20",
+          "monto": 2565000,
+          "fuente": "Servicios operativos Octubre",
+          "descripcion": "Ingresos complementarios de Diseño y Experiencia de Usuario en Octubre"
+        },
+        {
+          "fecha": "2025-11-05",
+          "monto": 3190000,
+          "fuente": "Contrato estratégico Noviembre",
+          "descripcion": "Desembolso principal de Diseño y Experiencia de Usuario en Noviembre"
+        },
+        {
+          "fecha": "2025-11-20",
+          "monto": 2610000,
+          "fuente": "Servicios operativos Noviembre",
+          "descripcion": "Ingresos complementarios de Diseño y Experiencia de Usuario en Noviembre"
+        },
+        {
+          "fecha": "2025-12-05",
+          "monto": 3300000,
+          "fuente": "Contrato estratégico Diciembre",
+          "descripcion": "Desembolso principal de Diseño y Experiencia de Usuario en Diciembre"
+        },
+        {
+          "fecha": "2025-12-20",
+          "monto": 2700000,
+          "fuente": "Servicios operativos Diciembre",
+          "descripcion": "Ingresos complementarios de Diseño y Experiencia de Usuario en Diciembre"
+        }
+      ],
+      "gastos": [
+        {
+          "fecha": "2025-01-10",
+          "monto": 1218000,
+          "categoria": "Testing y laboratorios",
+          "descripcion": "Ejecución operativa (Testing y laboratorios) Enero"
+        },
+        {
+          "fecha": "2025-01-25",
+          "monto": 882000,
+          "categoria": "Investigación UX",
+          "descripcion": "Actividad complementaria (Investigación UX) Enero"
+        },
+        {
+          "fecha": "2025-02-10",
+          "monto": 1160000,
+          "categoria": "Herramientas de diseño",
+          "descripcion": "Ejecución operativa (Herramientas de diseño) Febrero"
+        },
+        {
+          "fecha": "2025-02-25",
+          "monto": 840000,
+          "categoria": "Testing y laboratorios",
+          "descripcion": "Actividad complementaria (Testing y laboratorios) Febrero"
+        },
+        {
+          "fecha": "2025-03-10",
+          "monto": 1334000,
+          "categoria": "Investigación UX",
+          "descripcion": "Ejecución operativa (Investigación UX) Marzo"
+        },
+        {
+          "fecha": "2025-03-25",
+          "monto": 966000,
+          "categoria": "Herramientas de diseño",
+          "descripcion": "Actividad complementaria (Herramientas de diseño) Marzo"
+        },
+        {
+          "fecha": "2025-04-10",
+          "monto": 1392000,
+          "categoria": "Testing y laboratorios",
+          "descripcion": "Ejecución operativa (Testing y laboratorios) Abril"
+        },
+        {
+          "fecha": "2025-04-25",
+          "monto": 1008000,
+          "categoria": "Investigación UX",
+          "descripcion": "Actividad complementaria (Investigación UX) Abril"
+        },
+        {
+          "fecha": "2025-05-10",
+          "monto": 1450000,
+          "categoria": "Herramientas de diseño",
+          "descripcion": "Ejecución operativa (Herramientas de diseño) Mayo"
+        },
+        {
+          "fecha": "2025-05-25",
+          "monto": 1050000,
+          "categoria": "Testing y laboratorios",
+          "descripcion": "Actividad complementaria (Testing y laboratorios) Mayo"
+        },
+        {
+          "fecha": "2025-06-10",
+          "monto": 1508000,
+          "categoria": "Investigación UX",
+          "descripcion": "Ejecución operativa (Investigación UX) Junio"
+        },
+        {
+          "fecha": "2025-06-25",
+          "monto": 1092000,
+          "categoria": "Herramientas de diseño",
+          "descripcion": "Actividad complementaria (Herramientas de diseño) Junio"
+        },
+        {
+          "fecha": "2025-07-10",
+          "monto": 1566000,
+          "categoria": "Testing y laboratorios",
+          "descripcion": "Ejecución operativa (Testing y laboratorios) Julio"
+        },
+        {
+          "fecha": "2025-07-25",
+          "monto": 1134000,
+          "categoria": "Investigación UX",
+          "descripcion": "Actividad complementaria (Investigación UX) Julio"
+        },
+        {
+          "fecha": "2025-08-10",
+          "monto": 1595000,
+          "categoria": "Herramientas de diseño",
+          "descripcion": "Ejecución operativa (Herramientas de diseño) Agosto"
+        },
+        {
+          "fecha": "2025-08-25",
+          "monto": 1155000,
+          "categoria": "Testing y laboratorios",
+          "descripcion": "Actividad complementaria (Testing y laboratorios) Agosto"
+        },
+        {
+          "fecha": "2025-09-10",
+          "monto": 1624000,
+          "categoria": "Investigación UX",
+          "descripcion": "Ejecución operativa (Investigación UX) Septiembre"
+        },
+        {
+          "fecha": "2025-09-25",
+          "monto": 1176000,
+          "categoria": "Herramientas de diseño",
+          "descripcion": "Actividad complementaria (Herramientas de diseño) Septiembre"
+        },
+        {
+          "fecha": "2025-10-10",
+          "monto": 1653000,
+          "categoria": "Testing y laboratorios",
+          "descripcion": "Ejecución operativa (Testing y laboratorios) Octubre"
+        },
+        {
+          "fecha": "2025-10-25",
+          "monto": 1197000,
+          "categoria": "Investigación UX",
+          "descripcion": "Actividad complementaria (Investigación UX) Octubre"
+        },
+        {
+          "fecha": "2025-11-10",
+          "monto": 1682000,
+          "categoria": "Herramientas de diseño",
+          "descripcion": "Ejecución operativa (Herramientas de diseño) Noviembre"
+        },
+        {
+          "fecha": "2025-11-25",
+          "monto": 1218000,
+          "categoria": "Testing y laboratorios",
+          "descripcion": "Actividad complementaria (Testing y laboratorios) Noviembre"
+        },
+        {
+          "fecha": "2025-12-10",
+          "monto": 1711000,
+          "categoria": "Investigación UX",
+          "descripcion": "Ejecución operativa (Investigación UX) Diciembre"
+        },
+        {
+          "fecha": "2025-12-25",
+          "monto": 1239000,
+          "categoria": "Herramientas de diseño",
+          "descripcion": "Actividad complementaria (Herramientas de diseño) Diciembre"
+        }
+      ]
+    },
+    {
+      "nombre": "Finanzas y Control",
+      "presupuesto_anual": 52000000,
+      "presupuesto_mensual": {
+        "enero": {
+          "plan": 4200000,
+          "ingresos": 6000000,
+          "gastos": 3500000
+        },
+        "febrero": {
+          "plan": 4300000,
+          "ingresos": 6200000,
+          "gastos": 3600000
+        },
+        "marzo": {
+          "plan": 4500000,
+          "ingresos": 6400000,
+          "gastos": 3800000
+        },
+        "abril": {
+          "plan": 4600000,
+          "ingresos": 6600000,
+          "gastos": 4000000
+        },
+        "mayo": {
+          "plan": 4700000,
+          "ingresos": 6800000,
+          "gastos": 4100000
+        },
+        "junio": {
+          "plan": 4800000,
+          "ingresos": 7000000,
+          "gastos": 4200000
+        },
+        "julio": {
+          "plan": 4900000,
+          "ingresos": 7200000,
+          "gastos": 4300000
+        },
+        "agosto": {
+          "plan": 5000000,
+          "ingresos": 7400000,
+          "gastos": 4400000
+        },
+        "septiembre": {
+          "plan": 5100000,
+          "ingresos": 7600000,
+          "gastos": 4500000
+        },
+        "octubre": {
+          "plan": 5200000,
+          "ingresos": 7800000,
+          "gastos": 4600000
+        },
+        "noviembre": {
+          "plan": 5300000,
+          "ingresos": 8000000,
+          "gastos": 4700000
+        },
+        "diciembre": {
+          "plan": 5400000,
+          "ingresos": 8200000,
+          "gastos": 4800000
+        }
+      },
+      "categorias_gasto": [
+        {
+          "nombre": "Auditoría y control",
+          "monto": 12000000
+        },
+        {
+          "nombre": "Herramientas financieras",
+          "monto": 8000000
+        },
+        {
+          "nombre": "Gestión de caja",
+          "monto": 6400000
+        }
+      ],
+      "ingresos": [
+        {
+          "fecha": "2025-01-05",
+          "monto": 3300000,
+          "fuente": "Contrato estratégico Enero",
+          "descripcion": "Desembolso principal de Finanzas y Control en Enero"
+        },
+        {
+          "fecha": "2025-01-20",
+          "monto": 2700000,
+          "fuente": "Servicios operativos Enero",
+          "descripcion": "Ingresos complementarios de Finanzas y Control en Enero"
+        },
+        {
+          "fecha": "2025-02-05",
+          "monto": 3410000,
+          "fuente": "Contrato estratégico Febrero",
+          "descripcion": "Desembolso principal de Finanzas y Control en Febrero"
+        },
+        {
+          "fecha": "2025-02-20",
+          "monto": 2790000,
+          "fuente": "Servicios operativos Febrero",
+          "descripcion": "Ingresos complementarios de Finanzas y Control en Febrero"
+        },
+        {
+          "fecha": "2025-03-05",
+          "monto": 3520000,
+          "fuente": "Contrato estratégico Marzo",
+          "descripcion": "Desembolso principal de Finanzas y Control en Marzo"
+        },
+        {
+          "fecha": "2025-03-20",
+          "monto": 2880000,
+          "fuente": "Servicios operativos Marzo",
+          "descripcion": "Ingresos complementarios de Finanzas y Control en Marzo"
+        },
+        {
+          "fecha": "2025-04-05",
+          "monto": 3630000,
+          "fuente": "Contrato estratégico Abril",
+          "descripcion": "Desembolso principal de Finanzas y Control en Abril"
+        },
+        {
+          "fecha": "2025-04-20",
+          "monto": 2970000,
+          "fuente": "Servicios operativos Abril",
+          "descripcion": "Ingresos complementarios de Finanzas y Control en Abril"
+        },
+        {
+          "fecha": "2025-05-05",
+          "monto": 3740000,
+          "fuente": "Contrato estratégico Mayo",
+          "descripcion": "Desembolso principal de Finanzas y Control en Mayo"
+        },
+        {
+          "fecha": "2025-05-20",
+          "monto": 3060000,
+          "fuente": "Servicios operativos Mayo",
+          "descripcion": "Ingresos complementarios de Finanzas y Control en Mayo"
+        },
+        {
+          "fecha": "2025-06-05",
+          "monto": 3850000,
+          "fuente": "Contrato estratégico Junio",
+          "descripcion": "Desembolso principal de Finanzas y Control en Junio"
+        },
+        {
+          "fecha": "2025-06-20",
+          "monto": 3150000,
+          "fuente": "Servicios operativos Junio",
+          "descripcion": "Ingresos complementarios de Finanzas y Control en Junio"
+        },
+        {
+          "fecha": "2025-07-05",
+          "monto": 3960000,
+          "fuente": "Contrato estratégico Julio",
+          "descripcion": "Desembolso principal de Finanzas y Control en Julio"
+        },
+        {
+          "fecha": "2025-07-20",
+          "monto": 3240000,
+          "fuente": "Servicios operativos Julio",
+          "descripcion": "Ingresos complementarios de Finanzas y Control en Julio"
+        },
+        {
+          "fecha": "2025-08-05",
+          "monto": 4070000,
+          "fuente": "Contrato estratégico Agosto",
+          "descripcion": "Desembolso principal de Finanzas y Control en Agosto"
+        },
+        {
+          "fecha": "2025-08-20",
+          "monto": 3330000,
+          "fuente": "Servicios operativos Agosto",
+          "descripcion": "Ingresos complementarios de Finanzas y Control en Agosto"
+        },
+        {
+          "fecha": "2025-09-05",
+          "monto": 4180000,
+          "fuente": "Contrato estratégico Septiembre",
+          "descripcion": "Desembolso principal de Finanzas y Control en Septiembre"
+        },
+        {
+          "fecha": "2025-09-20",
+          "monto": 3420000,
+          "fuente": "Servicios operativos Septiembre",
+          "descripcion": "Ingresos complementarios de Finanzas y Control en Septiembre"
+        },
+        {
+          "fecha": "2025-10-05",
+          "monto": 4290000,
+          "fuente": "Contrato estratégico Octubre",
+          "descripcion": "Desembolso principal de Finanzas y Control en Octubre"
+        },
+        {
+          "fecha": "2025-10-20",
+          "monto": 3510000,
+          "fuente": "Servicios operativos Octubre",
+          "descripcion": "Ingresos complementarios de Finanzas y Control en Octubre"
+        },
+        {
+          "fecha": "2025-11-05",
+          "monto": 4400000,
+          "fuente": "Contrato estratégico Noviembre",
+          "descripcion": "Desembolso principal de Finanzas y Control en Noviembre"
+        },
+        {
+          "fecha": "2025-11-20",
+          "monto": 3600000,
+          "fuente": "Servicios operativos Noviembre",
+          "descripcion": "Ingresos complementarios de Finanzas y Control en Noviembre"
+        },
+        {
+          "fecha": "2025-12-05",
+          "monto": 4510000,
+          "fuente": "Contrato estratégico Diciembre",
+          "descripcion": "Desembolso principal de Finanzas y Control en Diciembre"
+        },
+        {
+          "fecha": "2025-12-20",
+          "monto": 3690000,
+          "fuente": "Servicios operativos Diciembre",
+          "descripcion": "Ingresos complementarios de Finanzas y Control en Diciembre"
+        }
+      ],
+      "gastos": [
+        {
+          "fecha": "2025-01-10",
+          "monto": 2030000,
+          "categoria": "Gestión de caja",
+          "descripcion": "Ejecución operativa (Gestión de caja) Enero"
+        },
+        {
+          "fecha": "2025-01-25",
+          "monto": 1470000,
+          "categoria": "Auditoría y control",
+          "descripcion": "Actividad complementaria (Auditoría y control) Enero"
+        },
+        {
+          "fecha": "2025-02-10",
+          "monto": 2088000,
+          "categoria": "Herramientas financieras",
+          "descripcion": "Ejecución operativa (Herramientas financieras) Febrero"
+        },
+        {
+          "fecha": "2025-02-25",
+          "monto": 1512000,
+          "categoria": "Gestión de caja",
+          "descripcion": "Actividad complementaria (Gestión de caja) Febrero"
+        },
+        {
+          "fecha": "2025-03-10",
+          "monto": 2204000,
+          "categoria": "Auditoría y control",
+          "descripcion": "Ejecución operativa (Auditoría y control) Marzo"
+        },
+        {
+          "fecha": "2025-03-25",
+          "monto": 1596000,
+          "categoria": "Herramientas financieras",
+          "descripcion": "Actividad complementaria (Herramientas financieras) Marzo"
+        },
+        {
+          "fecha": "2025-04-10",
+          "monto": 2320000,
+          "categoria": "Gestión de caja",
+          "descripcion": "Ejecución operativa (Gestión de caja) Abril"
+        },
+        {
+          "fecha": "2025-04-25",
+          "monto": 1680000,
+          "categoria": "Auditoría y control",
+          "descripcion": "Actividad complementaria (Auditoría y control) Abril"
+        },
+        {
+          "fecha": "2025-05-10",
+          "monto": 2378000,
+          "categoria": "Herramientas financieras",
+          "descripcion": "Ejecución operativa (Herramientas financieras) Mayo"
+        },
+        {
+          "fecha": "2025-05-25",
+          "monto": 1722000,
+          "categoria": "Gestión de caja",
+          "descripcion": "Actividad complementaria (Gestión de caja) Mayo"
+        },
+        {
+          "fecha": "2025-06-10",
+          "monto": 2436000,
+          "categoria": "Auditoría y control",
+          "descripcion": "Ejecución operativa (Auditoría y control) Junio"
+        },
+        {
+          "fecha": "2025-06-25",
+          "monto": 1764000,
+          "categoria": "Herramientas financieras",
+          "descripcion": "Actividad complementaria (Herramientas financieras) Junio"
+        },
+        {
+          "fecha": "2025-07-10",
+          "monto": 2494000,
+          "categoria": "Gestión de caja",
+          "descripcion": "Ejecución operativa (Gestión de caja) Julio"
+        },
+        {
+          "fecha": "2025-07-25",
+          "monto": 1806000,
+          "categoria": "Auditoría y control",
+          "descripcion": "Actividad complementaria (Auditoría y control) Julio"
+        },
+        {
+          "fecha": "2025-08-10",
+          "monto": 2552000,
+          "categoria": "Herramientas financieras",
+          "descripcion": "Ejecución operativa (Herramientas financieras) Agosto"
+        },
+        {
+          "fecha": "2025-08-25",
+          "monto": 1848000,
+          "categoria": "Gestión de caja",
+          "descripcion": "Actividad complementaria (Gestión de caja) Agosto"
+        },
+        {
+          "fecha": "2025-09-10",
+          "monto": 2610000,
+          "categoria": "Auditoría y control",
+          "descripcion": "Ejecución operativa (Auditoría y control) Septiembre"
+        },
+        {
+          "fecha": "2025-09-25",
+          "monto": 1890000,
+          "categoria": "Herramientas financieras",
+          "descripcion": "Actividad complementaria (Herramientas financieras) Septiembre"
+        },
+        {
+          "fecha": "2025-10-10",
+          "monto": 2668000,
+          "categoria": "Gestión de caja",
+          "descripcion": "Ejecución operativa (Gestión de caja) Octubre"
+        },
+        {
+          "fecha": "2025-10-25",
+          "monto": 1932000,
+          "categoria": "Auditoría y control",
+          "descripcion": "Actividad complementaria (Auditoría y control) Octubre"
+        },
+        {
+          "fecha": "2025-11-10",
+          "monto": 2726000,
+          "categoria": "Herramientas financieras",
+          "descripcion": "Ejecución operativa (Herramientas financieras) Noviembre"
+        },
+        {
+          "fecha": "2025-11-25",
+          "monto": 1974000,
+          "categoria": "Gestión de caja",
+          "descripcion": "Actividad complementaria (Gestión de caja) Noviembre"
+        },
+        {
+          "fecha": "2025-12-10",
+          "monto": 2784000,
+          "categoria": "Auditoría y control",
+          "descripcion": "Ejecución operativa (Auditoría y control) Diciembre"
+        },
+        {
+          "fecha": "2025-12-25",
+          "monto": 2016000,
+          "categoria": "Herramientas financieras",
+          "descripcion": "Actividad complementaria (Herramientas financieras) Diciembre"
+        }
+      ]
+    },
+    {
+      "nombre": "Logística y Suministros",
+      "presupuesto_anual": 75000000,
+      "presupuesto_mensual": {
+        "enero": {
+          "plan": 6000000,
+          "ingresos": 8200000,
+          "gastos": 5200000
+        },
+        "febrero": {
+          "plan": 6100000,
+          "ingresos": 8500000,
+          "gastos": 5300000
+        },
+        "marzo": {
+          "plan": 6300000,
+          "ingresos": 8700000,
+          "gastos": 5500000
+        },
+        "abril": {
+          "plan": 6500000,
+          "ingresos": 9000000,
+          "gastos": 5600000
+        },
+        "mayo": {
+          "plan": 6700000,
+          "ingresos": 9400000,
+          "gastos": 5900000
+        },
+        "junio": {
+          "plan": 6900000,
+          "ingresos": 9800000,
+          "gastos": 6000000
+        },
+        "julio": {
+          "plan": 7100000,
+          "ingresos": 10000000,
+          "gastos": 6100000
+        },
+        "agosto": {
+          "plan": 7300000,
+          "ingresos": 10200000,
+          "gastos": 6200000
+        },
+        "septiembre": {
+          "plan": 7500000,
+          "ingresos": 10400000,
+          "gastos": 6400000
+        },
+        "octubre": {
+          "plan": 7700000,
+          "ingresos": 10600000,
+          "gastos": 6500000
+        },
+        "noviembre": {
+          "plan": 7900000,
+          "ingresos": 10800000,
+          "gastos": 6600000
+        },
+        "diciembre": {
+          "plan": 8100000,
+          "ingresos": 11000000,
+          "gastos": 6800000
+        }
+      },
+      "categorias_gasto": [
+        {
+          "nombre": "Contratos 3PL",
+          "monto": 26000000
+        },
+        {
+          "nombre": "Combustible y mantenimiento",
+          "monto": 18000000
+        },
+        {
+          "nombre": "Almacenes",
+          "monto": 12000000
+        }
+      ],
+      "ingresos": [
+        {
+          "fecha": "2025-01-05",
+          "monto": 4510000,
+          "fuente": "Contrato estratégico Enero",
+          "descripcion": "Desembolso principal de Logística y Suministros en Enero"
+        },
+        {
+          "fecha": "2025-01-20",
+          "monto": 3690000,
+          "fuente": "Servicios operativos Enero",
+          "descripcion": "Ingresos complementarios de Logística y Suministros en Enero"
+        },
+        {
+          "fecha": "2025-02-05",
+          "monto": 4675000,
+          "fuente": "Contrato estratégico Febrero",
+          "descripcion": "Desembolso principal de Logística y Suministros en Febrero"
+        },
+        {
+          "fecha": "2025-02-20",
+          "monto": 3825000,
+          "fuente": "Servicios operativos Febrero",
+          "descripcion": "Ingresos complementarios de Logística y Suministros en Febrero"
+        },
+        {
+          "fecha": "2025-03-05",
+          "monto": 4785000,
+          "fuente": "Contrato estratégico Marzo",
+          "descripcion": "Desembolso principal de Logística y Suministros en Marzo"
+        },
+        {
+          "fecha": "2025-03-20",
+          "monto": 3915000,
+          "fuente": "Servicios operativos Marzo",
+          "descripcion": "Ingresos complementarios de Logística y Suministros en Marzo"
+        },
+        {
+          "fecha": "2025-04-05",
+          "monto": 4950000,
+          "fuente": "Contrato estratégico Abril",
+          "descripcion": "Desembolso principal de Logística y Suministros en Abril"
+        },
+        {
+          "fecha": "2025-04-20",
+          "monto": 4050000,
+          "fuente": "Servicios operativos Abril",
+          "descripcion": "Ingresos complementarios de Logística y Suministros en Abril"
+        },
+        {
+          "fecha": "2025-05-05",
+          "monto": 5170000,
+          "fuente": "Contrato estratégico Mayo",
+          "descripcion": "Desembolso principal de Logística y Suministros en Mayo"
+        },
+        {
+          "fecha": "2025-05-20",
+          "monto": 4230000,
+          "fuente": "Servicios operativos Mayo",
+          "descripcion": "Ingresos complementarios de Logística y Suministros en Mayo"
+        },
+        {
+          "fecha": "2025-06-05",
+          "monto": 5390000,
+          "fuente": "Contrato estratégico Junio",
+          "descripcion": "Desembolso principal de Logística y Suministros en Junio"
+        },
+        {
+          "fecha": "2025-06-20",
+          "monto": 4410000,
+          "fuente": "Servicios operativos Junio",
+          "descripcion": "Ingresos complementarios de Logística y Suministros en Junio"
+        },
+        {
+          "fecha": "2025-07-05",
+          "monto": 5500000,
+          "fuente": "Contrato estratégico Julio",
+          "descripcion": "Desembolso principal de Logística y Suministros en Julio"
+        },
+        {
+          "fecha": "2025-07-20",
+          "monto": 4500000,
+          "fuente": "Servicios operativos Julio",
+          "descripcion": "Ingresos complementarios de Logística y Suministros en Julio"
+        },
+        {
+          "fecha": "2025-08-05",
+          "monto": 5610000,
+          "fuente": "Contrato estratégico Agosto",
+          "descripcion": "Desembolso principal de Logística y Suministros en Agosto"
+        },
+        {
+          "fecha": "2025-08-20",
+          "monto": 4590000,
+          "fuente": "Servicios operativos Agosto",
+          "descripcion": "Ingresos complementarios de Logística y Suministros en Agosto"
+        },
+        {
+          "fecha": "2025-09-05",
+          "monto": 5720000,
+          "fuente": "Contrato estratégico Septiembre",
+          "descripcion": "Desembolso principal de Logística y Suministros en Septiembre"
+        },
+        {
+          "fecha": "2025-09-20",
+          "monto": 4680000,
+          "fuente": "Servicios operativos Septiembre",
+          "descripcion": "Ingresos complementarios de Logística y Suministros en Septiembre"
+        },
+        {
+          "fecha": "2025-10-05",
+          "monto": 5830000,
+          "fuente": "Contrato estratégico Octubre",
+          "descripcion": "Desembolso principal de Logística y Suministros en Octubre"
+        },
+        {
+          "fecha": "2025-10-20",
+          "monto": 4770000,
+          "fuente": "Servicios operativos Octubre",
+          "descripcion": "Ingresos complementarios de Logística y Suministros en Octubre"
+        },
+        {
+          "fecha": "2025-11-05",
+          "monto": 5940000,
+          "fuente": "Contrato estratégico Noviembre",
+          "descripcion": "Desembolso principal de Logística y Suministros en Noviembre"
+        },
+        {
+          "fecha": "2025-11-20",
+          "monto": 4860000,
+          "fuente": "Servicios operativos Noviembre",
+          "descripcion": "Ingresos complementarios de Logística y Suministros en Noviembre"
+        },
+        {
+          "fecha": "2025-12-05",
+          "monto": 6050000,
+          "fuente": "Contrato estratégico Diciembre",
+          "descripcion": "Desembolso principal de Logística y Suministros en Diciembre"
+        },
+        {
+          "fecha": "2025-12-20",
+          "monto": 4950000,
+          "fuente": "Servicios operativos Diciembre",
+          "descripcion": "Ingresos complementarios de Logística y Suministros en Diciembre"
+        }
+      ],
+      "gastos": [
+        {
+          "fecha": "2025-01-10",
+          "monto": 3016000,
+          "categoria": "Almacenes",
+          "descripcion": "Ejecución operativa (Almacenes) Enero"
+        },
+        {
+          "fecha": "2025-01-25",
+          "monto": 2184000,
+          "categoria": "Contratos 3PL",
+          "descripcion": "Actividad complementaria (Contratos 3PL) Enero"
+        },
+        {
+          "fecha": "2025-02-10",
+          "monto": 3074000,
+          "categoria": "Combustible y mantenimiento",
+          "descripcion": "Ejecución operativa (Combustible y mantenimiento) Febrero"
+        },
+        {
+          "fecha": "2025-02-25",
+          "monto": 2226000,
+          "categoria": "Almacenes",
+          "descripcion": "Actividad complementaria (Almacenes) Febrero"
+        },
+        {
+          "fecha": "2025-03-10",
+          "monto": 3190000,
+          "categoria": "Contratos 3PL",
+          "descripcion": "Ejecución operativa (Contratos 3PL) Marzo"
+        },
+        {
+          "fecha": "2025-03-25",
+          "monto": 2310000,
+          "categoria": "Combustible y mantenimiento",
+          "descripcion": "Actividad complementaria (Combustible y mantenimiento) Marzo"
+        },
+        {
+          "fecha": "2025-04-10",
+          "monto": 3248000,
+          "categoria": "Almacenes",
+          "descripcion": "Ejecución operativa (Almacenes) Abril"
+        },
+        {
+          "fecha": "2025-04-25",
+          "monto": 2352000,
+          "categoria": "Contratos 3PL",
+          "descripcion": "Actividad complementaria (Contratos 3PL) Abril"
+        },
+        {
+          "fecha": "2025-05-10",
+          "monto": 3422000,
+          "categoria": "Combustible y mantenimiento",
+          "descripcion": "Ejecución operativa (Combustible y mantenimiento) Mayo"
+        },
+        {
+          "fecha": "2025-05-25",
+          "monto": 2478000,
+          "categoria": "Almacenes",
+          "descripcion": "Actividad complementaria (Almacenes) Mayo"
+        },
+        {
+          "fecha": "2025-06-10",
+          "monto": 3480000,
+          "categoria": "Contratos 3PL",
+          "descripcion": "Ejecución operativa (Contratos 3PL) Junio"
+        },
+        {
+          "fecha": "2025-06-25",
+          "monto": 2520000,
+          "categoria": "Combustible y mantenimiento",
+          "descripcion": "Actividad complementaria (Combustible y mantenimiento) Junio"
+        },
+        {
+          "fecha": "2025-07-10",
+          "monto": 3538000,
+          "categoria": "Almacenes",
+          "descripcion": "Ejecución operativa (Almacenes) Julio"
+        },
+        {
+          "fecha": "2025-07-25",
+          "monto": 2562000,
+          "categoria": "Contratos 3PL",
+          "descripcion": "Actividad complementaria (Contratos 3PL) Julio"
+        },
+        {
+          "fecha": "2025-08-10",
+          "monto": 3596000,
+          "categoria": "Combustible y mantenimiento",
+          "descripcion": "Ejecución operativa (Combustible y mantenimiento) Agosto"
+        },
+        {
+          "fecha": "2025-08-25",
+          "monto": 2604000,
+          "categoria": "Almacenes",
+          "descripcion": "Actividad complementaria (Almacenes) Agosto"
+        },
+        {
+          "fecha": "2025-09-10",
+          "monto": 3712000,
+          "categoria": "Contratos 3PL",
+          "descripcion": "Ejecución operativa (Contratos 3PL) Septiembre"
+        },
+        {
+          "fecha": "2025-09-25",
+          "monto": 2688000,
+          "categoria": "Combustible y mantenimiento",
+          "descripcion": "Actividad complementaria (Combustible y mantenimiento) Septiembre"
+        },
+        {
+          "fecha": "2025-10-10",
+          "monto": 3770000,
+          "categoria": "Almacenes",
+          "descripcion": "Ejecución operativa (Almacenes) Octubre"
+        },
+        {
+          "fecha": "2025-10-25",
+          "monto": 2730000,
+          "categoria": "Contratos 3PL",
+          "descripcion": "Actividad complementaria (Contratos 3PL) Octubre"
+        },
+        {
+          "fecha": "2025-11-10",
+          "monto": 3828000,
+          "categoria": "Combustible y mantenimiento",
+          "descripcion": "Ejecución operativa (Combustible y mantenimiento) Noviembre"
+        },
+        {
+          "fecha": "2025-11-25",
+          "monto": 2772000,
+          "categoria": "Almacenes",
+          "descripcion": "Actividad complementaria (Almacenes) Noviembre"
+        },
+        {
+          "fecha": "2025-12-10",
+          "monto": 3944000,
+          "categoria": "Contratos 3PL",
+          "descripcion": "Ejecución operativa (Contratos 3PL) Diciembre"
+        },
+        {
+          "fecha": "2025-12-25",
+          "monto": 2856000,
+          "categoria": "Combustible y mantenimiento",
+          "descripcion": "Actividad complementaria (Combustible y mantenimiento) Diciembre"
+        }
+      ]
+    },
+    {
+      "nombre": "Marketing y Comunicación",
+      "presupuesto_anual": 36000000,
+      "presupuesto_mensual": {
+        "enero": {
+          "plan": 3000000,
+          "ingresos": 4500000,
+          "gastos": 2500000
+        },
+        "febrero": {
+          "plan": 3100000,
+          "ingresos": 4700000,
+          "gastos": 2600000
+        },
+        "marzo": {
+          "plan": 3200000,
+          "ingresos": 5000000,
+          "gastos": 2700000
+        },
+        "abril": {
+          "plan": 3300000,
+          "ingresos": 5200000,
+          "gastos": 2800000
+        },
+        "mayo": {
+          "plan": 3400000,
+          "ingresos": 5400000,
+          "gastos": 2900000
+        },
+        "junio": {
+          "plan": 3500000,
+          "ingresos": 5600000,
+          "gastos": 3000000
+        },
+        "julio": {
+          "plan": 3600000,
+          "ingresos": 5800000,
+          "gastos": 3100000
+        },
+        "agosto": {
+          "plan": 3700000,
+          "ingresos": 6000000,
+          "gastos": 3200000
+        },
+        "septiembre": {
+          "plan": 3800000,
+          "ingresos": 6200000,
+          "gastos": 3300000
+        },
+        "octubre": {
+          "plan": 3900000,
+          "ingresos": 6400000,
+          "gastos": 3400000
+        },
+        "noviembre": {
+          "plan": 4000000,
+          "ingresos": 6600000,
+          "gastos": 3500000
+        },
+        "diciembre": {
+          "plan": 4100000,
+          "ingresos": 6800000,
+          "gastos": 3600000
+        }
+      },
+      "categorias_gasto": [
+        {
+          "nombre": "Campañas digitales",
+          "monto": 11000000
+        },
+        {
+          "nombre": "Eventos",
+          "monto": 9000000
+        },
+        {
+          "nombre": "Producción audiovisual",
+          "monto": 7000000
+        }
+      ],
+      "ingresos": [
+        {
+          "fecha": "2025-01-05",
+          "monto": 2475000,
+          "fuente": "Contrato estratégico Enero",
+          "descripcion": "Desembolso principal de Marketing y Comunicación en Enero"
+        },
+        {
+          "fecha": "2025-01-20",
+          "monto": 2025000,
+          "fuente": "Servicios operativos Enero",
+          "descripcion": "Ingresos complementarios de Marketing y Comunicación en Enero"
+        },
+        {
+          "fecha": "2025-02-05",
+          "monto": 2585000,
+          "fuente": "Contrato estratégico Febrero",
+          "descripcion": "Desembolso principal de Marketing y Comunicación en Febrero"
+        },
+        {
+          "fecha": "2025-02-20",
+          "monto": 2115000,
+          "fuente": "Servicios operativos Febrero",
+          "descripcion": "Ingresos complementarios de Marketing y Comunicación en Febrero"
+        },
+        {
+          "fecha": "2025-03-05",
+          "monto": 2750000,
+          "fuente": "Contrato estratégico Marzo",
+          "descripcion": "Desembolso principal de Marketing y Comunicación en Marzo"
+        },
+        {
+          "fecha": "2025-03-20",
+          "monto": 2250000,
+          "fuente": "Servicios operativos Marzo",
+          "descripcion": "Ingresos complementarios de Marketing y Comunicación en Marzo"
+        },
+        {
+          "fecha": "2025-04-05",
+          "monto": 2860000,
+          "fuente": "Contrato estratégico Abril",
+          "descripcion": "Desembolso principal de Marketing y Comunicación en Abril"
+        },
+        {
+          "fecha": "2025-04-20",
+          "monto": 2340000,
+          "fuente": "Servicios operativos Abril",
+          "descripcion": "Ingresos complementarios de Marketing y Comunicación en Abril"
+        },
+        {
+          "fecha": "2025-05-05",
+          "monto": 2970000,
+          "fuente": "Contrato estratégico Mayo",
+          "descripcion": "Desembolso principal de Marketing y Comunicación en Mayo"
+        },
+        {
+          "fecha": "2025-05-20",
+          "monto": 2430000,
+          "fuente": "Servicios operativos Mayo",
+          "descripcion": "Ingresos complementarios de Marketing y Comunicación en Mayo"
+        },
+        {
+          "fecha": "2025-06-05",
+          "monto": 3080000,
+          "fuente": "Contrato estratégico Junio",
+          "descripcion": "Desembolso principal de Marketing y Comunicación en Junio"
+        },
+        {
+          "fecha": "2025-06-20",
+          "monto": 2520000,
+          "fuente": "Servicios operativos Junio",
+          "descripcion": "Ingresos complementarios de Marketing y Comunicación en Junio"
+        },
+        {
+          "fecha": "2025-07-05",
+          "monto": 3190000,
+          "fuente": "Contrato estratégico Julio",
+          "descripcion": "Desembolso principal de Marketing y Comunicación en Julio"
+        },
+        {
+          "fecha": "2025-07-20",
+          "monto": 2610000,
+          "fuente": "Servicios operativos Julio",
+          "descripcion": "Ingresos complementarios de Marketing y Comunicación en Julio"
+        },
+        {
+          "fecha": "2025-08-05",
+          "monto": 3300000,
+          "fuente": "Contrato estratégico Agosto",
+          "descripcion": "Desembolso principal de Marketing y Comunicación en Agosto"
+        },
+        {
+          "fecha": "2025-08-20",
+          "monto": 2700000,
+          "fuente": "Servicios operativos Agosto",
+          "descripcion": "Ingresos complementarios de Marketing y Comunicación en Agosto"
+        },
+        {
+          "fecha": "2025-09-05",
+          "monto": 3410000,
+          "fuente": "Contrato estratégico Septiembre",
+          "descripcion": "Desembolso principal de Marketing y Comunicación en Septiembre"
+        },
+        {
+          "fecha": "2025-09-20",
+          "monto": 2790000,
+          "fuente": "Servicios operativos Septiembre",
+          "descripcion": "Ingresos complementarios de Marketing y Comunicación en Septiembre"
+        },
+        {
+          "fecha": "2025-10-05",
+          "monto": 3520000,
+          "fuente": "Contrato estratégico Octubre",
+          "descripcion": "Desembolso principal de Marketing y Comunicación en Octubre"
+        },
+        {
+          "fecha": "2025-10-20",
+          "monto": 2880000,
+          "fuente": "Servicios operativos Octubre",
+          "descripcion": "Ingresos complementarios de Marketing y Comunicación en Octubre"
+        },
+        {
+          "fecha": "2025-11-05",
+          "monto": 3630000,
+          "fuente": "Contrato estratégico Noviembre",
+          "descripcion": "Desembolso principal de Marketing y Comunicación en Noviembre"
+        },
+        {
+          "fecha": "2025-11-20",
+          "monto": 2970000,
+          "fuente": "Servicios operativos Noviembre",
+          "descripcion": "Ingresos complementarios de Marketing y Comunicación en Noviembre"
+        },
+        {
+          "fecha": "2025-12-05",
+          "monto": 3740000,
+          "fuente": "Contrato estratégico Diciembre",
+          "descripcion": "Desembolso principal de Marketing y Comunicación en Diciembre"
+        },
+        {
+          "fecha": "2025-12-20",
+          "monto": 3060000,
+          "fuente": "Servicios operativos Diciembre",
+          "descripcion": "Ingresos complementarios de Marketing y Comunicación en Diciembre"
+        }
+      ],
+      "gastos": [
+        {
+          "fecha": "2025-01-10",
+          "monto": 1450000,
+          "categoria": "Producción audiovisual",
+          "descripcion": "Ejecución operativa (Producción audiovisual) Enero"
+        },
+        {
+          "fecha": "2025-01-25",
+          "monto": 1050000,
+          "categoria": "Campañas digitales",
+          "descripcion": "Actividad complementaria (Campañas digitales) Enero"
+        },
+        {
+          "fecha": "2025-02-10",
+          "monto": 1508000,
+          "categoria": "Eventos",
+          "descripcion": "Ejecución operativa (Eventos) Febrero"
+        },
+        {
+          "fecha": "2025-02-25",
+          "monto": 1092000,
+          "categoria": "Producción audiovisual",
+          "descripcion": "Actividad complementaria (Producción audiovisual) Febrero"
+        },
+        {
+          "fecha": "2025-03-10",
+          "monto": 1566000,
+          "categoria": "Campañas digitales",
+          "descripcion": "Ejecución operativa (Campañas digitales) Marzo"
+        },
+        {
+          "fecha": "2025-03-25",
+          "monto": 1134000,
+          "categoria": "Eventos",
+          "descripcion": "Actividad complementaria (Eventos) Marzo"
+        },
+        {
+          "fecha": "2025-04-10",
+          "monto": 1624000,
+          "categoria": "Producción audiovisual",
+          "descripcion": "Ejecución operativa (Producción audiovisual) Abril"
+        },
+        {
+          "fecha": "2025-04-25",
+          "monto": 1176000,
+          "categoria": "Campañas digitales",
+          "descripcion": "Actividad complementaria (Campañas digitales) Abril"
+        },
+        {
+          "fecha": "2025-05-10",
+          "monto": 1682000,
+          "categoria": "Eventos",
+          "descripcion": "Ejecución operativa (Eventos) Mayo"
+        },
+        {
+          "fecha": "2025-05-25",
+          "monto": 1218000,
+          "categoria": "Producción audiovisual",
+          "descripcion": "Actividad complementaria (Producción audiovisual) Mayo"
+        },
+        {
+          "fecha": "2025-06-10",
+          "monto": 1740000,
+          "categoria": "Campañas digitales",
+          "descripcion": "Ejecución operativa (Campañas digitales) Junio"
+        },
+        {
+          "fecha": "2025-06-25",
+          "monto": 1260000,
+          "categoria": "Eventos",
+          "descripcion": "Actividad complementaria (Eventos) Junio"
+        },
+        {
+          "fecha": "2025-07-10",
+          "monto": 1798000,
+          "categoria": "Producción audiovisual",
+          "descripcion": "Ejecución operativa (Producción audiovisual) Julio"
+        },
+        {
+          "fecha": "2025-07-25",
+          "monto": 1302000,
+          "categoria": "Campañas digitales",
+          "descripcion": "Actividad complementaria (Campañas digitales) Julio"
+        },
+        {
+          "fecha": "2025-08-10",
+          "monto": 1856000,
+          "categoria": "Eventos",
+          "descripcion": "Ejecución operativa (Eventos) Agosto"
+        },
+        {
+          "fecha": "2025-08-25",
+          "monto": 1344000,
+          "categoria": "Producción audiovisual",
+          "descripcion": "Actividad complementaria (Producción audiovisual) Agosto"
+        },
+        {
+          "fecha": "2025-09-10",
+          "monto": 1914000,
+          "categoria": "Campañas digitales",
+          "descripcion": "Ejecución operativa (Campañas digitales) Septiembre"
+        },
+        {
+          "fecha": "2025-09-25",
+          "monto": 1386000,
+          "categoria": "Eventos",
+          "descripcion": "Actividad complementaria (Eventos) Septiembre"
+        },
+        {
+          "fecha": "2025-10-10",
+          "monto": 1972000,
+          "categoria": "Producción audiovisual",
+          "descripcion": "Ejecución operativa (Producción audiovisual) Octubre"
+        },
+        {
+          "fecha": "2025-10-25",
+          "monto": 1428000,
+          "categoria": "Campañas digitales",
+          "descripcion": "Actividad complementaria (Campañas digitales) Octubre"
+        },
+        {
+          "fecha": "2025-11-10",
+          "monto": 2030000,
+          "categoria": "Eventos",
+          "descripcion": "Ejecución operativa (Eventos) Noviembre"
+        },
+        {
+          "fecha": "2025-11-25",
+          "monto": 1470000,
+          "categoria": "Producción audiovisual",
+          "descripcion": "Actividad complementaria (Producción audiovisual) Noviembre"
+        },
+        {
+          "fecha": "2025-12-10",
+          "monto": 2088000,
+          "categoria": "Campañas digitales",
+          "descripcion": "Ejecución operativa (Campañas digitales) Diciembre"
+        },
+        {
+          "fecha": "2025-12-25",
+          "monto": 1512000,
+          "categoria": "Eventos",
+          "descripcion": "Actividad complementaria (Eventos) Diciembre"
+        }
+      ]
+    },
+    {
+      "nombre": "Recursos Humanos",
+      "presupuesto_anual": 48000000,
+      "presupuesto_mensual": {
+        "enero": {
+          "plan": 3800000,
+          "ingresos": 5200000,
+          "gastos": 3200000
+        },
+        "febrero": {
+          "plan": 3900000,
+          "ingresos": 5300000,
+          "gastos": 3300000
+        },
+        "marzo": {
+          "plan": 4000000,
+          "ingresos": 5400000,
+          "gastos": 3400000
+        },
+        "abril": {
+          "plan": 4100000,
+          "ingresos": 5600000,
+          "gastos": 3500000
+        },
+        "mayo": {
+          "plan": 4200000,
+          "ingresos": 5700000,
+          "gastos": 3600000
+        },
+        "junio": {
+          "plan": 4300000,
+          "ingresos": 5800000,
+          "gastos": 3700000
+        },
+        "julio": {
+          "plan": 4400000,
+          "ingresos": 6000000,
+          "gastos": 3800000
+        },
+        "agosto": {
+          "plan": 4500000,
+          "ingresos": 6100000,
+          "gastos": 3900000
+        },
+        "septiembre": {
+          "plan": 4600000,
+          "ingresos": 6200000,
+          "gastos": 4000000
+        },
+        "octubre": {
+          "plan": 4700000,
+          "ingresos": 6300000,
+          "gastos": 4100000
+        },
+        "noviembre": {
+          "plan": 4800000,
+          "ingresos": 6400000,
+          "gastos": 4200000
+        },
+        "diciembre": {
+          "plan": 4900000,
+          "ingresos": 6500000,
+          "gastos": 4300000
+        }
+      },
+      "categorias_gasto": [
+        {
+          "nombre": "Desarrollo de talento",
+          "monto": 13000000
+        },
+        {
+          "nombre": "Beneficios y bienestar",
+          "monto": 11000000
+        },
+        {
+          "nombre": "Gestión documental",
+          "monto": 6000000
+        }
+      ],
+      "ingresos": [
+        {
+          "fecha": "2025-01-05",
+          "monto": 2860000,
+          "fuente": "Contrato estratégico Enero",
+          "descripcion": "Desembolso principal de Recursos Humanos en Enero"
+        },
+        {
+          "fecha": "2025-01-20",
+          "monto": 2340000,
+          "fuente": "Servicios operativos Enero",
+          "descripcion": "Ingresos complementarios de Recursos Humanos en Enero"
+        },
+        {
+          "fecha": "2025-02-05",
+          "monto": 2915000,
+          "fuente": "Contrato estratégico Febrero",
+          "descripcion": "Desembolso principal de Recursos Humanos en Febrero"
+        },
+        {
+          "fecha": "2025-02-20",
+          "monto": 2385000,
+          "fuente": "Servicios operativos Febrero",
+          "descripcion": "Ingresos complementarios de Recursos Humanos en Febrero"
+        },
+        {
+          "fecha": "2025-03-05",
+          "monto": 2970000,
+          "fuente": "Contrato estratégico Marzo",
+          "descripcion": "Desembolso principal de Recursos Humanos en Marzo"
+        },
+        {
+          "fecha": "2025-03-20",
+          "monto": 2430000,
+          "fuente": "Servicios operativos Marzo",
+          "descripcion": "Ingresos complementarios de Recursos Humanos en Marzo"
+        },
+        {
+          "fecha": "2025-04-05",
+          "monto": 3080000,
+          "fuente": "Contrato estratégico Abril",
+          "descripcion": "Desembolso principal de Recursos Humanos en Abril"
+        },
+        {
+          "fecha": "2025-04-20",
+          "monto": 2520000,
+          "fuente": "Servicios operativos Abril",
+          "descripcion": "Ingresos complementarios de Recursos Humanos en Abril"
+        },
+        {
+          "fecha": "2025-05-05",
+          "monto": 3135000,
+          "fuente": "Contrato estratégico Mayo",
+          "descripcion": "Desembolso principal de Recursos Humanos en Mayo"
+        },
+        {
+          "fecha": "2025-05-20",
+          "monto": 2565000,
+          "fuente": "Servicios operativos Mayo",
+          "descripcion": "Ingresos complementarios de Recursos Humanos en Mayo"
+        },
+        {
+          "fecha": "2025-06-05",
+          "monto": 3190000,
+          "fuente": "Contrato estratégico Junio",
+          "descripcion": "Desembolso principal de Recursos Humanos en Junio"
+        },
+        {
+          "fecha": "2025-06-20",
+          "monto": 2610000,
+          "fuente": "Servicios operativos Junio",
+          "descripcion": "Ingresos complementarios de Recursos Humanos en Junio"
+        },
+        {
+          "fecha": "2025-07-05",
+          "monto": 3300000,
+          "fuente": "Contrato estratégico Julio",
+          "descripcion": "Desembolso principal de Recursos Humanos en Julio"
+        },
+        {
+          "fecha": "2025-07-20",
+          "monto": 2700000,
+          "fuente": "Servicios operativos Julio",
+          "descripcion": "Ingresos complementarios de Recursos Humanos en Julio"
+        },
+        {
+          "fecha": "2025-08-05",
+          "monto": 3355000,
+          "fuente": "Contrato estratégico Agosto",
+          "descripcion": "Desembolso principal de Recursos Humanos en Agosto"
+        },
+        {
+          "fecha": "2025-08-20",
+          "monto": 2745000,
+          "fuente": "Servicios operativos Agosto",
+          "descripcion": "Ingresos complementarios de Recursos Humanos en Agosto"
+        },
+        {
+          "fecha": "2025-09-05",
+          "monto": 3410000,
+          "fuente": "Contrato estratégico Septiembre",
+          "descripcion": "Desembolso principal de Recursos Humanos en Septiembre"
+        },
+        {
+          "fecha": "2025-09-20",
+          "monto": 2790000,
+          "fuente": "Servicios operativos Septiembre",
+          "descripcion": "Ingresos complementarios de Recursos Humanos en Septiembre"
+        },
+        {
+          "fecha": "2025-10-05",
+          "monto": 3465000,
+          "fuente": "Contrato estratégico Octubre",
+          "descripcion": "Desembolso principal de Recursos Humanos en Octubre"
+        },
+        {
+          "fecha": "2025-10-20",
+          "monto": 2835000,
+          "fuente": "Servicios operativos Octubre",
+          "descripcion": "Ingresos complementarios de Recursos Humanos en Octubre"
+        },
+        {
+          "fecha": "2025-11-05",
+          "monto": 3520000,
+          "fuente": "Contrato estratégico Noviembre",
+          "descripcion": "Desembolso principal de Recursos Humanos en Noviembre"
+        },
+        {
+          "fecha": "2025-11-20",
+          "monto": 2880000,
+          "fuente": "Servicios operativos Noviembre",
+          "descripcion": "Ingresos complementarios de Recursos Humanos en Noviembre"
+        },
+        {
+          "fecha": "2025-12-05",
+          "monto": 3575000,
+          "fuente": "Contrato estratégico Diciembre",
+          "descripcion": "Desembolso principal de Recursos Humanos en Diciembre"
+        },
+        {
+          "fecha": "2025-12-20",
+          "monto": 2925000,
+          "fuente": "Servicios operativos Diciembre",
+          "descripcion": "Ingresos complementarios de Recursos Humanos en Diciembre"
+        }
+      ],
+      "gastos": [
+        {
+          "fecha": "2025-01-10",
+          "monto": 1856000,
+          "categoria": "Gestión documental",
+          "descripcion": "Ejecución operativa (Gestión documental) Enero"
+        },
+        {
+          "fecha": "2025-01-25",
+          "monto": 1344000,
+          "categoria": "Desarrollo de talento",
+          "descripcion": "Actividad complementaria (Desarrollo de talento) Enero"
+        },
+        {
+          "fecha": "2025-02-10",
+          "monto": 1914000,
+          "categoria": "Beneficios y bienestar",
+          "descripcion": "Ejecución operativa (Beneficios y bienestar) Febrero"
+        },
+        {
+          "fecha": "2025-02-25",
+          "monto": 1386000,
+          "categoria": "Gestión documental",
+          "descripcion": "Actividad complementaria (Gestión documental) Febrero"
+        },
+        {
+          "fecha": "2025-03-10",
+          "monto": 1972000,
+          "categoria": "Desarrollo de talento",
+          "descripcion": "Ejecución operativa (Desarrollo de talento) Marzo"
+        },
+        {
+          "fecha": "2025-03-25",
+          "monto": 1428000,
+          "categoria": "Beneficios y bienestar",
+          "descripcion": "Actividad complementaria (Beneficios y bienestar) Marzo"
+        },
+        {
+          "fecha": "2025-04-10",
+          "monto": 2030000,
+          "categoria": "Gestión documental",
+          "descripcion": "Ejecución operativa (Gestión documental) Abril"
+        },
+        {
+          "fecha": "2025-04-25",
+          "monto": 1470000,
+          "categoria": "Desarrollo de talento",
+          "descripcion": "Actividad complementaria (Desarrollo de talento) Abril"
+        },
+        {
+          "fecha": "2025-05-10",
+          "monto": 2088000,
+          "categoria": "Beneficios y bienestar",
+          "descripcion": "Ejecución operativa (Beneficios y bienestar) Mayo"
+        },
+        {
+          "fecha": "2025-05-25",
+          "monto": 1512000,
+          "categoria": "Gestión documental",
+          "descripcion": "Actividad complementaria (Gestión documental) Mayo"
+        },
+        {
+          "fecha": "2025-06-10",
+          "monto": 2146000,
+          "categoria": "Desarrollo de talento",
+          "descripcion": "Ejecución operativa (Desarrollo de talento) Junio"
+        },
+        {
+          "fecha": "2025-06-25",
+          "monto": 1554000,
+          "categoria": "Beneficios y bienestar",
+          "descripcion": "Actividad complementaria (Beneficios y bienestar) Junio"
+        },
+        {
+          "fecha": "2025-07-10",
+          "monto": 2204000,
+          "categoria": "Gestión documental",
+          "descripcion": "Ejecución operativa (Gestión documental) Julio"
+        },
+        {
+          "fecha": "2025-07-25",
+          "monto": 1596000,
+          "categoria": "Desarrollo de talento",
+          "descripcion": "Actividad complementaria (Desarrollo de talento) Julio"
+        },
+        {
+          "fecha": "2025-08-10",
+          "monto": 2262000,
+          "categoria": "Beneficios y bienestar",
+          "descripcion": "Ejecución operativa (Beneficios y bienestar) Agosto"
+        },
+        {
+          "fecha": "2025-08-25",
+          "monto": 1638000,
+          "categoria": "Gestión documental",
+          "descripcion": "Actividad complementaria (Gestión documental) Agosto"
+        },
+        {
+          "fecha": "2025-09-10",
+          "monto": 2320000,
+          "categoria": "Desarrollo de talento",
+          "descripcion": "Ejecución operativa (Desarrollo de talento) Septiembre"
+        },
+        {
+          "fecha": "2025-09-25",
+          "monto": 1680000,
+          "categoria": "Beneficios y bienestar",
+          "descripcion": "Actividad complementaria (Beneficios y bienestar) Septiembre"
+        },
+        {
+          "fecha": "2025-10-10",
+          "monto": 2378000,
+          "categoria": "Gestión documental",
+          "descripcion": "Ejecución operativa (Gestión documental) Octubre"
+        },
+        {
+          "fecha": "2025-10-25",
+          "monto": 1722000,
+          "categoria": "Desarrollo de talento",
+          "descripcion": "Actividad complementaria (Desarrollo de talento) Octubre"
+        },
+        {
+          "fecha": "2025-11-10",
+          "monto": 2436000,
+          "categoria": "Beneficios y bienestar",
+          "descripcion": "Ejecución operativa (Beneficios y bienestar) Noviembre"
+        },
+        {
+          "fecha": "2025-11-25",
+          "monto": 1764000,
+          "categoria": "Gestión documental",
+          "descripcion": "Actividad complementaria (Gestión documental) Noviembre"
+        },
+        {
+          "fecha": "2025-12-10",
+          "monto": 2494000,
+          "categoria": "Desarrollo de talento",
+          "descripcion": "Ejecución operativa (Desarrollo de talento) Diciembre"
+        },
+        {
+          "fecha": "2025-12-25",
+          "monto": 1806000,
+          "categoria": "Beneficios y bienestar",
+          "descripcion": "Actividad complementaria (Beneficios y bienestar) Diciembre"
+        }
+      ]
+    },
+    {
+      "nombre": "Tecnologías de la Información",
+      "presupuesto_anual": 95000000,
+      "presupuesto_mensual": {
+        "enero": {
+          "plan": 7800000,
+          "ingresos": 12500000,
+          "gastos": 6900000
+        },
+        "febrero": {
+          "plan": 8000000,
+          "ingresos": 13000000,
+          "gastos": 7100000
+        },
+        "marzo": {
+          "plan": 8200000,
+          "ingresos": 14500000,
+          "gastos": 7200000
+        },
+        "abril": {
+          "plan": 8400000,
+          "ingresos": 15000000,
+          "gastos": 7400000
+        },
+        "mayo": {
+          "plan": 8600000,
+          "ingresos": 15800000,
+          "gastos": 7600000
+        },
+        "junio": {
+          "plan": 8800000,
+          "ingresos": 16500000,
+          "gastos": 7800000
+        },
+        "julio": {
+          "plan": 9000000,
+          "ingresos": 17000000,
+          "gastos": 8000000
+        },
+        "agosto": {
+          "plan": 9200000,
+          "ingresos": 17500000,
+          "gastos": 8200000
+        },
+        "septiembre": {
+          "plan": 9400000,
+          "ingresos": 18000000,
+          "gastos": 8300000
+        },
+        "octubre": {
+          "plan": 9600000,
+          "ingresos": 18500000,
+          "gastos": 8500000
+        },
+        "noviembre": {
+          "plan": 9800000,
+          "ingresos": 19000000,
+          "gastos": 8700000
+        },
+        "diciembre": {
+          "plan": 10000000,
+          "ingresos": 19500000,
+          "gastos": 8900000
+        }
+      },
+      "categorias_gasto": [
+        {
+          "nombre": "Infraestructura cloud",
+          "monto": 32000000
+        },
+        {
+          "nombre": "Desarrollo de productos",
+          "monto": 27000000
+        },
+        {
+          "nombre": "Soporte y operaciones",
+          "monto": 19000000
+        }
+      ],
+      "ingresos": [
+        {
+          "fecha": "2025-01-05",
+          "monto": 6875000,
+          "fuente": "Contrato estratégico Enero",
+          "descripcion": "Desembolso principal de Tecnologías de la Información en Enero"
+        },
+        {
+          "fecha": "2025-01-20",
+          "monto": 5625000,
+          "fuente": "Servicios operativos Enero",
+          "descripcion": "Ingresos complementarios de Tecnologías de la Información en Enero"
+        },
+        {
+          "fecha": "2025-02-05",
+          "monto": 7150000,
+          "fuente": "Contrato estratégico Febrero",
+          "descripcion": "Desembolso principal de Tecnologías de la Información en Febrero"
+        },
+        {
+          "fecha": "2025-02-20",
+          "monto": 5850000,
+          "fuente": "Servicios operativos Febrero",
+          "descripcion": "Ingresos complementarios de Tecnologías de la Información en Febrero"
+        },
+        {
+          "fecha": "2025-03-05",
+          "monto": 7975000,
+          "fuente": "Contrato estratégico Marzo",
+          "descripcion": "Desembolso principal de Tecnologías de la Información en Marzo"
+        },
+        {
+          "fecha": "2025-03-20",
+          "monto": 6525000,
+          "fuente": "Servicios operativos Marzo",
+          "descripcion": "Ingresos complementarios de Tecnologías de la Información en Marzo"
+        },
+        {
+          "fecha": "2025-04-05",
+          "monto": 8250000,
+          "fuente": "Contrato estratégico Abril",
+          "descripcion": "Desembolso principal de Tecnologías de la Información en Abril"
+        },
+        {
+          "fecha": "2025-04-20",
+          "monto": 6750000,
+          "fuente": "Servicios operativos Abril",
+          "descripcion": "Ingresos complementarios de Tecnologías de la Información en Abril"
+        },
+        {
+          "fecha": "2025-05-05",
+          "monto": 8690000,
+          "fuente": "Contrato estratégico Mayo",
+          "descripcion": "Desembolso principal de Tecnologías de la Información en Mayo"
+        },
+        {
+          "fecha": "2025-05-20",
+          "monto": 7110000,
+          "fuente": "Servicios operativos Mayo",
+          "descripcion": "Ingresos complementarios de Tecnologías de la Información en Mayo"
+        },
+        {
+          "fecha": "2025-06-05",
+          "monto": 9075000,
+          "fuente": "Contrato estratégico Junio",
+          "descripcion": "Desembolso principal de Tecnologías de la Información en Junio"
+        },
+        {
+          "fecha": "2025-06-20",
+          "monto": 7425000,
+          "fuente": "Servicios operativos Junio",
+          "descripcion": "Ingresos complementarios de Tecnologías de la Información en Junio"
+        },
+        {
+          "fecha": "2025-07-05",
+          "monto": 9350000,
+          "fuente": "Contrato estratégico Julio",
+          "descripcion": "Desembolso principal de Tecnologías de la Información en Julio"
+        },
+        {
+          "fecha": "2025-07-20",
+          "monto": 7650000,
+          "fuente": "Servicios operativos Julio",
+          "descripcion": "Ingresos complementarios de Tecnologías de la Información en Julio"
+        },
+        {
+          "fecha": "2025-08-05",
+          "monto": 9625000,
+          "fuente": "Contrato estratégico Agosto",
+          "descripcion": "Desembolso principal de Tecnologías de la Información en Agosto"
+        },
+        {
+          "fecha": "2025-08-20",
+          "monto": 7875000,
+          "fuente": "Servicios operativos Agosto",
+          "descripcion": "Ingresos complementarios de Tecnologías de la Información en Agosto"
+        },
+        {
+          "fecha": "2025-09-05",
+          "monto": 9900000,
+          "fuente": "Contrato estratégico Septiembre",
+          "descripcion": "Desembolso principal de Tecnologías de la Información en Septiembre"
+        },
+        {
+          "fecha": "2025-09-20",
+          "monto": 8100000,
+          "fuente": "Servicios operativos Septiembre",
+          "descripcion": "Ingresos complementarios de Tecnologías de la Información en Septiembre"
+        },
+        {
+          "fecha": "2025-10-05",
+          "monto": 10175000,
+          "fuente": "Contrato estratégico Octubre",
+          "descripcion": "Desembolso principal de Tecnologías de la Información en Octubre"
+        },
+        {
+          "fecha": "2025-10-20",
+          "monto": 8325000,
+          "fuente": "Servicios operativos Octubre",
+          "descripcion": "Ingresos complementarios de Tecnologías de la Información en Octubre"
+        },
+        {
+          "fecha": "2025-11-05",
+          "monto": 10450000,
+          "fuente": "Contrato estratégico Noviembre",
+          "descripcion": "Desembolso principal de Tecnologías de la Información en Noviembre"
+        },
+        {
+          "fecha": "2025-11-20",
+          "monto": 8550000,
+          "fuente": "Servicios operativos Noviembre",
+          "descripcion": "Ingresos complementarios de Tecnologías de la Información en Noviembre"
+        },
+        {
+          "fecha": "2025-12-05",
+          "monto": 10725000,
+          "fuente": "Contrato estratégico Diciembre",
+          "descripcion": "Desembolso principal de Tecnologías de la Información en Diciembre"
+        },
+        {
+          "fecha": "2025-12-20",
+          "monto": 8775000,
+          "fuente": "Servicios operativos Diciembre",
+          "descripcion": "Ingresos complementarios de Tecnologías de la Información en Diciembre"
+        }
+      ],
+      "gastos": [
+        {
+          "fecha": "2025-01-10",
+          "monto": 4002000,
+          "categoria": "Soporte y operaciones",
+          "descripcion": "Ejecución operativa (Soporte y operaciones) Enero"
+        },
+        {
+          "fecha": "2025-01-25",
+          "monto": 2898000,
+          "categoria": "Infraestructura cloud",
+          "descripcion": "Actividad complementaria (Infraestructura cloud) Enero"
+        },
+        {
+          "fecha": "2025-02-10",
+          "monto": 4118000,
+          "categoria": "Desarrollo de productos",
+          "descripcion": "Ejecución operativa (Desarrollo de productos) Febrero"
+        },
+        {
+          "fecha": "2025-02-25",
+          "monto": 2982000,
+          "categoria": "Soporte y operaciones",
+          "descripcion": "Actividad complementaria (Soporte y operaciones) Febrero"
+        },
+        {
+          "fecha": "2025-03-10",
+          "monto": 4176000,
+          "categoria": "Infraestructura cloud",
+          "descripcion": "Ejecución operativa (Infraestructura cloud) Marzo"
+        },
+        {
+          "fecha": "2025-03-25",
+          "monto": 3024000,
+          "categoria": "Desarrollo de productos",
+          "descripcion": "Actividad complementaria (Desarrollo de productos) Marzo"
+        },
+        {
+          "fecha": "2025-04-10",
+          "monto": 4292000,
+          "categoria": "Soporte y operaciones",
+          "descripcion": "Ejecución operativa (Soporte y operaciones) Abril"
+        },
+        {
+          "fecha": "2025-04-25",
+          "monto": 3108000,
+          "categoria": "Infraestructura cloud",
+          "descripcion": "Actividad complementaria (Infraestructura cloud) Abril"
+        },
+        {
+          "fecha": "2025-05-10",
+          "monto": 4408000,
+          "categoria": "Desarrollo de productos",
+          "descripcion": "Ejecución operativa (Desarrollo de productos) Mayo"
+        },
+        {
+          "fecha": "2025-05-25",
+          "monto": 3192000,
+          "categoria": "Soporte y operaciones",
+          "descripcion": "Actividad complementaria (Soporte y operaciones) Mayo"
+        },
+        {
+          "fecha": "2025-06-10",
+          "monto": 4524000,
+          "categoria": "Infraestructura cloud",
+          "descripcion": "Ejecución operativa (Infraestructura cloud) Junio"
+        },
+        {
+          "fecha": "2025-06-25",
+          "monto": 3276000,
+          "categoria": "Desarrollo de productos",
+          "descripcion": "Actividad complementaria (Desarrollo de productos) Junio"
+        },
+        {
+          "fecha": "2025-07-10",
+          "monto": 4640000,
+          "categoria": "Soporte y operaciones",
+          "descripcion": "Ejecución operativa (Soporte y operaciones) Julio"
+        },
+        {
+          "fecha": "2025-07-25",
+          "monto": 3360000,
+          "categoria": "Infraestructura cloud",
+          "descripcion": "Actividad complementaria (Infraestructura cloud) Julio"
+        },
+        {
+          "fecha": "2025-08-10",
+          "monto": 4756000,
+          "categoria": "Desarrollo de productos",
+          "descripcion": "Ejecución operativa (Desarrollo de productos) Agosto"
+        },
+        {
+          "fecha": "2025-08-25",
+          "monto": 3444000,
+          "categoria": "Soporte y operaciones",
+          "descripcion": "Actividad complementaria (Soporte y operaciones) Agosto"
+        },
+        {
+          "fecha": "2025-09-10",
+          "monto": 4814000,
+          "categoria": "Infraestructura cloud",
+          "descripcion": "Ejecución operativa (Infraestructura cloud) Septiembre"
+        },
+        {
+          "fecha": "2025-09-25",
+          "monto": 3486000,
+          "categoria": "Desarrollo de productos",
+          "descripcion": "Actividad complementaria (Desarrollo de productos) Septiembre"
+        },
+        {
+          "fecha": "2025-10-10",
+          "monto": 4930000,
+          "categoria": "Soporte y operaciones",
+          "descripcion": "Ejecución operativa (Soporte y operaciones) Octubre"
+        },
+        {
+          "fecha": "2025-10-25",
+          "monto": 3570000,
+          "categoria": "Infraestructura cloud",
+          "descripcion": "Actividad complementaria (Infraestructura cloud) Octubre"
+        },
+        {
+          "fecha": "2025-11-10",
+          "monto": 5046000,
+          "categoria": "Desarrollo de productos",
+          "descripcion": "Ejecución operativa (Desarrollo de productos) Noviembre"
+        },
+        {
+          "fecha": "2025-11-25",
+          "monto": 3654000,
+          "categoria": "Soporte y operaciones",
+          "descripcion": "Actividad complementaria (Soporte y operaciones) Noviembre"
+        },
+        {
+          "fecha": "2025-12-10",
+          "monto": 5162000,
+          "categoria": "Infraestructura cloud",
+          "descripcion": "Ejecución operativa (Infraestructura cloud) Diciembre"
+        },
+        {
+          "fecha": "2025-12-25",
+          "monto": 3738000,
+          "categoria": "Desarrollo de productos",
+          "descripcion": "Actividad complementaria (Desarrollo de productos) Diciembre"
+        }
+      ]
+    }
+  ]
+}

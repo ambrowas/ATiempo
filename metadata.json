@@ -1,0 +1,5 @@
+{
+  "name": "Atiempo",
+  "description": "A company management software with modules for attendance, employees, payroll, and more. Designed for offline use and eventually will be wired to Firebase.",
+  "requestFramePermissions": []
+}

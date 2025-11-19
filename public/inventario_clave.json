@@ -1,0 +1,40 @@
+{
+  "inventario": [
+    {
+      "categoria": "Infraestructura Estratégica",
+      "descripcion": "Espacios físicos y centros de operaciones prioritarios.",
+      "items": [
+        "Sede corporativa Malabo II (Torre A, plantas 7-9)",
+        "Sala Ejecutiva 'Sipopo' con videoconferencia 4K",
+        "Centro de documentación histórica Elebi (Ela Nguema)",
+        "Depósitos logísticos y archivo físico (Pilar Buepoyo)"
+      ],
+      "responsable": "Dirección Administrativa",
+      "contacto": "infraestructura@iniciativaselebi.com"
+    },
+    {
+      "categoria": "Equipamiento Ejecutivo",
+      "descripcion": "Activos tecnológicos y de movilidad asignados a presidencia.",
+      "items": [
+        "Flota de representación (SUV blindadas serie BN-2025)",
+        "Kit móvil de presentaciones internacionales",
+        "Consolas de traducción simultánea EN/FR/PT",
+        "Servidores portátiles cifrados con biometría"
+      ],
+      "responsable": "Gabinete del Consejero Delegado",
+      "contacto": "gabinete@iniciativaselebi.com"
+    },
+    {
+      "categoria": "Servicios Estratégicos",
+      "descripcion": "Contratos clave con proveedores y aliados.",
+      "items": [
+        "Soporte TI 24/7 con redundancia en Washington DC",
+        "Licencias SaaS: Project Atlas, Contabilidad ElebiSuite",
+        "Cobertura médica y evacuación Aeromed África",
+        "Tarjetas corporativas con seguros de viaje premium"
+      ],
+      "responsable": "Unidad de Compliance",
+      "contacto": "compliance@iniciativaselebi.com"
+    }
+  ]
+}

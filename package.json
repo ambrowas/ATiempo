@@ -1,23 +1,85 @@
 {
   "name": "atiempo",
-  "version": "1.0.0",
-  "description": "Final version of ATIEMPO Electron app with Python backend.",
-  "main": "main.js",
- "scripts": {
-  "backend": "venv/bin/python3 app.py",
-  "start": "concurrently \"npm run backend\" \"electron .\"",
-  "electron": "electron .",
-  "dist": "electron-builder --mac --x64 --config public/assets/icons/builder/electron-builder.yml"
-},
-  "keywords": [],
-  "author": "eleela",
-  "license": "ISC",
-  "devDependencies": {
-    "concurrently": "^9.2.0",
-    "electron": "^26.2.1",
-    "electron-builder": "^26.0.12"
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "main": "electron/main.cjs",
+  "description": "Gestor operativo Atiempo para Iniciativas Elebi",
+  "author": "Iniciativas Elebi <info@elebi.com>",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "electron": "concurrently -k \"vite\" \"wait-on http://localhost:5173 && electron ./electron/main.cjs\"",
+    "typecheck": "tsc --noEmit",
+    "dist": "npm run build && npm_config_build_from_source=1 electron-builder --mac",
+    "dist:win": "npm run build && npm_config_build_from_source=1 electron-builder --win",
+    "reset:db": "node scripts/reset-db.cjs"
   },
   "dependencies": {
-    "cors": "^2.8.5"
+    "@heroicons/react": "^2.2.0",
+    "@mapbox/mbtiles": "^0.12.1",
+    "@react-spring/web": "^10.0.3",
+    "@react-three/drei": "^9.86.3",
+    "@react-three/fiber": "^8.15.16",
+    "chart.js": "^4.5.1",
+    "chartjs-plugin-datalabels": "^2.2.0",
+    "jspdf": "^3.0.3",
+    "lottie-react": "^2.4.1",
+    "lottie-web": "^5.13.0",
+    "lowdb": "^7.0.1",
+    "maplibre-gl": "^5.12.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-dropzone": "^14.3.8",
+    "three": "^0.160.0"
+  },
+  "devDependencies": {
+    "@types/chart.js": "^2.9.41",
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.22",
+    "concurrently": "^9.2.1",
+    "electron": "^39.1.1",
+    "electron-builder": "^24.6.0",
+    "pmtiles": "^4.3.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.18",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.8",
+    "wait-on": "^9.0.3"
+  },
+  "build": {
+    "appId": "com.iniciativaselebi.atiempo",
+    "productName": "Atiempo",
+    "copyright": "© 2025 Iniciativas Elebi",
+    "directories": {
+      "output": "release",
+      "buildResources": "src/assets/icons"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "utils/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "icon": "atiempologo.icns",
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "dmg": {
+      "background": "src/assets/icons/dmg-background.png"
+    },
+    "win": {
+      "icon": "atiempologo.ico",
+      "target": [
+        "nsis",
+        "zip"
+      ]
+    }
   }
 }

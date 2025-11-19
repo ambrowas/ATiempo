@@ -1,0 +1,356 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#profile-content-wrapper {
+  width: 100%;
+  max-width: none;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-card {
+  background: #ffffff;
+  padding: 25px;
+  border: 2px solid black;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eeeeee;
+  padding-bottom: 20px;
+}
+
+.profile-header img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid #004080;
+  object-fit: cover;
+  margin: 0 auto;
+}
+
+.tab-switcher {
+  border-bottom: 2px solid black;
+  margin: 0 0 20px 0;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  width: 100%;
+}
+
+.tab-link {
+  background-color: #f1f1f1;
+  border: 1px solid #cccccc;
+  border-bottom: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.tab-link.active {
+  background-color: #004080;
+  color: white;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 15px 25px;
+}
+
+.detail-item strong {
+  display: block;
+  font-size: 12px;
+  color: #555;
+  text-transform: uppercase;
+}
+
+.detail-item span {
+  font-size: 16px;
+  color: #000;
+}
+
+.puesto-section {
+  margin-bottom: 25px;
+}
+
+.puesto-section h3 {
+  color: #004080;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.puesto-section ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+.puesto-section ul li {
+  margin-bottom: 5px;
+}
+
+.hierarchy-item {
+  margin-left: 20px;
+  margin-bottom: 5px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: white;
+}
+
+thead th {
+  background-color: #004080;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 600;
+  text-align: center;
+  padding: 10px;
+}
+
+td,
+th {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+
+.status-chip {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  text-transform: uppercase;
+}
+.status-completo {
+  background-color: #28a745;
+}
+.status-incompleto {
+  background-color: #ffc107;
+  color: black;
+}
+
+.payroll-summary td {
+  background-color: #e8f1ff;
+  font-weight: bold;
+  border-top: 2px solid #004080;
+}
+
+.btn-pdf {
+  background-color: #004080;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-pdf:hover {
+  background-color: #0066cc;
+}
+
+.btn {
+  background-color: #004080;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #0066cc;
+}
+
+.modal {
+  display: none; /* Changed to none, controlled by React state */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modal.show {
+  display: flex; /* Added show class for visibility */
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 760px;
+  max-width: 95%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content iframe {
+  width: 100%;
+  height: 72vh;
+  border: none;
+}
+
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #004080;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  transform: translateY(30px);
+  z-index: 3000;
+}
+
+.toast.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.filter-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+#attendanceTable {
+  border: 2px solid black;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+#attendanceTable th {
+  border-right: 1px solid #002d5a;
+}
+
+#attendanceTable td {
+  background-color: #f9fbff;
+  border: 1px solid #d0d0d0;
+}
+
+#attendanceTable tr:nth-child(even) td {
+  background-color: #f2f7ff;
+}
+
+#attendanceTable tr:hover td {
+  background-color: #e7f0ff;
+}
+
+#attendanceTable tfoot td {
+  background-color: #e8f1ff;
+  font-weight: bold;
+  color: #004080;
+  border-top: 2px solid #004080;
+}
+.status-cell {
+  font-weight: 600;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 4px 8px;
+  border-radius: 8px;
+  color: #fff;
+  display: inline-block;
+  min-width: 100px;
+  font-size: 12px;
+}
+
+.status-completo {
+  background-color: #16a34a;
+}
+.status-incompleto {
+  background-color: #f59e0b;
+}
+.status-tarde {
+  background-color: #dc2626;
+}
+.status-ausencia-injustificada {
+  background-color: #7f1d1d;
+}
+.status-jornada-incompleta {
+  background-color: #0d6efd;
+}
+.status-default {
+  background-color: #6b7280;
+}
+/* ===============================================
+   Custom Animation: Slow Pulse (for Lottie)
+   =============================================== */
+@keyframes slow-pulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+.animate-slow-pulse {
+  animation: slow-pulse 6s ease-in-out infinite;
+}
+@keyframes fade-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+.animate-fade-in {
+  animation: fade-in 0.25s ease-out forwards;
+}
+.vehicle-card {
+  border: 2px solid #000;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.vehicle-photo {
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.vehicle-actions button {
+  border: 2px solid #000;
+}
+.bg-green-600 {
+  background-color: #3B5323 !important; /* Military Green */
+}
+
+.hover\:bg-green-700:hover {
+  background-color: #2E4220 !important; /* Darker Military Green */
+}
+
+  
