@@ -12,8 +12,8 @@
     "preview": "vite preview",
     "electron": "concurrently -k \"vite\" \"wait-on http://localhost:5173 && electron ./electron/main.cjs\"",
     "typecheck": "tsc --noEmit",
-    "dist": "npm run build && cross-env npm_config_build_from_source=1 electron-builder --mac",
-    "dist:win": "npm run build && cross-env npm_config_build_from_source=1 electron-builder --win",
+    "dist": "npm run build && electron-builder --mac",
+    "dist:win": "npm run build && electron-builder --win --publish never",
     "reset:db": "node scripts/reset-db.cjs"
   },
   "dependencies": {
