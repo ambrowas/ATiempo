@@ -18,3 +18,10 @@ View your app in AI Studio: https://ai.studio/apps/drive/1dc_adBc8whrg514py1_3t1
 2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
 3. Run the app:
    `npm run dev`
+
+## Automated Windows builds
+
+- The workflow at [.github/workflows/windows-build.yml](.github/workflows/windows-build.yml) now uses Electron Forge on `windows-latest` runners to produce the Windows installer.
+- Forge output lives under `out/make/...`; the workflow uploads everything under that folder as the `atiempo-windows` artifact.
+- Tagging a commit with `v*` triggers a publish step (`npm run publish:win`) that drafts a GitHub Release using the generated Squirrel installer.
+- To build locally on Windows, run `npm ci` then `npm run make:win`. Publish with a `GITHUB_TOKEN` in your environment via `npm run publish:win`.

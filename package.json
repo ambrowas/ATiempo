@@ -14,7 +14,9 @@
     "typecheck": "tsc --noEmit",
     "dist": "npm run build && electron-builder --mac",
     "dist:win": "npm run build && electron-builder --win --publish never",
-    "reset:db": "node scripts/reset-db.cjs"
+    "reset:db": "node scripts/reset-db.cjs",
+    "make:win": "npm run build && electron-forge make --platform=win32 --arch=x64",
+    "publish:win": "npm run build && electron-forge publish --platform=win32 --arch=x64 --target=github"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -35,6 +37,12 @@
     "three": "^0.160.0"
   },
   "devDependencies": {
+    "@electron-forge/cli": "^7.4.0",
+    "@electron-forge/maker-deb": "^7.4.0",
+    "@electron-forge/maker-rpm": "^7.4.0",
+    "@electron-forge/maker-squirrel": "^7.4.0",
+    "@electron-forge/maker-zip": "^7.4.0",
+    "@electron-forge/publisher-github": "^7.4.0",
     "@types/chart.js": "^2.9.41",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
@@ -80,6 +88,51 @@
       "target": [
         "nsis",
         "zip"
+      ]
+    }
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "asar": false,
+        "icon": "src/assets/icons/atiempologo",
+        "appBundleId": "com.iniciativaselebi.atiempo",
+        "executableName": "Atiempo"
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "atiempo",
+            "setupIcon": "src/assets/icons/atiempologo.ico"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ],
+      "publishers": [
+        {
+          "name": "@electron-forge/publisher-github",
+          "config": {
+            "repository": {
+              "owner": "ambrowas",
+              "name": "ATiempo"
+            },
+            "draft": true
+          }
+        }
       ]
     }
   }

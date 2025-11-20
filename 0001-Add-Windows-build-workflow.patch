@@ -1,0 +1,103 @@
+From 8245ae8ef104f70b8b326c2c574a1a9e9a9009ef Mon Sep 17 00:00:00 2001
+From: "Victor M. Ele Ela" <eleelavm@gmail.com>
+Date: Tue, 18 Nov 2025 22:26:23 -0500
+Subject: [PATCH] Add Windows build workflow
+
+---
+ .github/workflows/windows-build.yml | 50 +++++++++++++++++++++++++++++
+ README.md                           | 26 +++++++++++++++
+ 2 files changed, 76 insertions(+)
+ create mode 100644 .github/workflows/windows-build.yml
+ create mode 100644 README.md
+
+diff --git a/.github/workflows/windows-build.yml b/.github/workflows/windows-build.yml
+new file mode 100644
+index 0000000..6c49acf
+--- /dev/null
++++ b/.github/workflows/windows-build.yml
+@@ -0,0 +1,50 @@
++name: Build Windows Installer
++
++on:
++  push:
++    branches:
++      - main
++    tags:
++      - 'v*'
++  pull_request:
++    branches:
++      - main
++  workflow_dispatch:
++
++jobs:
++  build-windows:
++    runs-on: windows-latest
++    defaults:
++      run:
++        shell: bash
++    strategy:
++      matrix:
++        node-version: [20]
++
++    steps:
++      - name: Check out repository
++        uses: actions/checkout@v4
++
++      - name: Set up Node.js ${{ matrix.node-version }}
++        uses: actions/setup-node@v4
++        with:
++          node-version: ${{ matrix.node-version }}
++          cache: 'npm'
++
++      - name: Install dependencies
++        run: npm ci
++
++      - name: Build Windows distribution
++        run: npm run dist:win
++
++      - name: Upload Windows installer
++        uses: actions/upload-artifact@v4
++        with:
++          name: atiempo-windows
++          path: |
++            release/*.exe
++            release/*.msi
++            release/*.zip
++            release/*.nsis
++            release/*.blockmap
++          if-no-files-found: warn
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..faddf95
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,26 @@
++<div align="center">
++<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
++</div>
++
++# Run and deploy your AI Studio app
++
++This contains everything you need to run your app locally.
++
++View your app in AI Studio: https://ai.studio/apps/drive/1dc_adBc8whrg514py1_3t1mMX7cQIvUy
++
++## Run Locally
++
++**Prerequisites:**  Node.js
++
++
++1. Install dependencies:
++   `npm install`
++2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
++3. Run the app:
++   `npm run dev`
++
++## Automated Windows builds
++
++- The workflow at [.github/workflows/windows-build.yml](.github/workflows/windows-build.yml) runs on every push or pull request targeting `main`, tags that start with `v`, or via `Run workflow` in GitHub's UI.
++- It executes `npm ci` followed by `npm run dist:win` on a Windows runner, producing the NSIS installer and other distributables under `release/`.
++- Download `atiempo-windows` from the workflow run's *Artifacts* section to get the generated `.exe` (and accompanying `.zip`/`.blockmap`) files.
+-- 
+2.33.0
+
